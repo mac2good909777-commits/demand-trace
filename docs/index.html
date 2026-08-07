@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>需求軌跡監控 — 睦聚工業地產</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1c2430; --muted:#61708a; --line:#e3e7ee;
+  --accent:#0f6b5c; --accent-soft:#e3f1ee;
+  --a:#b3261e; --a-soft:#fbe9e7; --b:#8a5a00; --b-soft:#fff3d6; --c:#3b5b92; --c-soft:#e8eefb;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12161c; --card:#1a2029; --ink:#e8edf4; --muted:#94a3b8; --line:#2a3340;
+    --accent:#4fd1b5; --accent-soft:#123f36;
+    --a:#ff8a80; --a-soft:#3a1f1d; --b:#ffd54f; --b-soft:#3a2f10; --c:#90b4f0; --c-soft:#1c2a44; }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{padding:28px 20px 18px;border-bottom:1px solid var(--line);background:var(--card)}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:1.45rem;letter-spacing:.05em}
+h1 small{font-size:.85rem;color:var(--muted);font-weight:400;margin-left:.6em}
+.sub{color:var(--muted);font-size:.88rem;margin-top:4px}
+nav.tabs{display:flex;gap:8px;margin-top:16px}
+nav.tabs button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 16px;border-radius:20px;cursor:pointer;font-size:.9rem}
+nav.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{padding:20px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.filters select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:.88rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.card .top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
+.co{font-weight:700;font-size:1.05rem}
+.tick{color:var(--muted);font-size:.85rem}
+.badge{font-size:.75rem;padding:2px 10px;border-radius:12px;white-space:nowrap}
+.badge.type{background:var(--accent-soft);color:var(--accent)}
+.badge.pA{background:var(--a-soft);color:var(--a)}
+.badge.pB{background:var(--b-soft);color:var(--b)}
+.badge.pC{background:var(--c-soft);color:var(--c)}
+.date{color:var(--muted);font-size:.82rem;margin-left:auto}
+.sec{margin-top:8px;font-size:.92rem}
+.sec b{color:var(--muted);font-weight:600;font-size:.8rem;display:block;margin-bottom:2px}
+.src a{color:var(--accent);word-break:break-all;text-decoration:none;border-bottom:1px dotted var(--accent)}
+.src span{color:var(--muted)}
+#dossierList{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+#dossierList .card{cursor:pointer;transition:transform .1s}
+#dossierList .card:hover{transform:translateY(-2px)}
+#mdView{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px 28px}
+#mdView h1{font-size:1.3rem;margin-bottom:12px}
+#mdView h2{font-size:1.05rem;margin:18px 0 8px;color:var(--accent)}
+#mdView table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.88rem;display:block;overflow-x:auto}
+#mdView th,#mdView td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+#mdView a{color:var(--accent)}
+.back{display:inline-block;margin-bottom:12px;color:var(--accent);cursor:pointer;font-size:.9rem}
+.empty{color:var(--muted);text-align:center;padding:40px 0}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>需求軌跡監控<small>購置・處分・產業鏈切入點</small></h1>
+  <div class="sub">觀察名單公司經營軌跡交叉判讀｜每日自動更新｜睦聚工業地產</div>
+  <nav class="tabs">
+    <button id="tabT" class="on" onclick="show('timeline')">事件時間軸</button>
+    <button id="tabD" onclick="show('dossiers')">公司軌跡檔</button>
+  </nav>
+</div></header>
+<main><div class="wrap">
+  <section id="timeline">
+    <div class="filters">
+      <select id="fCo"><option value="">全部公司</option></select>
+      <select id="fPr"><option value="">全部優先級</option><option>A-立即接觸</option><option>B-三個月內</option><option>C-持續觀察</option></select>
+      <select id="fTy"><option value="">全部事件類型</option></select>
+    </div>
+    <div id="list"></div>
+  </section>
+  <section id="dossiers" style="display:none">
+    <div id="dossierList"></div>
+    <div id="mdWrap" style="display:none">
+      <span class="back" onclick="closeMd()">← 回公司列表</span>
+      <div id="mdView"></div>
+    </div>
+  </section>
+</div></main>
+<footer>資料來源：公開資訊觀測站重大訊息、新聞、內政部實價登錄｜本頁僅供內部研判參考</footer>
+<script>
+let RECS=[];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function linkify(s){
+  return esc(s).split(/\s*;\s*|\s*；\s*/).map(part=>{
+    const m=part.match(/https?:\/\/\S+/);
+    if(m){const u=m[0];return part.replace(u,`<a href="${u}" target="_blank" rel="noopener">${u}</a>`);}
+    return `<span>${part}</span>`;
+  }).join('<br>');
+}
+function pCls(p){return p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';}
+function render(){
+  const co=fCo.value,pr=fPr.value,ty=fTy.value;
+  const rows=RECS.filter(r=>(!co||r.company===co)&&(!pr||r.priority===pr)&&(!ty||r.eventType===ty));
+  list.innerHTML=rows.length?rows.map(r=>`
+   <div class="card">
+     <div class="top">
+       <span class="co">${esc(r.company)}</span><span class="tick">${esc(r.ticker)}</span>
+       <span class="badge type">${esc(r.eventType)}</span>
+       <span class="badge ${pCls(r.priority)}">${esc(r.priority)}</span>
+       <span class="badge type" style="background:transparent;border:1px solid var(--line);color:var(--muted)">${esc(r.label)}</span>
+       <span class="date">事件日 ${esc(r.eventDate)}｜記錄 ${esc(r.recordDate)}</span>
+     </div>
+     <div class="sec"><b>事件摘要</b>${esc(r.summary)}</div>
+     <div class="sec"><b>軌跡判讀</b>${esc(r.reading)}</div>
+     <div class="sec"><b>切入點</b>${esc(r.entry)}</div>
+     ${r.related?`<div class="sec"><b>關聯公司</b>${esc(r.related)}</div>`:''}
+     <div class="sec src"><b>來源（點回原文自行判讀）</b>${linkify(r.sources)}</div>
+   </div>`).join(''):'<div class="empty">無符合資料</div>';
+}
+function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
+fetch('data/records.json?'+Date.now()).then(r=>r.json()).then(d=>{
+  RECS=d.slice().reverse();
+  fill(fCo,RECS.map(r=>r.company));fill(fTy,RECS.map(r=>r.eventType));
+  [fCo,fPr,fTy].forEach(s=>s.onchange=render);render();
+});
+fetch('companies/index.json?'+Date.now()).then(r=>r.json()).then(files=>{
+  dossierList.innerHTML=files.map(f=>`<div class="card" onclick="openMd('${f}')"><div class="co">${f.replace(/\.md$/,'')}</div><div class="tick">點擊檢視軌跡檔 →</div></div>`).join('');
+});
+function openMd(f){
+  fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()).then(t=>{
+    mdView.innerHTML=marked.parse(t);dossierList.style.display='none';mdWrap.style.display='block';
+  });
+}
+function closeMd(){mdWrap.style.display='none';dossierList.style.display='grid';}
+function show(w){
+  timeline.style.display=w==='timeline'?'block':'none';
+  dossiers.style.display=w==='dossiers'?'block':'none';
+  tabT.classList.toggle('on',w==='timeline');tabD.classList.toggle('on',w==='dossiers');
+  if(w==='dossiers')closeMd();
+}
+</script>
+</body>
+</html>

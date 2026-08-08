@@ -96,6 +96,7 @@ footer{color:var(--muted);font-size:.76rem;text-align:center;padding:24px 0 40px
     <button id="tab0" class="on" onclick="show(0)">總覽（權重排序）</button>
     <button id="tab1" onclick="show(1)">事件時間軸</button>
     <button id="tab2" onclick="show(2)">公司軌跡檔</button>
+    <button id="tab3" onclick="show(3)">封存資料</button>
   </nav>
 </div></header>
 <main><div class="wrap">
@@ -126,6 +127,11 @@ footer{color:var(--muted);font-size:.76rem;text-align:center;padding:24px 0 40px
   </div>
 </section>
 
+<section id="view3" style="display:none">
+  <h2 class="sec">🗂 封存資料（最新進度＝「追蹤結案」的公司；記錄任一新動作即自動解除封存）</h2>
+  <div id="archList"></div>
+</section>
+
 </div></main>
 <footer>資料來源：公開資訊觀測站重大訊息、新聞、內政部實價登錄｜經營進度同步至 Google 試算表｜睦聚工業地產</footer>
 <script>
@@ -134,8 +140,13 @@ const ACT_GROUPS=[
  ['開發接觸',['寄發開發信','電訪','已聯繫上','拜訪','已約訪']],
  ['購置經營（幫它找）',['確認購置需求','提供物件','帶看物件','出價斡旋','購置成案']],
  ['出售經營（幫它賣）',['確認處分需求','爭取委託','已取得委託','整理銷售資料','推廣曝光','帶買方看廠','買方出價/斡旋','出售成案']],
- ['其他',['委託洽談','暫停追蹤']]
+ ['其他',['委託洽談','暫停追蹤','追蹤結案']]
 ];
+const ARCHIVE_ACT='追蹤結案';
+function isArchived(co){
+  const rows=PROG.filter(p=>p[1]===co);
+  return rows.length>0 && rows[rows.length-1][2]===ARCHIVE_ACT;
+}
 let RECS=[],WATCH=[],PROG=[];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
@@ -206,8 +217,22 @@ function recCard(r){return `
    ${r.related?`<div class="sec2"><b>關聯公司</b>${esc(r.related)}</div>`:''}
    <div class="sec2 src"><b>來源（點回原文自行判讀）</b>${linkify(r.sources)}</div>
  </div>`}
+function renderArchive(){
+  const ws=WATCH.filter(w=>isArchived(w.company)).sort((a,b)=>(b.score||0)-(a.score||0));
+  archList.innerHTML=ws.length?ws.map((w,i)=>`
+   <div class="card" style="opacity:.75">
+     <div class="top">
+       <span class="co" style="cursor:pointer" onclick="show(2);openMd('${w.md}')">${esc(w.company)}</span>
+       <span class="tick">${esc(w.ticker)}</span>
+       <span class="badge line">🗂 已封存</span>
+       <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}分</span>
+     </div>
+     <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
+     <div class="prog"><b>經營進度紀錄</b>${progChips(w.company,10)}${progForm(w.company,'a'+i)}</div>
+   </div>`).join(''):'<div class="empty">無封存資料</div>';
+}
 function renderRanking(){
-  const ws=WATCH.slice().sort((a,b)=>(b.score||0)-(a.score||0));
+  const ws=WATCH.filter(w=>!isArchived(w.company)).sort((a,b)=>(b.score||0)-(a.score||0));
   ranking.innerHTML=ws.map((w,i)=>`
    <div class="card">
      <div class="top rank">
@@ -234,8 +259,9 @@ function renderDash(){
   const sell=RECS.filter(r=>/處分|收縮/.test(r.eventType)).length;
   const buy=RECS.filter(r=>/取得|擴產/.test(r.eventType)).length;
   const acted=new Set(PROG.map(p=>p[1])).size;
+  const arch=WATCH.filter(w=>isArchived(w.company)).length;
   kpis.innerHTML=`
-   <div class="kpi"><div class="n">${WATCH.length}</div><div class="t">監控公司（A級 ${nA}）</div></div>
+   <div class="kpi"><div class="n">${WATCH.length-arch}</div><div class="t">監控中（A級 ${nA}｜封存 ${arch}）</div></div>
    <div class="kpi hot"><div class="n">${nHigh}</div><div class="t">高機率（12個月內）</div></div>
    <div class="kpi"><div class="n">${RECS.length}</div><div class="t">累積事件</div></div>
    <div class="kpi sell"><div class="n">${sell}</div><div class="t">處分/收縮訊號</div></div>
@@ -244,7 +270,7 @@ function renderDash(){
   latest.innerHTML=RECS.slice(0,3).map(recCard).join('')||'<div class="empty">尚無事件</div>';
 }
 function renderWgrid(){
-  const ws=WATCH.slice().sort((a,b)=>(b.score||0)-(a.score||0));
+  const ws=WATCH.filter(w=>!isArchived(w.company)).sort((a,b)=>(b.score||0)-(a.score||0));
   wgrid.innerHTML=ws.map(w=>`
    <div class="card" onclick="openMd('${w.md}')">
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
@@ -254,7 +280,7 @@ function renderWgrid(){
      <div class="r">${esc(w.reason)}</div>
    </div>`).join('');
 }
-function renderAll(){renderRanking();renderDash();renderWgrid();}
+function renderAll(){renderRanking();renderDash();renderWgrid();renderArchive();}
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
 Promise.all([
   fetch('data/records.json?'+Date.now()).then(r=>r.json()),
@@ -277,7 +303,7 @@ function openMd(f){
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){
-  for(let k=0;k<3;k++){
+  for(let k=0;k<4;k++){
     document.getElementById('view'+k).style.display=k===i?'block':'none';
     document.getElementById('tab'+k).classList.toggle('on',k===i);
   }

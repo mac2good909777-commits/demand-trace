@@ -65,6 +65,8 @@ h2.sec{font-size:1rem;color:var(--muted);margin:20px 0 10px;letter-spacing:.08em
 .prog b{color:var(--muted);font-weight:600;font-size:.78rem;display:block;margin-bottom:4px}
 .chip{display:inline-block;font-size:.76rem;background:var(--accent-soft);color:var(--accent);border-radius:10px;padding:1px 9px;margin:0 4px 4px 0}
 .chip small{color:var(--muted)}
+.chip .del{cursor:pointer;margin-left:5px;color:var(--muted);font-weight:700}
+.chip .del:hover{color:var(--a)}
 .pform{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .pform select,.pform input{padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.84rem}
 .pform input{flex:1;min-width:140px}
@@ -142,7 +144,22 @@ function linkify(s){
 }
 function progChips(co,limit){
   const rows=PROG.filter(p=>p[1]===co).slice(-limit);
-  return rows.length?rows.map(p=>`<span class="chip">${esc(p[2])}${p[3]?'·'+esc(p[3]):''} <small>${esc(String(p[0]).slice(5,10))}</small></span>`).join(''):'<span class="chip" style="background:transparent;border:1px dashed var(--line);color:var(--muted)">尚無紀錄</span>';
+  return rows.length?rows.map(p=>`<span class="chip">${esc(p[2])}${p[3]?'·'+esc(p[3]):''} <small>${esc(String(p[0]).slice(5,10))}</small><a class="del" title="刪除" onclick="delProg('${esc(p[0])}','${esc(co)}','${esc(p[2])}',this)">✕</a></span>`).join(''):'<span class="chip" style="background:transparent;border:1px dashed var(--line);color:var(--muted)">尚無紀錄</span>';
+}
+function latestBadge(co){
+  const rows=PROG.filter(p=>p[1]===co);
+  if(!rows.length) return '';
+  const p=rows[rows.length-1];
+  return `<span class="badge type" title="最新經營進度">📌 ${esc(p[2])} <small style="opacity:.7">${esc(String(p[0]).slice(5,10))}</small></span>`;
+}
+async function delProg(time,co,act,el){
+  if(!confirm(`刪除進度：${co}｜${act}｜${time}？`))return;
+  el.textContent='…';
+  const body=JSON.stringify({token:'muju-trace-2026',action:'progress_del',time,company:co,act});
+  try{
+    const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
+    if(r.ok){await loadProg();renderAll();}else alert('刪除失敗：'+(r.error||''));
+  }catch(e){alert('連線失敗');}
 }
 function progForm(co,id){
   return `<div class="pform">
@@ -195,6 +212,7 @@ function renderRanking(){
        <span class="badge ${w.tier==='A'?'pA':w.tier==='B'?'pB':'pC'}">${esc(w.tier)}級</span>
        <span class="scorebar p${w.prob}"><i style="width:${w.score||0}%"></i></span>
        <span class="scoretxt t${w.prob}">${w.score}分・${esc(w.prob)}</span>
+       ${latestBadge(w.company)}
      </div>
      <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
      <div class="sec2"><b>經營建議</b>${esc(w.advice||'')}</div>
@@ -227,6 +245,7 @@ function renderWgrid(){
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
      <span class="badge ${w.tier==='A'?'pA':'pB'}">${esc(w.tier)}級</span>
      <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}分</span></div>
+     <div style="margin-top:4px">${latestBadge(w.company)}</div>
      <div class="r">${esc(w.reason)}</div>
    </div>`).join('');
 }

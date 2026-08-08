@@ -100,6 +100,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 <header><div class="wrap">
   <h1>需求軌跡監控<small>DEMAND TRACE</small></h1>
   <div class="sub">未來 12 個月需求機率權重排序｜<b>處分需求＝金</b>・<b style="color:var(--blue)">購置需求＝藍</b>｜每日 03:00 自動更新｜台中・彰化・南投・苗栗・雲林・嘉義</div>
+  <div class="sub" style="margin-top:2px">🕓 資料最後更新：<b id="lastUpd" style="color:var(--blue);font-family:Inter,monospace">載入中…</b></div>
   <nav class="tabs">
     <button id="tab0" class="on" onclick="show(0)">總覽</button>
     <button id="tab4" onclick="show(4)">經營中</button>
@@ -331,6 +332,8 @@ Promise.all([
   loadProg()
 ]).then(([d,w])=>{
   RECS=d.slice().reverse(); WATCH=w;
+  const ts=[...d.map(r=>String(r.recordDate||'')),...PROG.map(p=>String(p[0]||''))].sort().pop();
+  document.getElementById('lastUpd').textContent=ts||'—';
   fill(fCo,RECS.map(r=>r.company)); fill(fTy,RECS.map(r=>r.eventType));
   [fCo,fPr,fTy].forEach(s=>s.onchange=renderTimeline);
   renderTimeline(); renderAll();

@@ -53,6 +53,7 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 .badge.pB{background:var(--gold-light);color:var(--gold)}
 .badge.pC{background:var(--line-light);color:var(--muted)}
 .badge.line{background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500}
+.badge.loc{background:var(--line-light);color:var(--muted);font-weight:500;border:1px solid var(--line)}
 .badge.act{background:var(--blue);color:#fff}
 .date{color:var(--faint);font-size:.78rem;margin-left:auto;font-family:"Inter",monospace}
 .sec2{margin-top:7px;font-size:.9rem}
@@ -165,6 +166,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 const kindBadge=k=>k==='sell'?'<span class="badge sell">處分</span>':k==='both'?'<span class="badge sell">處分</span><span class="badge buy">購置</span>':'<span class="badge buy">購置</span>';
+const locBadges=w=>(w.locs||[]).map(l=>`<span class="badge loc">📍${esc(l)}</span>`).join('');
 function isArchived(co){const r=PROG.filter(p=>p[1]===co);return r.length>0&&r[r.length-1][2]===ARCHIVE_ACT;}
 function linkify(s){
   return esc(s).split(/\s*;\s*|\s*；\s*/).map(part=>{
@@ -244,6 +246,7 @@ function rankCard(w,i,idp){return `
        <span class="scoretxt t${w.prob}">${w.score}・${esc(w.prob)}</span>
        ${latestBadge(w.company)}
      </div>
+     <div style="margin-top:3px">${locBadges(w)}</div>
      <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
      <div class="sec2"><b>經營建議</b>${esc(w.advice||'')}</div>
      <div class="prog"><b>經營進度</b>${progChips(w.company,4)}${progForm(w.company,idp+i)}</div>
@@ -272,6 +275,7 @@ function renderActive(){
        <span class="scoretxt t${w.prob}">${w.score}・${esc(w.prob)}</span>
        ${latestBadge(w.company)}
      </div>
+     <div style="margin-top:3px">${locBadges(w)}</div>
      <div class="sec2"><b>案件／訊號</b>${esc(w.reason)}</div>
      <div class="sec2"><b>經營建議</b>${esc(w.advice||'')}</div>
      ${ev.length?`<div class="sec2"><b>最新事件（${esc(ev[0].eventDate)}）</b>${esc(ev[0].summary)}</div>`:''}
@@ -320,7 +324,7 @@ function renderWgrid(){
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
      ${kindBadge(w.kind)}
      <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span></div>
-     <div style="margin-top:4px">${latestBadge(w.company)}</div>
+     <div style="margin-top:4px">${latestBadge(w.company)}${locBadges(w)}</div>
      <div class="r">${esc(w.reason)}</div>
    </div>`).join('');
 }

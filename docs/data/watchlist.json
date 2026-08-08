@@ -10,7 +10,11 @@
   "added": "2026-08-08",
   "md": "億光電子-2393.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "新北市·樹林區",
+   "苗栗縣·銅鑼鄉"
+  ]
  },
  {
   "company": "岱宇國際",
@@ -23,7 +27,11 @@
   "added": "2026-08-08",
   "md": "岱宇國際-1598.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台北市·中山區",
+   "台中市·大甲區"
+  ]
  },
  {
   "company": "鴻勁精密",
@@ -36,7 +44,10 @@
   "added": "2026-08-08",
   "md": "鴻勁精密-7769.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·大雅區"
+  ]
  },
  {
   "company": "創新服務",
@@ -49,7 +60,10 @@
   "added": "2026-08-08",
   "md": "創新服務-7828.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·大甲區"
+  ]
  },
  {
   "company": "大宇紡織",
@@ -62,7 +76,13 @@
   "added": "2026-08-08",
   "md": "大宇紡織-1445.md",
   "active": true,
-  "kind": "both"
+  "kind": "both",
+  "locs": [
+   "台北市·大同區",
+   "台中市·大雅區",
+   "彰化縣·鹿港鎮",
+   "桃園市·蘆竹區"
+  ]
  },
  {
   "company": "頌勝科技",
@@ -75,7 +95,10 @@
   "added": "2026-08-08",
   "md": "頌勝科技-7768.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·西屯區"
+  ]
  },
  {
   "company": "志聖工業",
@@ -88,7 +111,11 @@
   "added": "2026-08-08",
   "md": "志聖工業-2467.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "新北市·林口區",
+   "台中市·南屯區"
+  ]
  },
  {
   "company": "白紗科技印刷",
@@ -101,7 +128,10 @@
   "added": "2026-08-08",
   "md": "白紗科技印刷-8401.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·太平區"
+  ]
  },
  {
   "company": "和大工業",
@@ -114,7 +144,11 @@
   "added": "2026-08-08",
   "md": "和大工業-1536.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·大里區",
+   "嘉義縣·大林鎮"
+  ]
  },
  {
   "company": "台灣暹勁",
@@ -127,7 +161,10 @@
   "added": "2026-08-08",
   "md": "台灣暹勁.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·大雅區"
+  ]
  },
  {
   "company": "綠點高新科技",
@@ -140,7 +177,10 @@
   "added": "2026-08-08",
   "md": "綠點高新科技.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·大雅區"
+  ]
  },
  {
   "company": "高鋒工業",
@@ -153,7 +193,11 @@
   "added": "2026-08-08",
   "md": "高鋒工業-4510.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·大雅區",
+   "台中市·神岡區"
+  ]
  },
  {
   "company": "萬潤科技",
@@ -166,7 +210,11 @@
   "added": "2026-08-08",
   "md": "萬潤科技-6187.md",
   "active": false,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "高雄市·路竹區",
+   "台中市·西屯區"
+  ]
  },
  {
   "company": "錦明實業",
@@ -179,7 +227,10 @@
   "added": "2026-08-08",
   "md": "錦明實業-3230.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "桃園市·蘆竹區"
+  ]
  },
  {
   "company": "京元電子",
@@ -192,7 +243,12 @@
   "added": "2026-08-08",
   "md": "京元電子-2449.md",
   "active": false,
-  "kind": "both"
+  "kind": "both",
+  "locs": [
+   "新竹市·東區",
+   "苗栗縣·竹南鎮",
+   "苗栗縣·銅鑼鄉"
+  ]
  },
  {
   "company": "大統益",
@@ -205,7 +261,10 @@
   "added": "2026-08-08",
   "md": "大統益-1232.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台南市·官田區"
+  ]
  },
  {
   "company": "啟新生技",
@@ -218,7 +277,10 @@
   "added": "2026-08-08",
   "md": "啟新生技.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "新北市·新莊區"
+  ]
  },
  {
   "company": "聯純科技",
@@ -231,7 +293,10 @@
   "added": "2026-08-08",
   "md": "聯純科技-6977.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·西屯區"
+  ]
  },
  {
   "company": "十全特好食品",
@@ -244,7 +309,11 @@
   "added": "2026-08-08",
   "md": "十全特好食品.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "新竹縣·竹北市",
+   "台中市·烏日區"
+  ]
  },
  {
   "company": "信邦電子",
@@ -257,7 +326,12 @@
   "added": "2026-08-08",
   "md": "信邦電子-3023.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "苗栗縣·苗栗市",
+   "台中市·梧棲區",
+   "苗栗縣·銅鑼鄉"
+  ]
  },
  {
   "company": "進欣昱企業",
@@ -270,7 +344,10 @@
   "added": "2026-08-08",
   "md": "進欣昱企業.md",
   "active": true,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·梧棲區"
+  ]
  },
  {
   "company": "凱柏精密機械",
@@ -283,7 +360,10 @@
   "added": "2026-08-08",
   "md": "凱柏精密機械.md",
   "active": false,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·南屯區"
+  ]
  },
  {
   "company": "興國橡膠",
@@ -296,7 +376,10 @@
   "added": "2026-08-08",
   "md": "興國橡膠.md",
   "active": true,
-  "kind": "sell"
+  "kind": "sell",
+  "locs": [
+   "台中市·大肚區"
+  ]
  },
  {
   "company": "統一",
@@ -309,7 +392,11 @@
   "added": "2026-08-08",
   "md": "統一-1216.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台南市·永康區",
+   "台中市·梧棲區"
+  ]
  },
  {
   "company": "大城長城",
@@ -322,6 +409,9 @@
   "added": "2026-08-08",
   "md": "大城長城.md",
   "active": true,
-  "kind": "buy"
+  "kind": "buy",
+  "locs": [
+   "台中市·西屯區"
+  ]
  }
 ]

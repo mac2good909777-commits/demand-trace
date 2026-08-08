@@ -130,7 +130,12 @@ footer{color:var(--muted);font-size:.76rem;text-align:center;padding:24px 0 40px
 <footer>資料來源：公開資訊觀測站重大訊息、新聞、內政部實價登錄｜經營進度同步至 Google 試算表｜睦聚工業地產</footer>
 <script>
 const EP='https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec';
-const ACTS=['寄發開發信','電訪','已聯繫上','拜訪','提供物件','已約訪','委託洽談','成案','暫停追蹤'];
+const ACT_GROUPS=[
+ ['開發接觸',['寄發開發信','電訪','已聯繫上','拜訪','已約訪']],
+ ['購置經營（幫它找）',['確認購置需求','提供物件','帶看物件','出價斡旋','購置成案']],
+ ['出售經營（幫它賣）',['確認處分需求','爭取委託','已取得委託','整理銷售資料','推廣曝光','帶買方看廠','買方出價/斡旋','出售成案']],
+ ['其他',['委託洽談','暫停追蹤']]
+];
 let RECS=[],WATCH=[],PROG=[];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
@@ -165,7 +170,7 @@ function progForm(co,id){
   return `<div class="pform">
     <select id="act_${id}" onchange="saveProg('${esc(co)}','${id}',this)">
       <option value="">＋點選動作即儲存…</option>
-      ${ACTS.map(a=>`<option>${a}</option>`).join('')}
+      ${ACT_GROUPS.map(([g,acts])=>`<optgroup label="${g}">${acts.map(a=>`<option>${a}</option>`).join('')}</optgroup>`).join('')}
     </select>
     <input id="note_${id}" placeholder="備註（選填，先填再點選動作會一併儲存）">
     <span id="st_${id}" style="font-size:.8rem;color:var(--muted);align-self:center"></span>

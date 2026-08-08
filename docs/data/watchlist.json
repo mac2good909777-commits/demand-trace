@@ -9,7 +9,8 @@
   "advice": "調閱標售公告與底價期程；組織銅鑼周邊半導體/封測買方參與投標",
   "added": "2026-08-08",
   "md": "億光電子-2393.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "岱宇國際",
@@ -21,7 +22,8 @@
   "advice": "直接接洽財務長/發言人，爭取大甲二廠專任委託；預先整理大甲買方名單（機械/健身器材/物流）",
   "added": "2026-08-08",
   "md": "岱宇國際-1598.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "鴻勁精密",
@@ -33,7 +35,8 @@
   "advice": "供給大雅/神岡/潭子 3000 坪級廠房與工業地；建立總務/財務供件窗口",
   "added": "2026-08-08",
   "md": "鴻勁精密-7769.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "創新服務",
@@ -45,7 +48,8 @@
   "advice": "大甲幼獅園區周邊物件主動供給；查購置用途（自用/資產配置）判斷續買機率",
   "added": "2026-08-08",
   "md": "創新服務-7828.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "大宇紡織",
@@ -57,7 +61,8 @@
   "advice": "彰濱廠去化推進中；同步提案大雅廠部分樓層招租與蘆竹廠活化評估",
   "added": "2026-08-08",
   "md": "大宇紡織-1445.md",
-  "active": true
+  "active": true,
+  "kind": "both"
  },
  {
   "company": "頌勝科技",
@@ -69,7 +74,8 @@
   "advice": "授權額度未用完＝進行式買方，速供西屯/南屯工業區物件",
   "added": "2026-08-08",
   "md": "頌勝科技-7768.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "志聖工業",
@@ -81,7 +87,8 @@
   "advice": "追蹤原據點是否因搬遷釋出；同步經營賣方凱柏精密的處分後續需求",
   "added": "2026-08-08",
   "md": "志聖工業-2467.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "白紗科技印刷",
@@ -93,7 +100,8 @@
   "advice": "太平兩筆整合後可能仍缺倉儲/停車空間，探詢加購需求",
   "added": "2026-08-08",
   "md": "白紗科技印刷-8401.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "和大工業",
@@ -105,7 +113,8 @@
   "advice": "立即追補充公告確認標的；若為台中廠區＝本週內接洽爭取委託",
   "added": "2026-08-08",
   "md": "和大工業-1536.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "台灣暹勁",
@@ -117,7 +126,8 @@
   "advice": "查公司背景與產業別；大雅中清路周邊持續供件",
   "added": "2026-08-08",
   "md": "台灣暹勁.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "綠點高新科技",
@@ -129,7 +139,8 @@
   "advice": "查商工登記與名下不動產清冊；業界打聽搬遷/退場計畫，鎖定新據點需求",
   "added": "2026-08-08",
   "md": "綠點高新科技.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "高鋒工業",
@@ -141,7 +152,8 @@
   "advice": "接觸達佛羅/高鋒管理層，潭子/神岡一帶標的爭取委託",
   "added": "2026-08-08",
   "md": "高鋒工業-4510.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "萬潤科技",
@@ -153,7 +165,8 @@
   "advice": "追蹤台中擴產下一步；西屯工業區周邊物件保持供給",
   "added": "2026-08-08",
   "md": "萬潤科技-6187.md",
-  "active": false
+  "active": false,
+  "kind": "buy"
  },
  {
   "company": "錦明實業",
@@ -165,7 +178,8 @@
   "advice": "查處分標的位置；透過大宇案關係鏈接觸",
   "added": "2026-08-08",
   "md": "錦明實業-3230.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "京元電子",
@@ -177,7 +191,8 @@
   "advice": "低頻關注竹南/銅鑼動向；出現釋出訊號立即升級接觸",
   "added": "2026-08-08",
   "md": "京元電子-2449.md",
-  "active": false
+  "active": false,
+  "kind": "both"
  },
  {
   "company": "大統益",
@@ -189,7 +204,8 @@
   "advice": "重啟興國橡膠廠地提案（20260626專案）；供中部大面積工業地/倉儲用地，接洽總經理陳昭良窗口",
   "added": "2026-08-08",
   "md": "大統益-1232.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "啟新生技",
@@ -201,7 +217,8 @@
   "advice": "延續6月接觸——確認新產線/實驗室空間需求，供台中生技適用廠辦",
   "added": "2026-08-08",
   "md": "啟新生技.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "聯純科技",
@@ -213,7 +230,8 @@
   "advice": "探詢西屯廠區是否擴增；供工業區/精科周邊廠房件",
   "added": "2026-08-08",
   "md": "聯純科技-6977.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "十全特好食品",
@@ -225,7 +243,8 @@
   "advice": "確認烏日據點需求進度；追蹤其中部產能/倉儲布局",
   "added": "2026-08-08",
   "md": "十全特好食品.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "信邦電子",
@@ -237,7 +256,8 @@
   "advice": "銅科投產前的配套需求——供銅鑼/竹南/台中港周邊物件；同步查賣方進欣昱企業資產動向",
   "added": "2026-08-08",
   "md": "信邦電子-3023.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "進欣昱企業",
@@ -249,7 +269,8 @@
   "advice": "成交後回訪：確認搬遷去向與新據點需求；清查名下其他不動產；請託轉介",
   "added": "2026-08-08",
   "md": "進欣昱企業.md",
-  "active": true
+  "active": true,
+  "kind": "sell"
  },
  {
   "company": "凱柏精密機械",
@@ -261,7 +282,8 @@
   "advice": "查商工登記與搬遷去向；透過志聖案/精科園區人脈接觸；清查名下其他資產",
   "added": "2026-08-08",
   "md": "凱柏精密機械.md",
-  "active": false
+  "active": false,
+  "kind": "sell"
  },
  {
   "company": "興國橡膠",
@@ -273,7 +295,8 @@
   "advice": "推進出售進度；大統益6.05億中部購地授權＝最對口買方，重啟提案",
   "added": "2026-08-08",
   "md": "興國橡膠.md",
-  "active": true
+  "active": true,
+  "kind": "sell"
  },
  {
   "company": "統一",
@@ -285,7 +308,8 @@
   "advice": "透過大統益購地案連動集團窗口；中部物流節點用地供給",
   "added": "2026-08-08",
   "md": "統一-1216.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  },
  {
   "company": "大城長城",
@@ -297,6 +321,7 @@
   "advice": "維繫土地開發窗口；大面積土地標的優先轉介",
   "added": "2026-08-08",
   "md": "大城長城.md",
-  "active": true
+  "active": true,
+  "kind": "buy"
  }
 ]

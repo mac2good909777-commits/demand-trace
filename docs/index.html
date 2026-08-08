@@ -10,83 +10,112 @@
   --bg:#f6f7f9; --card:#ffffff; --ink:#1c2430; --muted:#61708a; --line:#e3e7ee;
   --accent:#0f6b5c; --accent-soft:#e3f1ee;
   --a:#b3261e; --a-soft:#fbe9e7; --b:#8a5a00; --b-soft:#fff3d6; --c:#3b5b92; --c-soft:#e8eefb;
+  --sell:#8a2be2; --sell-soft:#f1e8fb; --buy:#0b6bcb; --buy-soft:#e6f0fb;
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#12161c; --card:#1a2029; --ink:#e8edf4; --muted:#94a3b8; --line:#2a3340;
     --accent:#4fd1b5; --accent-soft:#123f36;
-    --a:#ff8a80; --a-soft:#3a1f1d; --b:#ffd54f; --b-soft:#3a2f10; --c:#90b4f0; --c-soft:#1c2a44; }
+    --a:#ff8a80; --a-soft:#3a1f1d; --b:#ffd54f; --b-soft:#3a2f10; --c:#90b4f0; --c-soft:#1c2a44;
+    --sell:#c9a2f5; --sell-soft:#2c1f42; --buy:#8ec2f5; --buy-soft:#16283c; }
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
-header{padding:28px 20px 18px;border-bottom:1px solid var(--line);background:var(--card)}
-.wrap{max-width:960px;margin:0 auto}
-h1{font-size:1.45rem;letter-spacing:.05em}
+header{padding:26px 20px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.wrap{max-width:1020px;margin:0 auto}
+h1{font-size:1.4rem;letter-spacing:.05em}
 h1 small{font-size:.85rem;color:var(--muted);font-weight:400;margin-left:.6em}
-.sub{color:var(--muted);font-size:.88rem;margin-top:4px}
-nav.tabs{display:flex;gap:8px;margin-top:16px}
+.sub{color:var(--muted);font-size:.86rem;margin-top:3px}
+nav.tabs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 nav.tabs button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 16px;border-radius:20px;cursor:pointer;font-size:.9rem}
 nav.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
 main{padding:20px}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.filters select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:.88rem}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .n{font-size:1.7rem;font-weight:700;letter-spacing:.02em}
+.kpi .t{color:var(--muted);font-size:.8rem;margin-top:2px}
+.kpi.hot .n{color:var(--a)}
+.kpi.buy .n{color:var(--buy)}
+.kpi.sell .n{color:var(--sell)}
+h2.sec{font-size:1rem;color:var(--muted);margin:20px 0 10px;letter-spacing:.08em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:12px}
 .card .top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
-.co{font-weight:700;font-size:1.05rem}
-.tick{color:var(--muted);font-size:.85rem}
-.badge{font-size:.75rem;padding:2px 10px;border-radius:12px;white-space:nowrap}
+.co{font-weight:700;font-size:1.02rem}
+.tick{color:var(--muted);font-size:.84rem}
+.badge{font-size:.74rem;padding:2px 10px;border-radius:12px;white-space:nowrap}
 .badge.type{background:var(--accent-soft);color:var(--accent)}
 .badge.pA{background:var(--a-soft);color:var(--a)}
 .badge.pB{background:var(--b-soft);color:var(--b)}
 .badge.pC{background:var(--c-soft);color:var(--c)}
-.date{color:var(--muted);font-size:.82rem;margin-left:auto}
-.sec{margin-top:8px;font-size:.92rem}
-.sec b{color:var(--muted);font-weight:600;font-size:.8rem;display:block;margin-bottom:2px}
+.badge.sell{background:var(--sell-soft);color:var(--sell)}
+.badge.buy{background:var(--buy-soft);color:var(--buy)}
+.badge.line{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.date{color:var(--muted);font-size:.8rem;margin-left:auto}
+.sec2{margin-top:7px;font-size:.9rem}
+.sec2 b{color:var(--muted);font-weight:600;font-size:.78rem;display:block;margin-bottom:1px}
 .src a{color:var(--accent);word-break:break-all;text-decoration:none;border-bottom:1px dotted var(--accent)}
 .src span{color:var(--muted)}
-#dossierList{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-#dossierList .card{cursor:pointer;transition:transform .1s}
-#dossierList .card:hover{transform:translateY(-2px)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filters select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:.88rem}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.wgrid .card{cursor:pointer;transition:transform .1s;margin:0}
+.wgrid .card:hover{transform:translateY(-2px)}
+.wgrid .r{color:var(--muted);font-size:.84rem;margin-top:4px}
 #mdView{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px 28px}
-#mdView h1{font-size:1.3rem;margin-bottom:12px}
-#mdView h2{font-size:1.05rem;margin:18px 0 8px;color:var(--accent)}
-#mdView table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.88rem;display:block;overflow-x:auto}
+#mdView h1{font-size:1.25rem;margin-bottom:12px}
+#mdView h2{font-size:1.02rem;margin:18px 0 8px;color:var(--accent)}
+#mdView table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.87rem;display:block;overflow-x:auto}
 #mdView th,#mdView td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+#mdView blockquote{border-left:3px solid var(--accent);padding:6px 14px;margin:8px 0;background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:.88rem}
 #mdView a{color:var(--accent)}
 .back{display:inline-block;margin-bottom:12px;color:var(--accent);cursor:pointer;font-size:.9rem}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
-footer{color:var(--muted);font-size:.78rem;text-align:center;padding:24px 0 40px}
+footer{color:var(--muted);font-size:.76rem;text-align:center;padding:24px 0 40px}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <h1>需求軌跡監控<small>購置・處分・產業鏈切入點</small></h1>
-  <div class="sub">觀察名單公司經營軌跡交叉判讀｜每日自動更新｜睦聚工業地產</div>
+  <div class="sub">觀察名單公司經營軌跡交叉判讀｜每日 03:00 自動更新｜監控範圍：台中・彰化・南投・苗栗・雲林・嘉義</div>
   <nav class="tabs">
-    <button id="tabT" class="on" onclick="show('timeline')">事件時間軸</button>
-    <button id="tabD" onclick="show('dossiers')">公司軌跡檔</button>
+    <button id="tab0" class="on" onclick="show(0)">總覽</button>
+    <button id="tab1" onclick="show(1)">事件時間軸</button>
+    <button id="tab2" onclick="show(2)">公司軌跡檔</button>
   </nav>
 </div></header>
 <main><div class="wrap">
-  <section id="timeline">
-    <div class="filters">
-      <select id="fCo"><option value="">全部公司</option></select>
-      <select id="fPr"><option value="">全部優先級</option><option>A-立即接觸</option><option>B-三個月內</option><option>C-持續觀察</option></select>
-      <select id="fTy"><option value="">全部事件類型</option></select>
-    </div>
-    <div id="list"></div>
-  </section>
-  <section id="dossiers" style="display:none">
-    <div id="dossierList"></div>
-    <div id="mdWrap" style="display:none">
-      <span class="back" onclick="closeMd()">← 回公司列表</span>
-      <div id="mdView"></div>
-    </div>
-  </section>
+
+<section id="view0">
+  <div class="kpis" id="kpis"></div>
+  <h2 class="sec">🔴 A級切入焦點</h2>
+  <div id="focus"></div>
+  <h2 class="sec">🕐 最新事件</h2>
+  <div id="latest"></div>
+</section>
+
+<section id="view1" style="display:none">
+  <div class="filters">
+    <select id="fCo"><option value="">全部公司</option></select>
+    <select id="fPr"><option value="">全部優先級</option><option>A-立即接觸</option><option>B-三個月內</option><option>C-持續觀察</option></select>
+    <select id="fTy"><option value="">全部事件類型</option></select>
+  </div>
+  <div id="list"></div>
+</section>
+
+<section id="view2" style="display:none">
+  <div class="wgrid" id="wgrid"></div>
+  <div id="mdWrap" style="display:none">
+    <span class="back" onclick="closeMd()">← 回公司列表</span>
+    <div id="mdView"></div>
+  </div>
+</section>
+
 </div></main>
-<footer>資料來源：公開資訊觀測站重大訊息、新聞、內政部實價登錄｜本頁僅供內部研判參考</footer>
+<footer>資料來源：公開資訊觀測站重大訊息、新聞、內政部實價登錄｜本頁僅供內部研判參考｜睦聚工業地產</footer>
 <script>
-let RECS=[];
+let RECS=[],WATCH=[];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
+const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 function linkify(s){
   return esc(s).split(/\s*;\s*|\s*；\s*/).map(part=>{
     const m=part.match(/https?:\/\/\S+/);
@@ -94,46 +123,76 @@ function linkify(s){
     return `<span>${part}</span>`;
   }).join('<br>');
 }
-function pCls(p){return p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';}
-function render(){
+function recCard(r){return `
+ <div class="card">
+   <div class="top">
+     <span class="co">${esc(r.company)}</span><span class="tick">${esc(r.ticker)}</span>
+     <span class="badge ${kindCls(r.eventType)}">${esc(r.eventType)}</span>
+     <span class="badge ${pCls(r.priority)}">${esc(r.priority)}</span>
+     <span class="badge line">${esc(r.label)}</span>
+     <span class="date">事件 ${esc(r.eventDate)}｜記錄 ${esc(r.recordDate)}</span>
+   </div>
+   <div class="sec2"><b>事件摘要</b>${esc(r.summary)}</div>
+   <div class="sec2"><b>軌跡判讀</b>${esc(r.reading)}</div>
+   <div class="sec2"><b>切入點</b>${esc(r.entry)}</div>
+   ${r.related?`<div class="sec2"><b>關聯公司</b>${esc(r.related)}</div>`:''}
+   <div class="sec2 src"><b>來源（點回原文自行判讀）</b>${linkify(r.sources)}</div>
+ </div>`}
+function renderTimeline(){
   const co=fCo.value,pr=fPr.value,ty=fTy.value;
   const rows=RECS.filter(r=>(!co||r.company===co)&&(!pr||r.priority===pr)&&(!ty||r.eventType===ty));
-  list.innerHTML=rows.length?rows.map(r=>`
-   <div class="card">
-     <div class="top">
-       <span class="co">${esc(r.company)}</span><span class="tick">${esc(r.ticker)}</span>
-       <span class="badge type">${esc(r.eventType)}</span>
-       <span class="badge ${pCls(r.priority)}">${esc(r.priority)}</span>
-       <span class="badge type" style="background:transparent;border:1px solid var(--line);color:var(--muted)">${esc(r.label)}</span>
-       <span class="date">事件日 ${esc(r.eventDate)}｜記錄 ${esc(r.recordDate)}</span>
-     </div>
-     <div class="sec"><b>事件摘要</b>${esc(r.summary)}</div>
-     <div class="sec"><b>軌跡判讀</b>${esc(r.reading)}</div>
-     <div class="sec"><b>切入點</b>${esc(r.entry)}</div>
-     ${r.related?`<div class="sec"><b>關聯公司</b>${esc(r.related)}</div>`:''}
-     <div class="sec src"><b>來源（點回原文自行判讀）</b>${linkify(r.sources)}</div>
-   </div>`).join(''):'<div class="empty">無符合資料</div>';
+  list.innerHTML=rows.length?rows.map(recCard).join(''):'<div class="empty">無符合資料</div>';
+}
+function renderDash(){
+  const nA=WATCH.filter(w=>w.tier==='A').length,nB=WATCH.filter(w=>w.tier==='B').length;
+  const sell=RECS.filter(r=>/處分|收縮/.test(r.eventType)).length;
+  const buy=RECS.filter(r=>/取得|擴產/.test(r.eventType)).length;
+  const pa=RECS.filter(r=>(r.priority||'').startsWith('A')).length;
+  const last=RECS[0]?RECS[0].recordDate:'—';
+  kpis.innerHTML=`
+   <div class="kpi"><div class="n">${WATCH.length}</div><div class="t">監控公司（A ${nA}｜B ${nB}）</div></div>
+   <div class="kpi"><div class="n">${RECS.length}</div><div class="t">累積事件</div></div>
+   <div class="kpi hot"><div class="n">${pa}</div><div class="t">A級切入事件</div></div>
+   <div class="kpi sell"><div class="n">${sell}</div><div class="t">處分/收縮訊號</div></div>
+   <div class="kpi buy"><div class="n">${buy}</div><div class="t">取得/擴產訊號</div></div>
+   <div class="kpi"><div class="n" style="font-size:1rem;line-height:2.2">${esc(last)}</div><div class="t">最後記錄時間</div></div>`;
+  const focusW=WATCH.filter(w=>w.tier==='A');
+  focus.innerHTML=focusW.map(w=>`
+   <div class="card" style="cursor:pointer" onclick="show(2);openMd('${w.md}')">
+     <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
+     <span class="badge pA">A級</span><span class="date">${esc(w.added)} 加入</span></div>
+     <div class="sec2">${esc(w.reason)}</div>
+   </div>`).join('');
+  latest.innerHTML=RECS.slice(0,3).map(recCard).join('')||'<div class="empty">尚無事件</div>';
 }
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
-fetch('data/records.json?'+Date.now()).then(r=>r.json()).then(d=>{
-  RECS=d.slice().reverse();
-  fill(fCo,RECS.map(r=>r.company));fill(fTy,RECS.map(r=>r.eventType));
-  [fCo,fPr,fTy].forEach(s=>s.onchange=render);render();
-});
-fetch('companies/index.json?'+Date.now()).then(r=>r.json()).then(files=>{
-  dossierList.innerHTML=files.map(f=>`<div class="card" onclick="openMd('${f}')"><div class="co">${f.replace(/\.md$/,'')}</div><div class="tick">點擊檢視軌跡檔 →</div></div>`).join('');
+Promise.all([
+  fetch('data/records.json?'+Date.now()).then(r=>r.json()),
+  fetch('data/watchlist.json?'+Date.now()).then(r=>r.json()).catch(()=>[])
+]).then(([d,w])=>{
+  RECS=d.slice().reverse(); WATCH=w;
+  fill(fCo,RECS.map(r=>r.company)); fill(fTy,RECS.map(r=>r.eventType));
+  [fCo,fPr,fTy].forEach(s=>s.onchange=renderTimeline);
+  renderTimeline(); renderDash();
+  wgrid.innerHTML=WATCH.map(w=>`
+   <div class="card" onclick="openMd('${w.md}')">
+     <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
+     <span class="badge ${w.tier==='A'?'pA':w.tier==='B'?'pB':'pC'}">${esc(w.tier)}級</span></div>
+     <div class="r">${esc(w.reason)}</div>
+   </div>`).join('');
 });
 function openMd(f){
   fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()).then(t=>{
-    mdView.innerHTML=marked.parse(t);dossierList.style.display='none';mdWrap.style.display='block';
+    mdView.innerHTML=marked.parse(t);wgrid.style.display='none';mdWrap.style.display='block';window.scrollTo(0,0);
   });
 }
-function closeMd(){mdWrap.style.display='none';dossierList.style.display='grid';}
-function show(w){
-  timeline.style.display=w==='timeline'?'block':'none';
-  dossiers.style.display=w==='dossiers'?'block':'none';
-  tabT.classList.toggle('on',w==='timeline');tabD.classList.toggle('on',w==='dossiers');
-  if(w==='dossiers')closeMd();
+function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
+function show(i){
+  for(let k=0;k<3;k++){
+    document.getElementById('view'+k).style.display=k===i?'block':'none';
+    document.getElementById('tab'+k).classList.toggle('on',k===i);
+  }
+  if(i===2)closeMd();
 }
 </script>
 </body>

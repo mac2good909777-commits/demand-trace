@@ -146,19 +146,25 @@ function progChips(co,limit){
 }
 function progForm(co,id){
   return `<div class="pform">
-    <select id="act_${id}">${ACTS.map(a=>`<option>${a}</option>`).join('')}</select>
-    <input id="note_${id}" placeholder="備註（選填）：窗口、回應、下一步…">
-    <button onclick="saveProg('${esc(co)}','${id}',this)">記錄</button>
+    <select id="act_${id}" onchange="saveProg('${esc(co)}','${id}',this)">
+      <option value="">＋點選動作即儲存…</option>
+      ${ACTS.map(a=>`<option>${a}</option>`).join('')}
+    </select>
+    <input id="note_${id}" placeholder="備註（選填，先填再點選動作會一併儲存）">
+    <span id="st_${id}" style="font-size:.8rem;color:var(--muted);align-self:center"></span>
   </div>`;
 }
-async function saveProg(co,id,btn){
-  btn.disabled=true;btn.textContent='寫入中…';
+async function saveProg(co,id,sel){
+  const act=sel.value; if(!act) return;
+  const st=document.getElementById('st_'+id);
+  sel.disabled=true; st.textContent='儲存中…';
   const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,
-    act:document.getElementById('act_'+id).value,note:document.getElementById('note_'+id).value});
+    act, note:document.getElementById('note_'+id).value});
   try{
     const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
-    if(r.ok){await loadProg();renderAll();}else{alert('寫入失敗：'+(r.error||''));btn.disabled=false;btn.textContent='記錄';}
-  }catch(e){alert('連線失敗');btn.disabled=false;btn.textContent='記錄';}
+    if(r.ok){st.textContent='✅ 已儲存';await loadProg();renderAll();}
+    else{st.textContent='❌ 失敗';sel.disabled=false;}
+  }catch(e){st.textContent='❌ 連線失敗';sel.disabled=false;}
 }
 async function loadProg(){
   try{PROG=(await fetch(EP+'?list=progress&t='+Date.now()).then(r=>r.json())).progress||[];}catch(e){PROG=[];}

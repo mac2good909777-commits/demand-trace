@@ -55,6 +55,19 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 .badge.line{background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500}
 .badge.loc{background:var(--line-light);color:var(--muted);font-weight:500;border:1px solid var(--line)}
 .badge.act{background:var(--blue);color:#fff}
+.badge.due0{background:#FDEBE9;color:var(--down);font-weight:800}
+.badge.due1{background:var(--gold-light);color:var(--gold);font-weight:800}
+.badge.due2{background:var(--blue-light);color:var(--blue);font-weight:700}
+.badge.due3{background:var(--line-light);color:var(--muted);font-weight:500}
+.badge.trk{background:#EDE9FE;color:#6D28D9;font-weight:700}
+.nx{margin-top:9px;border-top:1px dashed var(--line);padding-top:9px;font-size:.88rem;display:flex;gap:9px;align-items:flex-start}
+.nx .lab{color:var(--faint);font-weight:700;font-size:.74rem;letter-spacing:.12em;white-space:nowrap;padding-top:3px}
+.plan{margin-top:3px}
+.plan .row{display:flex;gap:10px;padding:5px 0;border-bottom:1px dotted var(--line-light);font-size:.87rem}
+.plan .row:last-child{border-bottom:none}
+.plan .d{font-family:"Inter",monospace;color:var(--blue);font-weight:700;white-space:nowrap;min-width:6em}
+.plan .row.past{opacity:.45}
+.plan .row.past .d{color:var(--faint);text-decoration:line-through}
 .date{color:var(--faint);font-size:.78rem;margin-left:auto;font-family:"Inter",monospace}
 .sec2{margin-top:7px;font-size:.9rem}
 .sec2 b{color:var(--faint);font-weight:700;font-size:.74rem;display:block;letter-spacing:.12em;margin-bottom:1px}
@@ -105,6 +118,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
   <nav class="tabs">
     <button id="tab0" class="on" onclick="show(0)">總覽</button>
     <button id="tab4" onclick="show(4)">經營中</button>
+    <button id="tab5" onclick="show(5)">🔭 長期追蹤</button>
     <button id="tab1" onclick="show(1)">事件時間軸</button>
     <button id="tab2" onclick="show(2)">公司軌跡檔</button>
     <button id="tab3" onclick="show(3)">封存資料</button>
@@ -114,6 +128,8 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 
 <section id="view0">
   <div class="kpis" id="kpis"></div>
+  <h2 class="sec">⏰ 時間提醒（7 天內到期與已逾期）<span class="cnt" id="cntDue"></span></h2>
+  <div id="dueList"></div>
   <h2 class="sec">🟡 處分需求（賣方案源）<span class="cnt" id="cntSell"></span></h2>
   <div id="rankSell"></div>
   <h2 class="sec">🔵 購置需求（買方需求）<span class="cnt" id="cntBuy"></span></h2>
@@ -125,6 +141,11 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 <section id="view4" style="display:none">
   <h2 class="sec">💼 經營中（進行式 pipeline；新消息由每日排程持續追蹤）</h2>
   <div id="activeList"></div>
+</section>
+
+<section id="view5" style="display:none">
+  <h2 class="sec">🔭 長期追蹤<span class="cnt">窗口已關或不在窗口內，但需求判斷為真、有明確回訪時點——依「下次關鍵日」由近至遠排序</span></h2>
+  <div id="trackList"></div>
 </section>
 
 <section id="view1" style="display:none">
@@ -233,6 +254,24 @@ function recCard(r){return `
    ${r.related?`<div class="sec2"><b>關聯公司</b>${esc(r.related)}</div>`:''}
    <div class="sec2 src"><b>來源（點回原文自行判讀）</b>${linkify(r.sources)}</div>
  </div>`}
+const TODAY=(()=>{const d=new Date();d.setHours(0,0,0,0);return d;})();
+function daysTo(s){if(!s)return null;const t=new Date(s+'T00:00:00');return isNaN(t)?null:Math.round((t-TODAY)/86400000);}
+function dueCls(n){return n===null?'due3':n<=0?'due0':n<=7?'due1':n<=30?'due2':'due3';}
+function dueTxt(n){return n===null?'—':n<0?`逾期 ${-n} 天`:n===0?'今日':`${n} 天後`;}
+function dueBadge(w){const n=daysTo(w.next);return w.next?`<span class="badge ${dueCls(n)}">${esc(w.next)}・${dueTxt(n)}</span>`:'';}
+function nextBlock(w){
+  if(!w.next)return '';
+  return `<div class="nx"><span class="lab">⏰ 時間提醒</span><span>${dueBadge(w)}
+   <span class="badge line">${esc(w.nextKind||'')}</span> ${esc(w.nextWhat||'')}</span></div>`;
+}
+function planBlock(w){
+  if(!w.plan||!w.plan.length)return '';
+  return `<div class="sec2"><b>時程表</b><div class="plan">`+w.plan.map(s=>{
+    const n=daysTo(s.d);
+    return `<div class="row${n!==null&&n<0?' past':''}"><span class="d">${esc(s.d)}</span>`
+      +`<span>${esc(s.w)}${n!==null&&n>=0?` <span class="badge ${dueCls(n)}">${dueTxt(n)}</span>`:''}</span></div>`;
+  }).join('')+`</div></div>`;
+}
 function rankCard(w,i,idp){return `
    <div class="card ${w.kind||'buy'}">
      <div class="top rank">
@@ -248,7 +287,8 @@ function rankCard(w,i,idp){return `
      </div>
      <div style="margin-top:3px">${locBadges(w)}</div>
      <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
-     <div class="sec2"><b>經營建議</b>${esc(w.advice||'')}</div>
+     <div class="sec2"><b>做法</b>${esc(w.advice||'')}</div>
+     ${nextBlock(w)}
      <div class="prog"><b>經營進度</b>${progChips(w.company,4)}${progForm(w.company,idp+i)}</div>
    </div>`}
 function renderRanking(){
@@ -277,10 +317,53 @@ function renderActive(){
      </div>
      <div style="margin-top:3px">${locBadges(w)}</div>
      <div class="sec2"><b>案件／訊號</b>${esc(w.reason)}</div>
-     <div class="sec2"><b>經營建議</b>${esc(w.advice||'')}</div>
+     <div class="sec2"><b>做法</b>${esc(w.advice||'')}</div>
      ${ev.length?`<div class="sec2"><b>最新事件（${esc(ev[0].eventDate)}）</b>${esc(ev[0].summary)}</div>`:''}
+     ${nextBlock(w)}
      <div class="prog"><b>經營進度</b>${progChips(w.company,6)}${progForm(w.company,'p'+i)}</div>
    </div>`}).join(''):'<div class="empty">無經營中案件</div>';
+}
+function renderTrack(){
+  const ws=WATCH.filter(w=>w.track&&!isArchived(w.company))
+    .sort((a,b)=>(daysTo(a.next)??9e9)-(daysTo(b.next)??9e9));
+  trackList.innerHTML=ws.length?ws.map((w,i)=>`
+   <div class="card ${w.kind||'buy'}">
+     <div class="top">
+       <span class="co" style="cursor:pointer" onclick="show(2);openMd('${w.md}')">${esc(w.company)}</span>
+       <span class="tick">${esc(w.ticker)}</span>
+       ${kindBadge(w.kind)}
+       <span class="badge ${w.tier==='A'?'pA':w.tier==='B'?'pB':'pC'}">${esc(w.tier)}級</span>
+       <span class="badge trk">🔭 長期追蹤</span>
+       ${w.active?'<span class="badge act">💼</span>':''}
+       <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span>
+     </div>
+     <div style="margin-top:3px">${locBadges(w)}</div>
+     <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
+     ${w.trackWhy?`<div class="sec2"><b>為何轉長期追蹤</b>${esc(w.trackWhy)}</div>`:''}
+     <div class="sec2"><b>做法</b>${esc(w.advice||'')}</div>
+     ${planBlock(w)}
+     ${nextBlock(w)}
+     <div class="prog"><b>經營進度</b>${progChips(w.company,6)}${progForm(w.company,'t'+i)}</div>
+   </div>`).join(''):'<div class="empty">無長期追蹤公司</div>';
+}
+function renderDue(){
+  const ws=WATCH.filter(w=>!isArchived(w.company)&&w.next)
+    .map(w=>({w,n:daysTo(w.next)})).filter(o=>o.n!==null&&o.n<=7)
+    .sort((a,b)=>a.n-b.n);
+  const over=ws.filter(o=>o.n<0).length;
+  cntDue.textContent=ws.length?`${ws.length} 件${over?`｜逾期 ${over} 件`:''}`:'';
+  dueList.innerHTML=ws.length?ws.map(o=>`
+   <div class="card ${o.w.kind||'buy'}" style="padding:12px 18px">
+     <div class="top" style="margin-bottom:2px">
+       <span class="badge ${dueCls(o.n)}">${esc(o.w.next)}・${dueTxt(o.n)}</span>
+       <span class="co" style="font-size:.98rem;cursor:pointer" onclick="show(2);openMd('${o.w.md}')">${esc(o.w.company)}</span>
+       <span class="tick">${esc(o.w.ticker)}</span>
+       ${kindBadge(o.w.kind)}
+       ${o.w.track?'<span class="badge trk">🔭</span>':''}
+       <span class="scoretxt t${o.w.prob}" style="margin-left:auto">${o.w.score}</span>
+     </div>
+     <div style="font-size:.89rem">${esc(o.w.nextWhat||'')}</div>
+   </div>`).join(''):'<div class="empty">7 天內無到期項目</div>';
 }
 function renderArchive(){
   const ws=WATCH.filter(w=>isArchived(w.company)).sort((a,b)=>(b.score||0)-(a.score||0));
@@ -308,12 +391,16 @@ function renderDash(){
   const nA=live.filter(w=>w.tier==='A').length,nHigh=live.filter(w=>w.prob==='高').length;
   const nSell=live.filter(w=>w.kind==='sell'||w.kind==='both').length;
   const nBuy=live.filter(w=>w.kind==='buy'||w.kind==='both').length;
+  const dues=live.filter(w=>w.next).map(w=>daysTo(w.next)).filter(n=>n!==null&&n<=7);
+  const nDue=dues.length, nOver=dues.filter(n=>n<0).length;
   kpis.innerHTML=`
    <div class="kpi"><div class="n">${live.length}</div><div class="t">監控中（A級 ${nA}｜封存 ${arch}）</div></div>
    <div class="kpi hot"><div class="n">${nHigh}</div><div class="t">高機率（12個月內）</div></div>
    <div class="kpi gold"><div class="n">${nSell}</div><div class="t">🟡 處分需求</div></div>
    <div class="kpi"><div class="n">${nBuy}</div><div class="t">🔵 購置需求</div></div>
    <div class="kpi up"><div class="n">${WATCH.filter(w=>w.active).length}</div><div class="t">💼 經營中</div></div>
+   <div class="kpi"><div class="n">${live.filter(w=>w.track).length}</div><div class="t">🔭 長期追蹤</div></div>
+   <div class="kpi hot"><div class="n">${nDue}</div><div class="t">⏰ 7 天內到期（逾期 ${nOver}）</div></div>
    <div class="kpi"><div class="n">${RECS.length}</div><div class="t">累積事件</div></div>`;
   latest.innerHTML=RECS.slice(0,3).map(recCard).join('')||'<div class="empty">尚無事件</div>';
 }
@@ -324,11 +411,11 @@ function renderWgrid(){
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
      ${kindBadge(w.kind)}
      <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span></div>
-     <div style="margin-top:4px">${latestBadge(w.company)}${locBadges(w)}</div>
+     <div style="margin-top:4px">${latestBadge(w.company)}${w.track?'<span class="badge trk">🔭</span>':''}${dueBadge(w)}${locBadges(w)}</div>
      <div class="r">${esc(w.reason)}</div>
    </div>`).join('');
 }
-function renderAll(){renderRanking();renderDash();renderWgrid();renderArchive();renderActive();}
+function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();}
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
 Promise.all([
   fetch('data/records.json?'+Date.now()).then(r=>r.json()),
@@ -347,13 +434,15 @@ function openMd(f){
   const w=WATCH.find(x=>x.md===f); CURCO=w?w.company:'';
   fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()).then(t=>{
     mdView.innerHTML=marked.parse(t);
-    mdProg.innerHTML=`<div class="prog" style="border:none;padding:0"><b>經營進度（${esc(CURCO)}）</b>${progChips(CURCO,10)}${CURCO?progForm(CURCO,'md'):''}</div>`;
+    mdProg.innerHTML=(w?`${w.track?`<div class="sec2"><b>🔭 長期追蹤・為何轉</b>${esc(w.trackWhy||'')}</div>`:''}
+      ${planBlock(w)}${nextBlock(w)}<div style="height:10px"></div>`:'')
+      +`<div class="prog" style="border:none;padding:0"><b>經營進度（${esc(CURCO)}）</b>${progChips(CURCO,10)}${CURCO?progForm(CURCO,'md'):''}</div>`;
     wgrid.style.display='none';mdWrap.style.display='block';window.scrollTo(0,0);
   });
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){
-  for(let k=0;k<5;k++){
+  for(let k=0;k<6;k++){
     document.getElementById('view'+k).style.display=k===i?'block':'none';
     document.getElementById('tab'+k).classList.toggle('on',k===i);
   }

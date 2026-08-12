@@ -86,7 +86,19 @@ if isinstance(remote, dict):
 print(f"試算表現有：{len(remote)} 筆")
 
 have = {key(x) for x in remote}
-missing = [x for x in local if key(x) not in have]
+# 只到月的事件日期（如 '2026/01'）寫進試算表後會被補成完整日期，
+# 反向比對不到 → 會被誤判成「還沒寫」而重複寫入。這類改用「年-月」前綴比對。
+have_month = {(c, d[:7], t) for c, d, t in have}
+
+
+def present(x):
+    c, d, t = key(x)
+    if (c, d, t) in have:
+        return True
+    return len(d) == 7 and (c, d, t) in have_month
+
+
+missing = [x for x in local if not present(x)]
 print(f"\n待補：{len(missing)} 筆\n")
 for x in missing:
     print(f"  · {x.get('recordDate','')} | {x.get('company')} {x.get('ticker','')} "

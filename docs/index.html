@@ -198,7 +198,7 @@ function linkify(s){
 }
 function progChips(co,limit){
   const rows=PROG.filter(p=>p[1]===co).slice(-limit);
-  return rows.length?rows.map(p=>`<span class="chip">${esc(p[2])}${p[3]?'·'+esc(p[3]):''} <small>${esc(String(p[0]).slice(5,10))}</small><a class="del" title="刪除" onclick="delProg('${esc(p[0])}','${esc(co)}','${esc(p[2])}',this)">✕</a></span>`).join(''):'<span class="chip" style="background:transparent;border:1px dashed var(--line);color:var(--faint)">尚無紀錄</span>';
+  return rows.length?rows.map(p=>`<span class="chip">${esc(p[2])}${p[3]?'·'+esc(p[3]):''}${p[4]?' <small>👤'+esc(String(p[4]).split('@')[0])+'</small>':''} <small>${esc(String(p[0]).slice(5,10))}</small><a class="del" title="刪除" onclick="delProg('${esc(p[0])}','${esc(co)}','${esc(p[2])}',this)">✕</a></span>`).join(''):'<span class="chip" style="background:transparent;border:1px dashed var(--line);color:var(--faint)">尚無紀錄</span>';
 }
 function latestBadge(co){
   const rows=PROG.filter(p=>p[1]===co);
@@ -220,7 +220,7 @@ async function saveProg(co,id,sel){
   const act=sel.value; if(!act) return;
   const st=document.getElementById('st_'+id);
   sel.disabled=true; st.textContent='儲存中…';
-  const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,act,note:document.getElementById('note_'+id).value});
+  const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,act,note:document.getElementById('note_'+id).value,user:(window.DT_USER||'')});
   try{
     const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
     if(r.ok){st.textContent='✅ 已儲存';await loadProg();renderAll();}

@@ -92,6 +92,17 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 .pform{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
 .pform select,.pform input{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:.84rem;font-family:inherit}
 .pform input{flex:1;min-width:150px}
+.lbtn{padding:6px 12px;border:1px solid var(--blue-light);border-radius:8px;background:var(--blue-light);color:var(--blue);cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:700;white-space:nowrap}
+.lbtn:hover{background:var(--blue);color:#fff}
+#ltModal{display:none;position:fixed;inset:0;background:rgba(30,58,95,.45);z-index:99;align-items:center;justify-content:center;padding:20px}
+#ltBox{background:var(--card);border-radius:14px;max-width:680px;width:100%;padding:22px 24px;box-shadow:0 20px 60px rgba(30,58,95,.3)}
+#ltBox h3{color:var(--blue-dark);font-size:1.02rem;margin-bottom:10px}
+#ltText{width:100%;height:340px;border:1px solid var(--line);border-radius:10px;padding:14px;font-family:inherit;font-size:.9rem;line-height:1.9;color:var(--ink);resize:vertical;background:var(--bg)}
+#ltBox .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+#ltBox .btns button{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700}
+#ltBox .cp{background:var(--blue);color:#fff}
+#ltBox .cl{background:var(--line-light);color:var(--muted)}
+#ltBox .hint{font-size:.76rem;color:var(--faint);margin-top:8px}
 .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .wgrid .card{cursor:pointer;transition:transform .12s,box-shadow .12s;margin:0}
 .wgrid .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(30,58,95,.1)}
@@ -173,6 +184,18 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 
 </div></main>
 <footer>資料來源：公開資訊觀測站重大訊息・新聞・內政部實價登錄｜經營進度同步至試算表｜內部研判參考</footer>
+
+<div id="ltModal" onclick="if(event.target===this)closeLetter()">
+  <div id="ltBox">
+    <h3 id="ltTitle">📄 開發信草稿</h3>
+    <textarea id="ltText"></textarea>
+    <div class="hint">※ 可先在文字框內微調（稱謂、日期、緣由細節）再複製；QR Code 段落對應實體信紙版面</div>
+    <div class="btns">
+      <button class="cl" onclick="closeLetter()">關閉</button>
+      <button class="cp" onclick="copyLetter(this)">複製全文</button>
+    </div>
+  </div>
+</div>
 <script>
 const EP='https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec';
 const ACT_GROUPS=[
@@ -214,7 +237,22 @@ function progForm(co,id){
     </select>
     <input id="note_${id}" placeholder="備註（選填，先填再點選動作會一併儲存）">
     <span id="st_${id}" style="font-size:.8rem;color:var(--faint);align-self:center"></span>
+    <button class="lbtn" onclick="event.stopPropagation();openLetter('${esc(co)}')">📄 開發信</button>
   </div>`;
+}
+function openLetter(co){
+  const w=WATCH.find(x=>x.company===co);
+  if(!w||!w.letter){alert('此公司尚未生成開發信');return;}
+  document.getElementById('ltTitle').textContent='📄 開發信草稿 — '+co;
+  document.getElementById('ltText').value=w.letter;
+  document.getElementById('ltModal').style.display='flex';
+}
+function closeLetter(){document.getElementById('ltModal').style.display='none';}
+async function copyLetter(btn){
+  const t=document.getElementById('ltText');
+  try{await navigator.clipboard.writeText(t.value);btn.textContent='✅ 已複製';}
+  catch(e){t.select();document.execCommand('copy');btn.textContent='✅ 已複製';}
+  setTimeout(()=>btn.textContent='複製全文',1500);
 }
 async function saveProg(co,id,sel){
   const act=sel.value; if(!act) return;

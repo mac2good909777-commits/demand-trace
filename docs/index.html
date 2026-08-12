@@ -176,10 +176,9 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 <script>
 const EP='https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec';
 const ACT_GROUPS=[
- ['開發接觸',['寄發開發信','電訪','已聯繫上','拜訪','已約訪']],
- ['購置經營（幫它找）',['確認購置需求','提供物件','帶看物件','出價斡旋','購置成案']],
- ['出售經營（幫它賣）',['確認處分需求','爭取委託','已取得委託','整理銷售資料','推廣曝光','帶買方看廠','買方出價/斡旋','出售成案']],
- ['其他',['委託洽談','暫停追蹤','追蹤結案']]
+ ['接觸',['寄發介紹信','電訪未接','已聯繫上']],
+ ['回訪（備註填日期 如2026-08-20）',['排定回訪','回訪完成']],
+ ['交棒／結案',['發現明確需求→交棒','暫停追蹤','追蹤結案']]
 ];
 const ARCHIVE_ACT='追蹤結案';
 let RECS=[],WATCH=[],PROG=[];
@@ -204,7 +203,8 @@ function latestBadge(co){
   const rows=PROG.filter(p=>p[1]===co);
   if(!rows.length) return '';
   const p=rows[rows.length-1];
-  return `<span class="badge act" title="最新經營進度">📌 ${esc(p[2])} <small style="opacity:.75">${esc(String(p[0]).slice(5,10))}</small></span>`;
+  const hot=String(p[2]).includes('交棒');
+  return `<span class="badge ${hot?'pA':'act'}" title="最新經營進度">${hot?'🤝':'📌'} ${esc(p[2])} <small style="opacity:.75">${esc(String(p[0]).slice(5,10))}</small></span>`;
 }
 function progForm(co,id){
   return `<div class="pform">

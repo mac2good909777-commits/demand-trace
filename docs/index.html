@@ -103,6 +103,25 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 #ltBox .cp{background:var(--blue);color:#fff}
 #ltBox .cl{background:var(--line-light);color:var(--muted)}
 #ltBox .hint{font-size:.76rem;color:var(--faint);margin-top:8px}
+#ltBox .rounds{display:flex;gap:6px;margin-bottom:8px}
+#ltBox .rounds button{padding:6px 12px;border:1px solid var(--line);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:700}
+#ltBox .rounds button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+#ltBox .ltnote{font-size:.8rem;color:var(--gold);background:var(--gold-light);border-radius:8px;padding:6px 12px;margin-bottom:8px}
+#ndModal{display:none;position:fixed;inset:0;background:rgba(30,58,95,.45);z-index:99;align-items:center;justify-content:center;padding:20px}
+#ndBox{background:var(--card);border-radius:14px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;padding:22px 24px;box-shadow:0 20px 60px rgba(30,58,95,.3)}
+#ndBox h3{color:var(--blue-dark);font-size:1.02rem;margin-bottom:12px}
+.ndgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ndgrid label{font-size:.78rem;color:var(--muted);font-weight:700;display:block;margin-bottom:3px}
+.ndgrid .f{display:flex;flex-direction:column}
+.ndgrid .f.full{grid-column:1/3}
+.ndgrid input,.ndgrid select,.ndgrid textarea{padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:.86rem;background:var(--bg);color:var(--ink)}
+.ndgrid textarea{resize:vertical;min-height:44px}
+#ndBox .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+#ndBox .btns button{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700}
+#ndBox .sv{background:var(--blue);color:#fff}
+#ndBox .cl{background:var(--line-light);color:var(--muted)}
+.needbar{margin-top:8px;font-size:.84rem;background:var(--gold-light);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:6px 12px}
+.needbar b{color:var(--gold);font-weight:700}
 .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .wgrid .card{cursor:pointer;transition:transform .12s,box-shadow .12s;margin:0}
 .wgrid .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(30,58,95,.1)}
@@ -187,12 +206,29 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 
 <div id="ltModal" onclick="if(event.target===this)closeLetter()">
   <div id="ltBox">
-    <h3 id="ltTitle">📄 開發信草稿</h3>
+    <h3 id="ltTitle">📄 開發信</h3>
+    <div class="rounds">
+      <button id="rd1" class="on" onclick="showRound(1)">第一次</button>
+      <button id="rd2" onclick="showRound(2)">第二次（3個月後）</button>
+      <button id="rd3" onclick="showRound(3)">第三次（6個月後）</button>
+    </div>
+    <div id="ltNote" class="ltnote"></div>
     <textarea id="ltText"></textarea>
-    <div class="hint">※ 可先在文字框內微調（稱謂、日期、緣由細節）再複製；QR Code 段落對應實體信紙版面</div>
+    <div class="hint">※ 可先在文字框內微調（稱謂、日期、緣由細節）再複製；附件 QR Code 對應實體信紙版面</div>
     <div class="btns">
       <button class="cl" onclick="closeLetter()">關閉</button>
       <button class="cp" onclick="copyLetter(this)">複製全文</button>
+    </div>
+  </div>
+</div>
+
+<div id="ndModal" onclick="if(event.target===this)closeNeed()">
+  <div id="ndBox">
+    <h3 id="ndTitle">📋 需求描述</h3>
+    <div class="ndgrid" id="ndGrid"></div>
+    <div class="btns">
+      <button class="cl" onclick="closeNeed()">關閉</button>
+      <button class="sv" onclick="saveNeed(this)">儲存</button>
     </div>
   </div>
 </div>
@@ -204,7 +240,7 @@ const ACT_GROUPS=[
  ['交棒／結案',['發現明確需求→交棒','暫停追蹤','追蹤結案']]
 ];
 const ARCHIVE_ACT='追蹤結案';
-let RECS=[],WATCH=[],PROG=[];
+let RECS=[],WATCH=[],PROG=[],NEEDS=[];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
@@ -238,14 +274,58 @@ function progForm(co,id){
     <input id="note_${id}" placeholder="備註（選填，先填再點選動作會一併儲存）">
     <span id="st_${id}" style="font-size:.8rem;color:var(--faint);align-self:center"></span>
     <button class="lbtn" onclick="event.stopPropagation();openLetter('${esc(co)}')">📄 開發信</button>
+    <button class="lbtn" onclick="event.stopPropagation();openNeed('${esc(co)}')">📋 需求描述</button>
   </div>`;
 }
+function needBar(co){
+  const n=NEEDS.find(x=>x[1]===co); if(!n)return'';
+  const parts=[n[2],n[3],n[4],n[8]?'@'+n[8]:'',n[5]?'預算'+n[5]+'萬':'',n[6]?'地'+n[6]+'坪':'',n[7]?'建'+n[7]+'坪':''].filter(Boolean);
+  return `<div class="needbar"><b>📋 需求</b> ${esc(parts.join('｜'))}${n[9]?'｜時程'+esc(n[9]):''}${n[12]?'｜窗口'+esc(n[12]):''}</div>`;
+}
+const ND_FIELDS=[['dir','方向','select',['','購置','處分','找租','出租']],['assetType','標的類型','select',['','工業地','廠房','建地','辦公室/廠辦','其他']],['deal','交易方式','select',['','買','賣','租','出租']],['budget','預算(萬)','input',''],['landPing','地坪','input',''],['bldgPing','建坪','input',''],['area','區域','input',''],['timeline','預計時程','input',''],['conditions','特定條件','textarea',''],['contactOrg','聯繫單位','input',''],['contactName','聯繫窗口','input',''],['phone','電話','input',''],['email','EMAIL','input',''],['memo','備註','textarea','']];
+let ND_CO='';
+function openNeed(co){
+  ND_CO=co;
+  document.getElementById('ndTitle').textContent='📋 需求描述 — '+co;
+  const n=NEEDS.find(x=>x[1]===co);
+  const map={dir:2,assetType:3,deal:4,budget:5,landPing:6,bldgPing:7,area:8,timeline:9,conditions:10,contactOrg:11,contactName:12,phone:13,email:14,memo:15};
+  document.getElementById('ndGrid').innerHTML=ND_FIELDS.map(([k,lab,typ,opts])=>{
+    const v=n?esc(n[map[k]]||''):'';
+    const cls=(typ==='textarea'||k==='conditions'||k==='memo')?'f full':'f';
+    let ctl;
+    if(typ==='select')ctl=`<select id="nd_${k}">${opts.map(o=>`<option${o===v?' selected':''}>${o}</option>`).join('')}</select>`;
+    else if(typ==='textarea')ctl=`<textarea id="nd_${k}">${v}</textarea>`;
+    else ctl=`<input id="nd_${k}" value="${v}">`;
+    return `<div class="${cls}"><label>${lab}</label>${ctl}</div>`;
+  }).join('');
+  document.getElementById('ndModal').style.display='flex';
+}
+function closeNeed(){document.getElementById('ndModal').style.display='none';}
+async function saveNeed(btn){
+  btn.disabled=true;btn.textContent='儲存中…';
+  const body={token:'muju-trace-2026',action:'need',company:ND_CO,user:(window.DT_USER||'')};
+  ND_FIELDS.forEach(([k])=>body[k]=document.getElementById('nd_'+k).value);
+  try{
+    const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(r=>r.json());
+    if(r.ok){await loadNeeds();closeNeed();renderAll();}else{alert('儲存失敗');btn.disabled=false;btn.textContent='儲存';}
+  }catch(e){alert('連線失敗');btn.disabled=false;btn.textContent='儲存';}
+}
+async function loadNeeds(){try{NEEDS=(await fetch(EP+'?list=needs&t='+Date.now()).then(r=>r.json())).needs||[];}catch(e){NEEDS=[];}}
+let LT_CO='';
 function openLetter(co){
   const w=WATCH.find(x=>x.company===co);
-  if(!w||!w.letter){alert('此公司尚未生成開發信');return;}
-  document.getElementById('ltTitle').textContent='📄 開發信草稿 — '+co;
-  document.getElementById('ltText').value=w.letter;
+  if(!w||!w.letters){alert('此公司尚未生成開發信');return;}
+  LT_CO=co;
+  document.getElementById('ltTitle').textContent='📄 開發信 — '+co;
+  showRound(1);
   document.getElementById('ltModal').style.display='flex';
+}
+function showRound(n){
+  const w=WATCH.find(x=>x.company===LT_CO); if(!w)return;
+  const L=w.letters[String(n)];
+  document.getElementById('ltText').value=L.body;
+  document.getElementById('ltNote').textContent='💡 '+L.note;
+  [1,2,3].forEach(i=>document.getElementById('rd'+i).classList.toggle('on',i===n));
 }
 function closeLetter(){document.getElementById('ltModal').style.display='none';}
 async function copyLetter(btn){
@@ -327,6 +407,7 @@ function rankCard(w,i,idp){return `
      <div class="sec2"><b>訊號</b>${esc(w.reason)}</div>
      <div class="sec2"><b>做法</b>${esc(w.advice||'')}</div>
      ${nextBlock(w)}
+     ${needBar(w.company)}
      <div class="prog"><b>經營進度</b>${progChips(w.company,4)}${progForm(w.company,idp+i)}</div>
    </div>`}
 function renderRanking(){
@@ -358,6 +439,7 @@ function renderActive(){
      <div class="sec2"><b>做法</b>${esc(w.advice||'')}</div>
      ${ev.length?`<div class="sec2"><b>最新事件（${esc(ev[0].eventDate)}）</b>${esc(ev[0].summary)}</div>`:''}
      ${nextBlock(w)}
+     ${needBar(w.company)}
      <div class="prog"><b>經營進度</b>${progChips(w.company,6)}${progForm(w.company,'p'+i)}</div>
    </div>`}).join(''):'<div class="empty">無經營中案件</div>';
 }
@@ -458,7 +540,8 @@ function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createEl
 Promise.all([
   fetch('data/records.json?'+Date.now()).then(r=>r.json()),
   fetch('data/watchlist.json?'+Date.now()).then(r=>r.json()).catch(()=>[]),
-  loadProg()
+  loadProg(),
+  loadNeeds()
 ]).then(([d,w])=>{
   RECS=d.slice().reverse(); WATCH=w;
   const ts=[...d.map(r=>String(r.recordDate||'')),...PROG.map(p=>String(p[0]||''))].sort().pop();

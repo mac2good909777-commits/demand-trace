@@ -60,6 +60,17 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 .badge.due2{background:var(--blue-light);color:var(--blue);font-weight:700}
 .badge.due3{background:var(--line-light);color:var(--muted);font-weight:500}
 .badge.trk{background:#EDE9FE;color:#6D28D9;font-weight:700}
+.badge.grp{background:#E7F0EC;color:#1F6E4E;font-weight:600;border:1px solid #CBE0D6;cursor:default}
+.chaincard{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:16px 20px;margin-bottom:14px}
+.chaincard h3{margin:0 0 4px;font-size:1rem}
+.chaincard .cdesc{color:var(--muted);font-size:.82rem;margin-bottom:10px}
+.chainrow{display:flex;gap:10px;align-items:flex-start;margin:6px 0}
+.chainrow .pos{flex:0 0 52px;font-size:.78rem;font-weight:700;color:var(--muted);padding-top:3px}
+.chainrow .nodes{display:flex;flex-wrap:wrap;gap:6px}
+.cnode{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.8rem;background:var(--line-light);color:var(--muted);border:1px solid var(--line)}
+.cnode.inw{background:var(--blue-light);color:var(--blue);font-weight:700;cursor:pointer;border-color:var(--blue)}
+.cnode.inw.sell{background:var(--gold-light);color:var(--gold);border-color:var(--gold)}
+.chainnote{margin-top:8px;font-size:.8rem;color:var(--ink);background:var(--gold-light);border-radius:8px;padding:6px 10px}
 .catsw{margin-top:9px;border-top:1px dashed var(--line);padding-top:9px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .catsw b{color:var(--faint);font-weight:700;font-size:.74rem;letter-spacing:.12em}
 .catsw button{padding:5px 12px;border:1px solid var(--line);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:700}
@@ -156,6 +167,8 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
     <button id="tab2" onclick="show(2)">公司軌跡</button>
     <button id="tab1" onclick="show(1)">事件時間軸</button>
     <button id="tab5" onclick="show(5)">🔭 長期追蹤</button>
+    <button id="tab6" onclick="show(6)">🏢 公司集團</button>
+    <button id="tab7" onclick="show(7)">🔗 產業鏈</button>
     <button id="tab3" onclick="show(3)">封存資料</button>
   </nav>
 </div></header>
@@ -199,6 +212,16 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
     <div id="mdView"></div>
     <div class="card" id="mdProg" style="margin-top:12px"></div>
   </div>
+</section>
+
+<section id="view6" style="display:none">
+  <h2 class="sec">🏢 公司集團<span class="cnt">母公司・股東組成・關係企業——集團內任一公司的資產動態都是切入線索</span></h2>
+  <div class="wgrid" id="grpList"></div>
+</section>
+
+<section id="view7" style="display:none">
+  <h2 class="sec">🔗 產業鏈<span class="cnt">依新聞與公開資訊串聯上下游——同鏈公司互為潛在交易相對人／需求前兆</span></h2>
+  <div id="chainList"></div>
 </section>
 
 <section id="view3" style="display:none">
@@ -252,7 +275,10 @@ function gsRun(fn,arg){
 }
 async function epGet(kind){
   if(SANDBOX)return JSON.parse(await gsRun('epGet',kind));
-  return fetch(EP+'?list='+kind+'&t='+Date.now()).then(r=>r.json());
+  // 8 秒逾時保險：EP 偶爾 hang 而非 reject，避免整頁卡「載入中」
+  const ac=new AbortController();const tm=setTimeout(()=>ac.abort(),8000);
+  try{return await fetch(EP+'?list='+kind+'&t='+Date.now(),{signal:ac.signal}).then(r=>r.json());}
+  finally{clearTimeout(tm);}
 }
 async function epPost(obj){
   const body=JSON.stringify(obj);
@@ -271,6 +297,49 @@ const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 const kindBadge=k=>k==='sell'?'<span class="badge sell">處分</span>':k==='both'?'<span class="badge sell">處分</span><span class="badge buy">購置</span>':'<span class="badge buy">購置</span>';
 const locBadges=w=>(w.locs||[]).map(l=>`<span class="badge loc">📍${esc(l)}</span>`).join('');
+// 集團標籤：watchlist 的 group 欄位 [{n:公司名, r:關係}]；3 家以內直接顯示，超過顯示 +N（完整見「公司集團」頁）
+const grpBadges=w=>{const g=w.group||[];if(!g.length)return '';
+  return g.slice(0,3).map(x=>`<span class="badge grp" title="${esc(x.r)}">🏢${esc(x.n)}</span>`).join('')
+    +(g.length>3?`<span class="badge grp" style="cursor:pointer" onclick="event.stopPropagation();show(6)">+${g.length-3}</span>`:'');};
+
+/*CHAIN-DATA-START 產業鏈資料（每日排程由新聞增補；node 的 n=公司名, w=1 表示在監控名單中可點開）*/
+const CHAIN=[
+ {name:'黃豆油脂・食品鏈',desc:'進口黃豆壓榨→油脂/粉→食品飼料。中游倉儲物流是本鏈當前需求。',
+  rows:[{pos:'上游',nodes:[{n:'進口黃豆(ADM/嘉吉採購)'}]},
+        {pos:'中游',nodes:[{n:'大統益',w:1},{n:'泰華油行'}]},
+        {pos:'下游',nodes:[{n:'統一',w:1},{n:'大成長城'},{n:'十全特好食品',w:1},{n:'大城長城',w:1}]}],
+  note:'🎯 大統益授權 6.05 億中部購地建倉庫（興國案最對口買方）；統一/十全特好＝下游食品經營中'},
+ {name:'半導體封測・SiP 鏈',desc:'IC設計→測試/封裝/SiP 模組→品牌。銅鑼/竹南為本鏈中部聚落。',
+  rows:[{pos:'上游',nodes:[{n:'IC 設計(聯發科等)'},{n:'萬潤科技(設備)',w:1},{n:'鴻勁精密(測試座)',w:1}]},
+        {pos:'中游',nodes:[{n:'京元電子',w:1},{n:'環鴻科技',w:1},{n:'環旭電子'},{n:'日月光投控'}]},
+        {pos:'下游',nodes:[{n:'品牌客戶(Apple/NVIDIA 供應鏈)'}]}],
+  note:'🎯 環鴻要買銅鑼 ⟷ 艾姆勒＋億光在賣銅鑼（配對線）；京元電銅鑼廠、群聯/鴻勁竹南'},
+ {name:'NAND 快閃記憶鏈',desc:'原廠顆粒→控制IC/模組→模組品牌。',
+  rows:[{pos:'上游',nodes:[{n:'Kioxia鎧俠(顆粒/股東)'}]},
+        {pos:'中游',nodes:[{n:'群聯電子',w:1}]},
+        {pos:'下游',nodes:[{n:'金士頓Kingston(股東/客戶)'}]}],
+  note:'🎯 群聯竹南連續買方（上游股東結構穩，擴產動能來自 AI 儲存需求）'},
+ {name:'光電・LED／光學鏈',desc:'磊晶晶粒→封裝/鏡頭→照明與手機品牌。',
+  rows:[{pos:'上游',nodes:[{n:'晶元光電(晶粒)'},{n:'全新光電(磊晶)',w:1}]},
+        {pos:'中游',nodes:[{n:'億光電子(封裝)',w:1},{n:'大立光(鏡頭)',w:1}]},
+        {pos:'下游',nodes:[{n:'照明/背光品牌'},{n:'手機品牌(Apple)'}]}],
+  note:'🎯 億光銅鑼廠標售中（賣方）；大立光台中持續購地（買方）——同鏈一買一賣'},
+ {name:'汽車傳動・車用鏈',desc:'鍛造/鋼材→傳動齒輪/輪圈/散熱→國際車廠。',
+  rows:[{pos:'上游',nodes:[{n:'鋼材/鍛造'}]},
+        {pos:'中游',nodes:[{n:'和大工業(齒輪)',w:1},{n:'高鋒工業(工具機)',w:1},{n:'巧新科技(鍛造輪圈)',w:1},{n:'艾姆勒(散熱車電)',w:1}]},
+        {pos:'下游',nodes:[{n:'Tesla/BorgWarner/車廠'}]}],
+  note:'🎯 和大處分大里廠(已專任委託他家,回訪115/11)；艾姆勒銅鑼處分 17 個月未成交；巧新雲林購置'},
+ {name:'PCB／電子設備鏈',desc:'設備供應商(G2C+聯盟)→PCB/半導體製造。',
+  rows:[{pos:'上游',nodes:[{n:'志聖工業',w:1},{n:'均豪精密(G2C+)'},{n:'均華精密(G2C+)'},{n:'萬潤科技',w:1}]},
+        {pos:'下游',nodes:[{n:'PCB 廠(欣興/南電)'},{n:'封測廠'}]}],
+  note:'🎯 志聖 14.8 億進駐精科(向凱柏精密購廠)——設備商擴產＝下游景氣前兆'},
+ {name:'石化・紡織／橡膠鏈',desc:'石化原料→紡纖/橡膠加工→成衣/輪胎工業。',
+  rows:[{pos:'上游',nodes:[{n:'台化',w:1},{n:'台塑集團'}]},
+        {pos:'中游',nodes:[{n:'大宇紡織',w:1},{n:'興國橡膠',w:1}]},
+        {pos:'下游',nodes:[{n:'成衣/輪胎/工業橡膠'}]}],
+  note:'🎯 台化彰化廠區處分題材；大宇彰濱去化＋大雅招租；興國＝我方委託(對口買方大統益)'}
+];
+/*CHAIN-DATA-END*/
 // 交易洽談分類已於 2026-08-13 整個移除（分頁／按鈕／owner-only 機制一併拿掉）。
 // 進度表中舊有的「設為交易洽談」標記不再被 CAT_MARKS 認得，
 // catOf() 會自動往前找上一個標記，都沒有就回退 watchlist active→focus。
@@ -586,11 +655,38 @@ function renderWgrid(){
      ${kindBadge(w.kind)}
      <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span></div>
      <div style="margin-top:4px">${catOf(w.company)==='focus'?'<span class="badge act">💼</span>':''}${catOf(w.company)==='track'?'<span class="badge trk">🔭</span>':''}${latestBadge(w.company)}${dueBadge(w)}${locBadges(w)}</div>
+     ${w.group&&w.group.length?`<div style="margin-top:4px">${grpBadges(w)}</div>`:''}
      <div class="r">${esc(w.reason)}</div>
      ${catSwitch(w.company)}
    </div>`).join('');
 }
-function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();}
+function renderGroup(){
+  const ws=WATCH.filter(w=>(w.group||[]).length).sort((a,b)=>(b.score||0)-(a.score||0));
+  grpList.innerHTML=ws.length?ws.map(w=>`
+   <div class="card ${w.kind||'buy'}" onclick="openMd('${w.md}')">
+     <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
+     ${kindBadge(w.kind)}<span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span></div>
+     <div style="margin-top:8px">${w.group.map(x=>{
+       const inW=WATCH.find(v=>v.company===x.n);
+       return `<div style="margin:4px 0;font-size:.85rem">
+         <span class="badge grp"${inW?` style="cursor:pointer" onclick="event.stopPropagation();show(2);openMd('${inW.md}')"`:''}>🏢${esc(x.n)}${inW?' ↗':''}</span>
+         <span style="color:var(--muted);font-size:.78rem;margin-left:6px">${esc(x.r)}</span></div>`;}).join('')}</div>
+   </div>`).join(''):'<div class="empty">尚無集團資料（由每日排程深研輪替逐家補齊股東組成）</div>';
+}
+function renderChain(){
+  chainList.innerHTML=CHAIN.map(c=>`
+   <div class="chaincard">
+     <h3>🔗 ${esc(c.name)}</h3><div class="cdesc">${esc(c.desc)}</div>
+     ${c.rows.map(r=>`<div class="chainrow"><span class="pos">${esc(r.pos)}</span><span class="nodes">${
+       r.nodes.map(nd=>{
+         const inW=nd.w&&WATCH.find(v=>v.company===nd.n.replace(/\(.*\)$/,'')||nd.n.startsWith(v.company));
+         return inW?`<span class="cnode inw ${inW.kind==='sell'?'sell':''}" onclick="show(2);openMd('${inW.md}')">${esc(nd.n)} ↗</span>`
+                   :`<span class="cnode">${esc(nd.n)}</span>`;
+       }).join('')}</span></div>`).join('')}
+     ${c.note?`<div class="chainnote">${esc(c.note)}</div>`:''}
+   </div>`).join('');
+}
+function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();renderGroup();renderChain();}
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
 function renderBoot(d,w){
   RECS=d.slice().reverse(); WATCH=w;
@@ -622,6 +718,7 @@ function openMd(f){
   const done=t=>{
     mdView.innerHTML=marked.parse(t||'');
     mdProg.innerHTML=(CURCO?catSwitch(CURCO):'')
+      +(w&&(w.group||[]).length?`<div class="sec2" style="margin-top:8px"><b>🏢 集團／股東</b>${w.group.map(x=>`<span class="badge grp" title="${esc(x.r)}">🏢${esc(x.n)}</span>`).join(' ')}</div>`:'')
       +(w?`${w.track?`<div class="sec2"><b>🔭 長期追蹤・為何轉</b>${esc(w.trackWhy||'')}</div>`:''}
       ${planBlock(w)}${nextBlock(w)}<div style="height:10px"></div>`:'')
       +`<div class="prog" style="border:none;padding:0"><b>經營進度（${esc(CURCO)}）</b>${progChips(CURCO,10)}${CURCO?progForm(CURCO,'md'):''}</div>`;
@@ -632,7 +729,7 @@ function openMd(f){
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){
-  for(let k=0;k<6;k++){
+  for(let k=0;k<8;k++){
     document.getElementById('view'+k).style.display=k===i?'block':'none';
     document.getElementById('tab'+k).classList.toggle('on',k===i);
   }

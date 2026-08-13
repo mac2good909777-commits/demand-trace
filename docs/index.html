@@ -245,6 +245,26 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 </div>
 <script>
 const EP='https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec';
+// ── 沙箱通道（2026-08-13）────────────────────────────────────────────
+// 登入版跑在 HtmlService 沙箱(googleusercontent)，client 對 script.google.com 的
+// fetch 會「卡住而不 reject」（try/catch 無效）→ 所有寫入/重載都會靜默卡死。
+// 故沙箱內一律改走 google.script.run 由伺服端代打 EP；公開版維持原本 fetch。
+const SANDBOX=!!(window.google&&window.google.script&&window.google.script.run);
+function gsRun(fn,arg){
+  return new Promise((res,rej)=>{
+    try{google.script.run.withSuccessHandler(res).withFailureHandler(rej)[fn](arg);}
+    catch(e){rej(e);}
+  });
+}
+async function epGet(kind){
+  if(SANDBOX)return JSON.parse(await gsRun('epGet',kind));
+  return fetch(EP+'?list='+kind+'&t='+Date.now()).then(r=>r.json());
+}
+async function epPost(obj){
+  const body=JSON.stringify(obj);
+  if(SANDBOX)return JSON.parse(await gsRun('epPost',body));
+  return fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
+}
 const ACT_GROUPS=[
  ['接觸',['寄發介紹信','電訪未接','已聯繫上']],
  ['回訪（備註填日期 如2026-08-20）',['排定回訪','回訪完成']],
@@ -272,9 +292,9 @@ function catOf(co){
 function isArchived(co){return catOf(co)==='archive';}
 async function setCat(co,cat){
   const act=Object.keys(CAT_MARKS).find(k=>CAT_MARKS[k]===cat);
-  const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,act,note:'',user:(window.DT_USER||'')});
-  try{const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
-    if(r.ok){await loadProg();renderAll();if(cat==='archive'&&document.getElementById('mdWrap').style.display==='block')closeMd();}}
+  try{const r=await epPost({token:'muju-trace-2026',action:'progress',company:co,act,note:'',user:(window.DT_USER||'')});
+    if(r.ok){await loadProg();renderAll();if(cat==='archive'&&document.getElementById('mdWrap').style.display==='block')closeMd();}
+    else alert('儲存失敗：'+(r.error||''));}
   catch(e){alert('連線失敗');}
 }
 function catSwitch(co){
@@ -346,11 +366,11 @@ async function saveNeed(btn){
   const body={token:'muju-trace-2026',action:'need',company:ND_CO,user:(window.DT_USER||'')};
   ND_FIELDS.forEach(([k])=>body[k]=document.getElementById('nd_'+k).value);
   try{
-    const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(r=>r.json());
+    const r=await epPost(body);
     if(r.ok){await loadNeeds();closeNeed();renderAll();}else{alert('儲存失敗');btn.disabled=false;btn.textContent='儲存';}
   }catch(e){alert('連線失敗');btn.disabled=false;btn.textContent='儲存';}
 }
-async function loadNeeds(){try{NEEDS=(await fetch(EP+'?list=needs&t='+Date.now()).then(r=>r.json())).needs||[];}catch(e){NEEDS=[];}}
+async function loadNeeds(){try{NEEDS=(await epGet('needs')).needs||[];}catch(e){NEEDS=[];}}
 let LT_CO='';
 function openLetter(co){
   const w=WATCH.find(x=>x.company===co);
@@ -378,9 +398,8 @@ async function saveProg(co,id,sel){
   const act=sel.value; if(!act) return;
   const st=document.getElementById('st_'+id);
   sel.disabled=true; st.textContent='儲存中…';
-  const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,act,note:document.getElementById('note_'+id).value,user:(window.DT_USER||'')});
   try{
-    const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
+    const r=await epPost({token:'muju-trace-2026',action:'progress',company:co,act,note:document.getElementById('note_'+id).value,user:(window.DT_USER||'')});
     if(r.ok){st.textContent='✅ 已儲存';await loadProg();renderAll();}
     else{st.textContent='❌ 失敗';sel.disabled=false;}
   }catch(e){st.textContent='❌ 連線失敗';sel.disabled=false;}
@@ -388,14 +407,13 @@ async function saveProg(co,id,sel){
 async function delProg(time,co,act,el){
   if(!confirm(`刪除進度：${co}｜${act}｜${time}？`))return;
   el.textContent='…';
-  const body=JSON.stringify({token:'muju-trace-2026',action:'progress_del',time,company:co,act});
   try{
-    const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
+    const r=await epPost({token:'muju-trace-2026',action:'progress_del',time,company:co,act});
     if(r.ok){await loadProg();renderAll();}else alert('刪除失敗：'+(r.error||''));
   }catch(e){alert('連線失敗');}
 }
 async function loadProg(){
-  try{PROG=(await fetch(EP+'?list=progress&t='+Date.now()).then(r=>r.json())).progress||[];}catch(e){PROG=[];}
+  try{PROG=(await epGet('progress')).progress||[];}catch(e){PROG=[];}
 }
 function recCard(r){return `
  <div class="card ${kindCls(r.eventType)==='line'?'':kindCls(r.eventType)}">
@@ -624,14 +642,17 @@ boot();
 let CURCO='';
 function openMd(f){
   const w=WATCH.find(x=>x.md===f); CURCO=w?w.company:'';
-  fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()).then(t=>{
-    mdView.innerHTML=marked.parse(t);
+  // 沙箱內相對路徑 companies/*.md 會指到 googleusercontent 而抓不到 → 走伺服端代取
+  const done=t=>{
+    mdView.innerHTML=marked.parse(t||'');
     mdProg.innerHTML=(CURCO?catSwitch(CURCO):'')
       +(w?`${w.track?`<div class="sec2"><b>🔭 長期追蹤・為何轉</b>${esc(w.trackWhy||'')}</div>`:''}
       ${planBlock(w)}${nextBlock(w)}<div style="height:10px"></div>`:'')
       +`<div class="prog" style="border:none;padding:0"><b>經營進度（${esc(CURCO)}）</b>${progChips(CURCO,10)}${CURCO?progForm(CURCO,'md'):''}</div>`;
     wgrid.style.display='none';mdWrap.style.display='block';window.scrollTo(0,0);
-  });
+  };
+  (SANDBOX?gsRun('getMd',f):fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()))
+    .then(done).catch(()=>done('（軌跡檔載入失敗，請稍後再試）'));
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){

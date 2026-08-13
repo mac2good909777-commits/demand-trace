@@ -215,12 +215,12 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 </section>
 
 <section id="view6" style="display:none">
-  <h2 class="sec">🏢 公司集團<span class="cnt">母公司・股東組成・關係企業——集團內任一公司的資產動態都是切入線索</span></h2>
+  <h2 class="sec">🏢 公司集團<span class="cnt">母公司・股東組成・關係企業——集團內任一公司的資產動態都是切入線索<b id="grpUpd" style="font-weight:700;color:var(--blue);margin-left:8px"></b></span></h2>
   <div class="wgrid" id="grpList"></div>
 </section>
 
 <section id="view7" style="display:none">
-  <h2 class="sec">🔗 產業鏈<span class="cnt">依新聞與公開資訊串聯上下游——同鏈公司互為潛在交易相對人／需求前兆</span></h2>
+  <h2 class="sec">🔗 產業鏈<span class="cnt">依新聞與公開資訊串聯上下游——同鏈公司互為潛在交易相對人／需求前兆<b id="chainUpd" style="font-weight:700;color:var(--blue);margin-left:8px"></b></span></h2>
   <div id="chainList"></div>
 </section>
 
@@ -302,7 +302,17 @@ const grpBadges=w=>{const g=w.group||[];if(!g.length)return '';
   return g.slice(0,3).map(x=>`<span class="badge grp" title="${esc(x.r)}">🏢${esc(x.n)}</span>`).join('')
     +(g.length>3?`<span class="badge grp" style="cursor:pointer" onclick="event.stopPropagation();show(6)">+${g.length-3}</span>`:'');};
 
-/*CHAIN-DATA-START 產業鏈資料（每日排程由新聞增補；node 的 n=公司名, w=1 表示在監控名單中可點開）*/
+// ── 公司集團／產業鏈的維護節奏（Mac 2026-08-14 定調）────────────────
+// 這兩份是**一次性建置**的結構資料，不是每日更新的動態資料。
+// 建置完成後**約半年更新一次**；改資料時記得同步把下面的日期改掉，
+// 頁面標題會自動顯示「最後更新／下次建議」（下次日期由 +6 個月推算）。
+const GROUP_UPDATED='2026-08-14';   // watchlist.json 的 group 欄（股東組成）
+const CHAIN_UPDATED='2026-08-14';   // 下方 CHAIN 區塊（上下游產業鏈）
+const plusHalfYear=d=>{const t=new Date(d+'T00:00:00');t.setMonth(t.getMonth()+6);
+  return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;};
+const updNote=d=>`🗓 最後更新 ${d}・下次建議 ${plusHalfYear(d)}（半年一次）`;
+
+/*CHAIN-DATA-START 產業鏈資料（一次性建置，半年更新一次；node 的 n=公司名, w=1 表示在監控名單中可點開）*/
 const CHAIN=[
  {name:'黃豆油脂・食品鏈',desc:'進口黃豆壓榨→油脂/粉→食品飼料。中游倉儲物流是本鏈當前需求。',
   rows:[{pos:'上游',nodes:[{n:'進口黃豆(ADM/嘉吉採購)'}]},
@@ -661,6 +671,7 @@ function renderWgrid(){
    </div>`).join('');
 }
 function renderGroup(){
+  document.getElementById('grpUpd').textContent=updNote(GROUP_UPDATED);
   const ws=WATCH.filter(w=>(w.group||[]).length).sort((a,b)=>(b.score||0)-(a.score||0));
   grpList.innerHTML=ws.length?ws.map(w=>`
    <div class="card ${w.kind||'buy'}" onclick="openMd('${w.md}')">
@@ -671,9 +682,10 @@ function renderGroup(){
        return `<div style="margin:4px 0;font-size:.85rem">
          <span class="badge grp"${inW?` style="cursor:pointer" onclick="event.stopPropagation();show(2);openMd('${inW.md}')"`:''}>🏢${esc(x.n)}${inW?' ↗':''}</span>
          <span style="color:var(--muted);font-size:.78rem;margin-left:6px">${esc(x.r)}</span></div>`;}).join('')}</div>
-   </div>`).join(''):'<div class="empty">尚無集團資料（由每日排程深研輪替逐家補齊股東組成）</div>';
+   </div>`).join(''):'<div class="empty">尚無集團資料</div>';
 }
 function renderChain(){
+  document.getElementById('chainUpd').textContent=updNote(CHAIN_UPDATED);
   chainList.innerHTML=CHAIN.map(c=>`
    <div class="chaincard">
      <h3>🔗 ${esc(c.name)}</h3><div class="cdesc">${esc(c.desc)}</div>

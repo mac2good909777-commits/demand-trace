@@ -185,7 +185,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 </section>
 
 <section id="view6" style="display:none">
-  <h2 class="sec">🤝 交易洽談<span class="cnt">已交棒進入斡旋/成交階段（僅現傑可見）</span></h2>
+  <h2 class="sec">🤝 交易洽談<span class="cnt">已進入具體買賣／出租交易的洽談（委託、帶看不算・僅現傑可見）</span></h2>
   <div id="dealList"></div>
 </section>
 
@@ -522,7 +522,7 @@ function renderDeal(){
      <div class="sec2"><b>案件</b>${esc(w.reason)}</div>
      <div class="prog"><b>洽談進度</b>${progChips(w.company,10)}${progForm(w.company,'d'+i)}</div>
      ${catSwitch(w.company)}
-   </div>`).join(''):'<div class="empty">無交易洽談中案件</div>';
+   </div>`).join(''):'<div class="empty">目前沒有進入交易洽談的公司</div>';
 }
 function renderDue(){
   const ws=WATCH.filter(w=>{const cat=catOf(w.company);return cat!=='archive'&&cat!=='deal'&&w.next;})

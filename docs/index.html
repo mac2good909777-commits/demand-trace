@@ -532,7 +532,8 @@ function renderArchive(){
 }
 function renderTimeline(){
   const co=fCo.value,pr=fPr.value,ty=fTy.value;
-  const rows=RECS.filter(r=>(!co||r.company===co)&&(!pr||r.priority===pr)&&(!ty||r.eventType===ty));
+  const rows=RECS.filter(r=>(!co||r.company===co)&&(!pr||r.priority===pr)&&(!ty||r.eventType===ty))
+    .slice().sort((a,b)=>String(b.recordDate||'').localeCompare(String(a.recordDate||'')));
   list.innerHTML=rows.length?rows.map(recCard).join(''):'<div class="empty">無符合資料</div>';
 }
 function renderDash(){

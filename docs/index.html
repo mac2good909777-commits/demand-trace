@@ -597,12 +597,7 @@ function renderWgrid(){
 }
 function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();renderDeal();}
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
-Promise.all([
-  fetch('data/records.json?'+Date.now()).then(r=>r.json()),
-  fetch('data/watchlist.json?'+Date.now()).then(r=>r.json()).catch(()=>[]),
-  loadProg(),
-  loadNeeds()
-]).then(([d,w])=>{
+function renderBoot(d,w){
   RECS=d.slice().reverse(); WATCH=w;
   const ts=[...d.map(r=>String(r.recordDate||'')),...PROG.map(p=>String(p[0]||''))].sort().pop();
   document.getElementById('lastUpd').textContent=ts||'—';
@@ -610,7 +605,22 @@ Promise.all([
   [fCo,fPr,fTy].forEach(s=>s.onchange=renderTimeline);
   if(isOwner())document.getElementById('tab6').style.display='';
   renderTimeline(); renderAll();
-});
+}
+async function boot(){
+  // 登入版：Apps Script 已伺服端注入 window.__DATA（沙箱內不做任何跨域 fetch，避免打 script.google.com 卡住）
+  if(window.__DATA){
+    PROG=window.__DATA.prog||[]; NEEDS=window.__DATA.needs||[];
+    renderBoot(window.__DATA.recs||[], window.__DATA.watch||[]);
+    return;
+  }
+  const [d,w]=await Promise.all([
+    fetch('data/records.json?'+Date.now()).then(r=>r.json()).catch(()=>[]),
+    fetch('data/watchlist.json?'+Date.now()).then(r=>r.json()).catch(()=>[])
+  ]);
+  await loadProg(); await loadNeeds();
+  renderBoot(d,w);
+}
+boot();
 let CURCO='';
 function openMd(f){
   const w=WATCH.find(x=>x.md===f); CURCO=w?w.company:'';

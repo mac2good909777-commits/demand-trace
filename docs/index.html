@@ -60,6 +60,11 @@ h2.sec .cnt{font-size:.78rem;color:var(--faint);font-weight:500}
 .badge.due2{background:var(--blue-light);color:var(--blue);font-weight:700}
 .badge.due3{background:var(--line-light);color:var(--muted);font-weight:500}
 .badge.trk{background:#EDE9FE;color:#6D28D9;font-weight:700}
+.catsw{margin-top:9px;border-top:1px dashed var(--line);padding-top:9px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.catsw b{color:var(--faint);font-weight:700;font-size:.74rem;letter-spacing:.12em}
+.catsw button{padding:5px 12px;border:1px solid var(--line);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:700}
+.catsw button:hover{border-color:var(--blue);color:var(--blue)}
+.catsw button.on{background:var(--blue);border-color:var(--blue);color:#fff}
 .nx{margin-top:9px;border-top:1px dashed var(--line);padding-top:9px;font-size:.88rem;display:flex;gap:9px;align-items:flex-start}
 .nx .lab{color:var(--faint);font-weight:700;font-size:.74rem;letter-spacing:.12em;white-space:nowrap;padding-top:3px}
 .plan{margin-top:3px}
@@ -146,9 +151,9 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
   <div class="sub">未來 12 個月需求機率權重排序｜<b>處分需求＝金</b>・<b style="color:var(--blue)">購置需求＝藍</b>｜每日 03:00 自動更新｜台中・彰化・南投・苗栗・雲林・嘉義</div>
   <div class="sub" style="margin-top:2px">🕓 資料最後更新：<b id="lastUpd" style="color:var(--blue);font-family:Inter,monospace">載入中…</b></div>
   <nav class="tabs">
-    <button id="tab4" class="on" onclick="show(4)">💼 經營中</button>
+    <button id="tab4" class="on" onclick="show(4)">💼 重點經營</button>
     <button id="tab0" onclick="show(0)">總覽（權重排序）</button>
-    <button id="tab2" onclick="show(2)">公司軌跡檔</button>
+    <button id="tab2" onclick="show(2)">公司軌跡</button>
     <button id="tab1" onclick="show(1)">事件時間軸</button>
     <button id="tab5" onclick="show(5)">🔭 長期追蹤</button>
     <button id="tab3" onclick="show(3)">封存資料</button>
@@ -169,7 +174,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 </section>
 
 <section id="view4">
-  <h2 class="sec">💼 經營中（進行式 pipeline；新消息由每日排程持續追蹤）</h2>
+  <h2 class="sec">💼 重點經營（進行式 pipeline；新消息由每日排程持續追蹤）</h2>
   <div id="activeList"></div>
 </section>
 
@@ -246,7 +251,32 @@ const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 const kindBadge=k=>k==='sell'?'<span class="badge sell">處分</span>':k==='both'?'<span class="badge sell">處分</span><span class="badge buy">購置</span>':'<span class="badge buy">購置</span>';
 const locBadges=w=>(w.locs||[]).map(l=>`<span class="badge loc">📍${esc(l)}</span>`).join('');
-function isArchived(co){const r=PROG.filter(p=>p[1]===co);return r.length>0&&r[r.length-1][2]===ARCHIVE_ACT;}
+const CAT_MARKS={'設為重點經營':'focus','設為長期追蹤':'track','追蹤結案':'archive'};
+function catOf(co){
+  // 使用者在儀表板設定的歸類優先（取最新標記）；否則回退 watchlist 旗標
+  const r=PROG.filter(p=>p[1]===co&&CAT_MARKS[p[2]]);
+  if(r.length) return CAT_MARKS[r[r.length-1][2]];
+  const w=WATCH.find(x=>x.company===co);
+  if(w&&w.active) return 'focus';
+  if(w&&w.track) return 'track';
+  return 'none';
+}
+function isArchived(co){return catOf(co)==='archive';}
+async function setCat(co,cat){
+  const act=Object.keys(CAT_MARKS).find(k=>CAT_MARKS[k]===cat);
+  const body=JSON.stringify({token:'muju-trace-2026',action:'progress',company:co,act,note:'',user:(window.DT_USER||'')});
+  try{const r=await fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body}).then(r=>r.json());
+    if(r.ok){await loadProg();renderAll();if(cat==='archive'&&document.getElementById('mdWrap').style.display==='block')closeMd();}}
+  catch(e){alert('連線失敗');}
+}
+function catSwitch(co){
+  const c=catOf(co);
+  return `<div class="catsw"><b>歸類</b>
+    <button class="${c==='focus'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','focus')">💼 重點經營</button>
+    <button class="${c==='track'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','track')">🔭 長期追蹤</button>
+    <button class="${c==='archive'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','archive')">🗂 封存</button>
+  </div>`;
+}
 function linkify(s){
   return esc(s).split(/\s*;\s*|\s*；\s*/).map(part=>{
     const m=part.match(/https?:\/\/\S+/);
@@ -419,7 +449,7 @@ function renderRanking(){
   cntSell.textContent=`${sell.length} 家`; cntBuy.textContent=`${buy.length} 家`;
 }
 function renderActive(){
-  const ws=WATCH.filter(w=>w.active).sort((a,b)=>(b.score||0)-(a.score||0));
+  const ws=WATCH.filter(w=>catOf(w.company)==='focus').sort((a,b)=>(b.score||0)-(a.score||0));
   activeList.innerHTML=ws.length?ws.map((w,i)=>{
     const ev=RECS.filter(r=>r.company===w.company).slice(0,1);
     return `
@@ -444,7 +474,7 @@ function renderActive(){
    </div>`}).join(''):'<div class="empty">無經營中案件</div>';
 }
 function renderTrack(){
-  const ws=WATCH.filter(w=>w.track&&!isArchived(w.company))
+  const ws=WATCH.filter(w=>catOf(w.company)==='track')
     .sort((a,b)=>(daysTo(a.next)??9e9)-(daysTo(b.next)??9e9));
   trackList.innerHTML=ws.length?ws.map((w,i)=>`
    <div class="card ${w.kind||'buy'}">
@@ -518,8 +548,8 @@ function renderDash(){
    <div class="kpi hot"><div class="n">${nHigh}</div><div class="t">高機率（12個月內）</div></div>
    <div class="kpi gold"><div class="n">${nSell}</div><div class="t">🟡 處分需求</div></div>
    <div class="kpi"><div class="n">${nBuy}</div><div class="t">🔵 購置需求</div></div>
-   <div class="kpi up"><div class="n">${WATCH.filter(w=>w.active).length}</div><div class="t">💼 經營中</div></div>
-   <div class="kpi"><div class="n">${live.filter(w=>w.track).length}</div><div class="t">🔭 長期追蹤</div></div>
+   <div class="kpi up"><div class="n">${WATCH.filter(w=>catOf(w.company)==='focus').length}</div><div class="t">💼 重點經營</div></div>
+   <div class="kpi"><div class="n">${WATCH.filter(w=>catOf(w.company)==='track').length}</div><div class="t">🔭 長期追蹤</div></div>
    <div class="kpi hot"><div class="n">${nDue}</div><div class="t">⏰ 7 天內到期（逾期 ${nOver}）</div></div>
    <div class="kpi"><div class="n">${RECS.length}</div><div class="t">累積事件</div></div>`;
   latest.innerHTML=RECS.slice(0,3).map(recCard).join('')||'<div class="empty">尚無事件</div>';
@@ -531,8 +561,9 @@ function renderWgrid(){
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
      ${kindBadge(w.kind)}
      <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span></div>
-     <div style="margin-top:4px">${latestBadge(w.company)}${w.track?'<span class="badge trk">🔭</span>':''}${dueBadge(w)}${locBadges(w)}</div>
+     <div style="margin-top:4px">${catOf(w.company)==='focus'?'<span class="badge act">💼</span>':''}${catOf(w.company)==='track'?'<span class="badge trk">🔭</span>':''}${latestBadge(w.company)}${dueBadge(w)}${locBadges(w)}</div>
      <div class="r">${esc(w.reason)}</div>
+     ${catSwitch(w.company)}
    </div>`).join('');
 }
 function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();}
@@ -555,7 +586,8 @@ function openMd(f){
   const w=WATCH.find(x=>x.md===f); CURCO=w?w.company:'';
   fetch('companies/'+encodeURIComponent(f)+'?'+Date.now()).then(r=>r.text()).then(t=>{
     mdView.innerHTML=marked.parse(t);
-    mdProg.innerHTML=(w?`${w.track?`<div class="sec2"><b>🔭 長期追蹤・為何轉</b>${esc(w.trackWhy||'')}</div>`:''}
+    mdProg.innerHTML=(CURCO?catSwitch(CURCO):'')
+      +(w?`${w.track?`<div class="sec2"><b>🔭 長期追蹤・為何轉</b>${esc(w.trackWhy||'')}</div>`:''}
       ${planBlock(w)}${nextBlock(w)}<div style="height:10px"></div>`:'')
       +`<div class="prog" style="border:none;padding:0"><b>經營進度（${esc(CURCO)}）</b>${progChips(CURCO,10)}${CURCO?progForm(CURCO,'md'):''}</div>`;
     wgrid.style.display='none';mdWrap.style.display='block';window.scrollTo(0,0);

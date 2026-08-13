@@ -156,6 +156,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
     <button id="tab2" onclick="show(2)">公司軌跡</button>
     <button id="tab1" onclick="show(1)">事件時間軸</button>
     <button id="tab5" onclick="show(5)">🔭 長期追蹤</button>
+    <button id="tab6" onclick="show(6)" style="display:none">🤝 交易洽談</button>
     <button id="tab3" onclick="show(3)">封存資料</button>
   </nav>
 </div></header>
@@ -181,6 +182,11 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 <section id="view5" style="display:none">
   <h2 class="sec">🔭 長期追蹤<span class="cnt">窗口已關或不在窗口內，但需求判斷為真、有明確回訪時點——依「下次關鍵日」由近至遠排序</span></h2>
   <div id="trackList"></div>
+</section>
+
+<section id="view6" style="display:none">
+  <h2 class="sec">🤝 交易洽談<span class="cnt">已交棒進入斡旋/成交階段（僅現傑可見）</span></h2>
+  <div id="dealList"></div>
 </section>
 
 <section id="view1" style="display:none">
@@ -251,7 +257,9 @@ const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 const kindBadge=k=>k==='sell'?'<span class="badge sell">處分</span>':k==='both'?'<span class="badge sell">處分</span><span class="badge buy">購置</span>':'<span class="badge buy">購置</span>';
 const locBadges=w=>(w.locs||[]).map(l=>`<span class="badge loc">📍${esc(l)}</span>`).join('');
-const CAT_MARKS={'設為重點經營':'focus','設為長期追蹤':'track','追蹤結案':'archive'};
+const OWNER='mac2good909777@gmail.com';
+const isOwner=()=>String(window.DT_USER||'').toLowerCase()===OWNER;
+const CAT_MARKS={'設為重點經營':'focus','設為長期追蹤':'track','設為交易洽談':'deal','追蹤結案':'archive'};
 function catOf(co){
   // 使用者在儀表板設定的歸類優先（取最新標記）；否則回退 watchlist 旗標
   const r=PROG.filter(p=>p[1]===co&&CAT_MARKS[p[2]]);
@@ -271,9 +279,11 @@ async function setCat(co,cat){
 }
 function catSwitch(co){
   const c=catOf(co);
+  const deal=isOwner()?`<button class="${c==='deal'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','deal')">🤝 交易洽談</button>`:'';
   return `<div class="catsw"><b>歸類</b>
     <button class="${c==='focus'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','focus')">💼 重點經營</button>
     <button class="${c==='track'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','track')">🔭 長期追蹤</button>
+    ${deal}
     <button class="${c==='archive'?'on':''}" onclick="event.stopPropagation();setCat('${esc(co)}','archive')">🗂 封存</button>
   </div>`;
 }
@@ -441,7 +451,7 @@ function rankCard(w,i,idp){return `
      <div class="prog"><b>經營進度</b>${progChips(w.company,4)}${progForm(w.company,idp+i)}</div>
    </div>`}
 function renderRanking(){
-  const live=WATCH.filter(w=>!isArchived(w.company));
+  const live=WATCH.filter(w=>{const cat=catOf(w.company);return cat!=='archive'&&cat!=='deal';});
   const sell=live.filter(w=>w.kind==='sell'||w.kind==='both').sort((a,b)=>(b.score||0)-(a.score||0));
   const buy=live.filter(w=>w.kind==='buy'||w.kind==='both').sort((a,b)=>(b.score||0)-(a.score||0));
   rankSell.innerHTML=sell.map((w,i)=>rankCard(w,i,'s')).join('')||'<div class="empty">無資料</div>';
@@ -496,8 +506,26 @@ function renderTrack(){
      <div class="prog"><b>經營進度</b>${progChips(w.company,6)}${progForm(w.company,'t'+i)}</div>
    </div>`).join(''):'<div class="empty">無長期追蹤公司</div>';
 }
+function renderDeal(){
+  if(!isOwner())return;
+  const ws=WATCH.filter(w=>catOf(w.company)==='deal').sort((a,b)=>(b.score||0)-(a.score||0));
+  dealList.innerHTML=ws.length?ws.map((w,i)=>`
+   <div class="card ${w.kind||'buy'}">
+     <div class="top">
+       <span class="co" style="cursor:pointer" onclick="show(2);openMd('${w.md}')">${esc(w.company)}</span>
+       <span class="tick">${esc(w.ticker)}</span>
+       ${kindBadge(w.kind)}
+       <span class="badge act" style="background:#6D28D9">🤝 交易洽談</span>
+       <span class="scoretxt t${w.prob}" style="margin-left:auto">${w.score}</span>
+     </div>
+     <div style="margin-top:3px">${locBadges(w)}</div>
+     <div class="sec2"><b>案件</b>${esc(w.reason)}</div>
+     <div class="prog"><b>洽談進度</b>${progChips(w.company,10)}${progForm(w.company,'d'+i)}</div>
+     ${catSwitch(w.company)}
+   </div>`).join(''):'<div class="empty">無交易洽談中案件</div>';
+}
 function renderDue(){
-  const ws=WATCH.filter(w=>!isArchived(w.company)&&w.next)
+  const ws=WATCH.filter(w=>{const cat=catOf(w.company);return cat!=='archive'&&cat!=='deal'&&w.next;})
     .map(w=>({w,n:daysTo(w.next)})).filter(o=>o.n!==null&&o.n<=7)
     .sort((a,b)=>a.n-b.n);
   const over=ws.filter(o=>o.n<0).length;
@@ -538,7 +566,7 @@ function renderTimeline(){
 }
 function renderDash(){
   const arch=WATCH.filter(w=>isArchived(w.company)).length;
-  const live=WATCH.filter(w=>!isArchived(w.company));
+  const live=WATCH.filter(w=>{const cat=catOf(w.company);return cat!=='archive'&&cat!=='deal';});
   const nA=live.filter(w=>w.tier==='A').length,nHigh=live.filter(w=>w.prob==='高').length;
   const nSell=live.filter(w=>w.kind==='sell'||w.kind==='both').length;
   const nBuy=live.filter(w=>w.kind==='buy'||w.kind==='both').length;
@@ -556,7 +584,7 @@ function renderDash(){
   latest.innerHTML=RECS.slice(0,3).map(recCard).join('')||'<div class="empty">尚無事件</div>';
 }
 function renderWgrid(){
-  const ws=WATCH.filter(w=>!isArchived(w.company)).sort((a,b)=>(b.score||0)-(a.score||0));
+  const ws=WATCH.filter(w=>{const cat=catOf(w.company);return cat!=='archive'&&cat!=='deal';}).sort((a,b)=>(b.score||0)-(a.score||0));
   wgrid.innerHTML=ws.map(w=>`
    <div class="card ${w.kind||'buy'}" onclick="openMd('${w.md}')">
      <div class="top"><span class="co">${esc(w.company)}</span><span class="tick">${esc(w.ticker)}</span>
@@ -567,7 +595,7 @@ function renderWgrid(){
      ${catSwitch(w.company)}
    </div>`).join('');
 }
-function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();}
+function renderAll(){renderRanking();renderDash();renderDue();renderWgrid();renderArchive();renderActive();renderTrack();renderDeal();}
 function fill(sel,vals){[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.textContent=v;sel.appendChild(o);});}
 Promise.all([
   fetch('data/records.json?'+Date.now()).then(r=>r.json()),
@@ -580,6 +608,7 @@ Promise.all([
   document.getElementById('lastUpd').textContent=ts||'—';
   fill(fCo,RECS.map(r=>r.company)); fill(fTy,RECS.map(r=>r.eventType));
   [fCo,fPr,fTy].forEach(s=>s.onchange=renderTimeline);
+  if(isOwner())document.getElementById('tab6').style.display='';
   renderTimeline(); renderAll();
 });
 let CURCO='';
@@ -596,7 +625,7 @@ function openMd(f){
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){
-  for(let k=0;k<6;k++){
+  for(let k=0;k<7;k++){
     document.getElementById('view'+k).style.display=k===i?'block':'none';
     document.getElementById('tab'+k).classList.toggle('on',k===i);
   }

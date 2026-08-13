@@ -360,7 +360,9 @@ async function saveNeed(btn){
   ND_FIELDS.forEach(([k])=>body[k]=document.getElementById('nd_'+k).value);
   try{
     const r=await epPost(body);
-    if(r.ok){await loadNeeds();closeNeed();renderAll();}else{alert('儲存失敗');btn.disabled=false;btn.textContent='儲存';}
+    // 先關窗再重載：即使 loadNeeds 失敗也不會把使用者卡在「儲存中…」的對話框裡
+    if(r.ok){closeNeed();btn.disabled=false;btn.textContent='儲存';await loadNeeds();renderAll();}
+    else{alert('儲存失敗');btn.disabled=false;btn.textContent='儲存';}
   }catch(e){alert('連線失敗');btn.disabled=false;btn.textContent='儲存';}
 }
 async function loadNeeds(){try{NEEDS=(await epGet('needs')).needs||[];}catch(e){NEEDS=[];}}

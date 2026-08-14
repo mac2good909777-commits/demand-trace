@@ -464,10 +464,14 @@ const ROUND_NOTE={
  2:'第 2 次（約 3 個月後）：已有印象，改以實質資訊加溫——區域行情、可提供的標的輪廓。',
  3:'第 3 次（約 6 個月後）：收尾定調，強調長期關係與隨傳隨到，並主動說明會降低叨擾頻率。'
 };
+// 已停用但仍留在進度表的分類標記字，一併排除（否則會被當成接觸紀錄）
+const DEAD_MARKS=['設為交易洽談'];
+const isMark=a=>!!CAT_MARKS[a]||DEAD_MARKS.includes(a);
+const contactsOf=co=>PROG.filter(p=>p[1]===co&&!isMark(p[2]));
 function letterPrompt(co,n){
   const w=WATCH.find(x=>x.company===co)||{};
   const evs=RECS.filter(r=>r.company===co).slice(0,3);
-  const prog=PROG.filter(p=>p[1]===co&&!CAT_MARKS[p[2]]);
+  const prog=contactsOf(co);
   const last=prog.length?prog[prog.length-1]:null;
   const L=[];
   L.push('請幫我寫一封開發信（工業地產開發用）。');
@@ -478,7 +482,8 @@ function letterPrompt(co,n){
   L.push('【這是第幾次接觸】第 '+n+' 次');
   L.push('【過往接觸紀錄】'+(last?last[0]+'　'+last[2]+(last[3]?'　'+last[3]:'')+'（累計 '+prog.length+' 筆）':'尚無接觸紀錄'));
   L.push('');
-  L.push('【近期公開動態】'+(evs.length?'':'（無，請勿杜撰）'));
+  L.push('【目前掌握的公開訊號】'+(w.reason||'（無）'));
+  L.push('【近期公開動態】'+(evs.length?'':'（系統無事件紀錄；詳細重訊可看該公司軌跡檔，沒有就別提，勿杜撰）'));
   evs.forEach(r=>L.push('- '+r.eventDate+'　'+r.eventType+'：'+r.summary));
   L.push('');
   L.push('【區域行情資訊】※ 有的話請貼在這行下面，沒有就整段刪掉');
@@ -502,7 +507,7 @@ function openLetter(co){
   LT_CO=co;
   document.getElementById('ltTitle').textContent='📄 開發信提示詞 — '+co;
   // 依既有接觸筆數預選輪次：0 筆→第1次，1-2 筆→第2次，3 筆以上→第3次
-  const nProg=PROG.filter(p=>p[1]===co&&!CAT_MARKS[p[2]]).length;
+  const nProg=contactsOf(co).length;
   showRound(nProg===0?1:nProg<3?2:3);
   document.getElementById('ltModal').style.display='flex';
 }

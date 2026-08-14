@@ -234,7 +234,7 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
 
 <div id="ltModal" onclick="if(event.target===this)closeLetter()">
   <div id="ltBox">
-    <h3 id="ltTitle">📄 開發信</h3>
+    <h3 id="ltTitle">📄 開發信提示詞</h3>
     <div class="rounds">
       <button id="rd1" class="on" onclick="showRound(1)">第一次</button>
       <button id="rd2" onclick="showRound(2)">第二次（3個月後）</button>
@@ -242,10 +242,11 @@ button.save{padding:6px 14px;border:none;border-radius:8px;background:var(--blue
     </div>
     <div id="ltNote" class="ltnote"></div>
     <textarea id="ltText"></textarea>
-    <div class="hint">※ 可先在文字框內微調（稱謂、日期、緣由細節）再複製；附件 QR Code 對應實體信紙版面</div>
+    <div class="hint">※ 這是<b>提示詞</b>不是信件本身：複製後貼到 Claude，即可產出客製化開發信。<br>
+    有區域／園區行情資料，先貼進上面的【區域行情資訊】欄再複製，信會更有份量。</div>
     <div class="btns">
       <button class="cl" onclick="closeLetter()">關閉</button>
-      <button class="cp" onclick="copyLetter(this)">複製全文</button>
+      <button class="cp" onclick="copyLetter(this)">複製提示詞</button>
     </div>
   </div>
 </div>
@@ -446,19 +447,59 @@ async function saveNeed(btn){
 }
 async function loadNeeds(){try{NEEDS=(await epGet('needs')).needs||[];}catch(e){NEEDS=[];}}
 let LT_CO='';
+// ── 開發信＝產生「貼給 Claude 的提示詞」，不預存靜態內容 ──────────────
+// 理由：依新聞客製的內容會過時；且 watchlist.json 是公開檔案，話術不宜寫進去。
+const ROUND_NOTE={
+ 1:'第 1 次：自我介紹＋留下資訊管道。不推銷、不強求，讓對方知道有這個管道可隨時取用。',
+ 2:'第 2 次（約 3 個月後）：已有印象，改以實質資訊加溫——區域行情、可提供的標的輪廓。',
+ 3:'第 3 次（約 6 個月後）：收尾定調，強調長期關係與隨傳隨到，並主動說明會降低叨擾頻率。'
+};
+function letterPrompt(co,n){
+  const w=WATCH.find(x=>x.company===co)||{};
+  const evs=RECS.filter(r=>r.company===co).slice(0,3);
+  const prog=PROG.filter(p=>p[1]===co&&!CAT_MARKS[p[2]]);
+  const last=prog.length?prog[prog.length-1]:null;
+  const L=[];
+  L.push('請幫我寫一封開發信（工業地產開發用）。');
+  L.push('');
+  L.push('【收件公司】'+co+(w.ticker&&w.ticker!=='未上市'?'（'+w.ticker+'）':'（未上市）'));
+  L.push('【所在區域】'+((w.locs||[]).join('、')||'（未填）'));
+  if((w.group||[]).length)L.push('【集團／股東】'+w.group.map(x=>x.n+'（'+x.r+'）').join('、'));
+  L.push('【這是第幾次接觸】第 '+n+' 次');
+  L.push('【過往接觸紀錄】'+(last?last[0]+'　'+last[2]+(last[3]?'　'+last[3]:'')+'（累計 '+prog.length+' 筆）':'尚無接觸紀錄'));
+  L.push('');
+  L.push('【近期公開動態】'+(evs.length?'':'（無，請勿杜撰）'));
+  evs.forEach(r=>L.push('- '+r.eventDate+'　'+r.eventType+'：'+r.summary));
+  L.push('');
+  L.push('【區域行情資訊】※ 有的話請貼在這行下面，沒有就整段刪掉');
+  L.push('');
+  L.push('【寄件人】張現傑｜瑞禾開發／睦聚開發');
+  L.push('【服務強項】中部六縣市（台中／彰化／南投／苗栗／雲林／嘉義）產業用地與廠房媒合；');
+  L.push('　瑞禾開發連續多年承接經濟部產業園區管理局產業用地媒合案；');
+  L.push('　第一手掌握各工業區、產業園區的買方需求與成交行情。');
+  L.push('');
+  L.push('【撰寫要求】');
+  L.push('1. 繁體中文商務書信，**300 字以內**，簡潔，不要長篇。');
+  L.push('2. 本次語氣定位：'+ROUND_NOTE[n]);
+  L.push('3. 若有近期公開動態，用一句話自然帶到（顯示有做功課），');
+  L.push('　 但**不要臆測對方意圖**、不要說「得知貴公司要買/要賣」這種未經證實的話。');
+  L.push('4. 若有區域行情資訊，放在信末當作「可取用的參考資料」，不要塞進正文。');
+  L.push('5. 格式：開頭「○○○　您好：」，結尾「敬祝　事業順利　平安喜樂」＋「張現傑　敬上」。');
+  L.push('6. 不要驚嘆號、不要業務腔、不要誇大保證、不要提及我方與其他公司的往來。');
+  return L.join('\n');
+}
 function openLetter(co){
-  const w=WATCH.find(x=>x.company===co);
-  if(!w||!w.letters){alert('此公司尚未生成開發信');return;}
   LT_CO=co;
-  document.getElementById('ltTitle').textContent='📄 開發信 — '+co;
-  showRound(1);
+  document.getElementById('ltTitle').textContent='📄 開發信提示詞 — '+co;
+  // 依既有接觸筆數預選輪次：0 筆→第1次，1-2 筆→第2次，3 筆以上→第3次
+  const nProg=PROG.filter(p=>p[1]===co&&!CAT_MARKS[p[2]]).length;
+  showRound(nProg===0?1:nProg<3?2:3);
   document.getElementById('ltModal').style.display='flex';
 }
 function showRound(n){
-  const w=WATCH.find(x=>x.company===LT_CO); if(!w)return;
-  const L=w.letters[String(n)];
-  document.getElementById('ltText').value=L.body;
-  document.getElementById('ltNote').textContent='💡 '+L.note;
+  if(!LT_CO)return;
+  document.getElementById('ltText').value=letterPrompt(LT_CO,n);
+  document.getElementById('ltNote').textContent='💡 '+ROUND_NOTE[n];
   [1,2,3].forEach(i=>document.getElementById('rd'+i).classList.toggle('on',i===n));
 }
 function closeLetter(){document.getElementById('ltModal').style.display='none';}
@@ -466,7 +507,7 @@ async function copyLetter(btn){
   const t=document.getElementById('ltText');
   try{await navigator.clipboard.writeText(t.value);btn.textContent='✅ 已複製';}
   catch(e){t.select();document.execCommand('copy');btn.textContent='✅ 已複製';}
-  setTimeout(()=>btn.textContent='複製全文',1500);
+  setTimeout(()=>btn.textContent='複製提示詞',1500);
 }
 async function saveProg(co,id,sel){
   const act=sel.value; if(!act) return;

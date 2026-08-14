@@ -298,10 +298,20 @@ const pCls=p=>p&&p.startsWith('A')?'pA':p&&p.startsWith('B')?'pB':'pC';
 const kindCls=t=>/處分|收縮/.test(t||'')?'sell':/取得|擴產/.test(t||'')?'buy':'line';
 const kindBadge=k=>k==='sell'?'<span class="badge sell">處分</span>':k==='both'?'<span class="badge sell">處分</span><span class="badge buy">購置</span>':'<span class="badge buy">購置</span>';
 const locBadges=w=>(w.locs||[]).map(l=>`<span class="badge loc">📍${esc(l)}</span>`).join('');
+// ── 助理視圖（2026-08-14）：藏起「🏢 公司集團」與「🔗 產業鏈」兩頁 ──────
+// 助理負責前期經營／客戶電訪／開發函，這兩頁的結構資料用不到，藏起來讓畫面專注。
+// ⚠️ 比對必須是「明確列舉」——公開版沒有 DT_USER，會判為非助理而看到全部，
+//    這是刻意的（公開版本來就是全公開）。切勿寫成 !DT_USER||... 那種寬鬆式。
+const ASSISTANTS=['yubob0513@gmail.com','nibreeze@gmail.com'];
+const isAssistant=()=>ASSISTANTS.includes(String(window.DT_USER||'').toLowerCase());
+const HIDE_FOR_ASSISTANT=[6,7];
+
 // 集團標籤：watchlist 的 group 欄位 [{n:公司名, r:關係}]；3 家以內直接顯示，超過顯示 +N（完整見「公司集團」頁）
 const grpBadges=w=>{const g=w.group||[];if(!g.length)return '';
   return g.slice(0,3).map(x=>`<span class="badge grp" title="${esc(x.r)}">🏢${esc(x.n)}</span>`).join('')
-    +(g.length>3?`<span class="badge grp" style="cursor:pointer" onclick="event.stopPropagation();show(6)">+${g.length-3}</span>`:'');};
+    +(g.length>3?(isAssistant()
+        ? `<span class="badge grp">+${g.length-3}</span>`   // 助理看不到集團頁，+N 不做成連結
+        : `<span class="badge grp" style="cursor:pointer" onclick="event.stopPropagation();show(6)">+${g.length-3}</span>`):'');};
 
 // ── 公司集團／產業鏈的維護節奏（Mac 2026-08-14 定調）────────────────
 // 這兩份是**一次性建置**的結構資料，不是每日更新的動態資料。
@@ -747,6 +757,7 @@ function renderBoot(d,w){
   document.getElementById('lastUpd').textContent=ts||'—';
   fill(fCo,RECS.map(r=>r.company)); fill(fTy,RECS.map(r=>r.eventType));
   [fCo,fPr,fTy].forEach(s=>s.onchange=renderTimeline);
+  if(isAssistant())HIDE_FOR_ASSISTANT.forEach(k=>document.getElementById('tab'+k).style.display='none');
   renderTimeline(); renderAll();
 }
 async function boot(){
@@ -782,6 +793,7 @@ function openMd(f){
 }
 function closeMd(){mdWrap.style.display='none';wgrid.style.display='grid';}
 function show(i){
+  if(isAssistant()&&HIDE_FOR_ASSISTANT.includes(i))return;  // 助理不得進入被隱藏的分頁
   for(let k=0;k<8;k++){
     document.getElementById('view'+k).style.display=k===i?'block':'none';
     document.getElementById('tab'+k).classList.toggle('on',k===i);

@@ -647,5 +647,33 @@
   "entry": "以二林租金12.62元/平方公尺對比南科37.59元的價差作為題材，對彰化二林、竹塘、埤頭、芳苑一帶的丁建與農地持有者做主動開發；同時盯矽品二林基地的建廠時程，其開工後的協力廠（表面處理、精密加工、氣體化學品、物流）會在二林周邊找廠，那批二線供應商是最容易成交的買方。",
   "related": "國家科學及技術委員會中部科學園區管理局；南部科學園區管理局；日月光投控（3711母公司）",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=7&SPOKE_TIME=184408&SPOKE_DATE=20260625&COMPANY_ID=3711;https://www.ttv.com.tw/finance/view/06202625202915A13C2334E9452DA0BBBEDFE7C3D17B99F4/587;https://today.line.me/tw/v3/article/OpMmkmD"
+ },
+ {
+  "recordDate": "2026-08-24 02:50",
+  "company": "美光台灣",
+  "ticker": "MU(美商美光科技台灣子公司)",
+  "eventDate": "2026/01/17",
+  "eventType": "取得資產",
+  "summary": "美光(Micron)宣布以現金18億美元（約新台幣569億元）收購力積電位於苗栗縣銅鑼科學園區之P5 12吋晶圓廠，含既有約30萬平方英尺300mm無塵室；銅鑼廠區土地逾11萬平方公尺（約33,275坪），原規劃可興建三座12吋晶圓廠。自交涉到拍板僅約兩個月。",
+  "reading": "監控區域內單筆量體最大的不動產移轉之一。美光取得的是園區內既有廠房而非新配地，代表其在台擴產優先採「買現成、快改裝」路線——這種買方對周邊丁建、倉儲與協力廠腹地的需求會比自建型買方更早、更急。力積電售廠後手握569億元現金，其中部產能重配置去向為另一條可追線索。",
+  "label": "擴張",
+  "entry": "第二層優先：銅鑼／竹南／頭份／苗栗市 1,000-5,000坪可即刻進駐廠房與丁建盤點，供美光營造、無塵室工程、氣體化學品、載具、物流協力廠落腳；第一層：美光台灣（台中后里中科園區）廠務／總務窗口；交易對手：力積電售廠後之中部布局",
+  "priority": "A-立即接觸",
+  "related": "力積電(6770)；信邦電子(2026/08/11標下億光原銅鑼廠34.58億)；聯詠(銅鑼研發運算中心)；京元電子(竹南/銅鑼產能重配置)",
+  "sources": "https://www.ctee.com.tw/news/20260117700623-430502 ; https://statementdog.com/news/15585 ; https://www.wealth.com.tw/articles/88c296a3-42b8-4572-9a43-d067aa56571c"
+ },
+ {
+  "recordDate": "2026-08-24 02:50",
+  "company": "美光台灣",
+  "ticker": "MU(美商美光科技台灣子公司)",
+  "eventDate": "2026/03/16",
+  "eventType": "擴產設廠",
+  "summary": "美光宣布完成收購力積電銅鑼P5廠區，並於2026年3月啟動第一階段無塵室改裝；計畫於2026年底啟動第二座晶圓廠建造工程，增建約27萬平方英尺無塵室空間，2028財年正式量產，支援先進DRAM與HBM產能。力積電於通過美光製程認證後將納入美光DRAM先進封裝供應鏈。",
+  "reading": "關鍵在「2026年底啟動第二座晶圓廠建造工程」——依交廠週期回推，2026Q4至2027上半年是營造、廠務工程、無塵室、氣體化學品與物流協力廠在銅鑼一帶找廠找地的高峰，而這批二線供應商才是仲介真正接得到的買方。銅鑼在近12個月內已聚集美光569億、信邦34.58億標購億光廠＋43億租地委建、聯詠研發運算中心、京元電產能重配置，是監控區域內密度最高的擴產聚落，供給盤點應立即啟動。",
+  "label": "擴張",
+  "entry": "2026Q4動工前3-6個月＝供應鏈落腳窗口，現在起盤點銅鑼／竹南／頭份／苗栗市可即刻進駐廠房與丁建；平行查美光台灣后里中科廠區廠務／總務窗口",
+  "priority": "A-立即接觸",
+  "related": "力積電(6770)；信邦電子(3023)；聯詠(3034)；京元電子(2449)",
+  "sources": "https://investors.micron.com/news-releases/news-release-details/meiguangwanchengshougoulijidiantongluo-p5-changqu ; https://finance.technews.tw/2026/03/16/micron-announced-the-completion-of-its-acquisition-of-powerchip-technologys-p5-fab-in-tongluo/ ; https://money.udn.com/money/story/5612/9383104 ; https://news.cnyes.com/news/id/6385678"
  }
 ]

@@ -675,5 +675,19 @@
   "priority": "A-立即接觸",
   "related": "力積電(6770)；信邦電子(3023)；聯詠(3034)；京元電子(2449)",
   "sources": "https://investors.micron.com/news-releases/news-release-details/meiguangwanchengshougoulijidiantongluo-p5-changqu ; https://finance.technews.tw/2026/03/16/micron-announced-the-completion-of-its-acquisition-of-powerchip-technologys-p5-fab-in-tongluo/ ; https://money.udn.com/money/story/5612/9383104 ; https://news.cnyes.com/news/id/6385678"
+ },
+ {
+  "recordDate": "2026-08-24 03:30",
+  "company": "鴻勁精密",
+  "ticker": "7769",
+  "eventDate": "2026-05-20",
+  "eventType": "擴產設廠",
+  "summary": "【回補・新聞先行待重訊確認】臺中市政府經發局核准鴻勁精密「工廠立體化」申請案，公司擴大投資約8.5億元增建廠房。核准內容：獲容積獎勵合計20%（新增投資15%＋能源管理5%），增建1層、新增樓地板面積2,283.53平方公尺（約690.6坪），並規劃屋頂型太陽能發電設施1,353.18平方公尺（約占屋頂面積69%），預估創造365個就業機會。市府新聞稿載明申請理由為「現有廠房已不敷使用」。本案為台積電中科1.4奈米四廠、1.5兆元投資帶動之供應鏈群聚效應案例。",
+  "reading": "【關鍵反證：立體化≠需求解除，反而證實缺口】8.5億元投資額看似不小，但實際增加的空間只有一層、約690.6坪——對照同一家公司2026/07/30法說會自述「除購入廠房與空地自建外，另斥資收購鄰近廠區」、且已把羽球場與員工餐廳臨時改建為組裝產線，可判定：**就地垂直增建補不上產能缺口，外部購置需求不減反增**。時間軸也支持此判讀：5/20核准立體化在前、7/30法說會仍宣告要收購鄰近廠區在後，先做最省事的就地增建、發現不夠才轉向對外收購，屬於「已窮盡內部解方」的買方，議價與決策速度都會比一般詢價客戶快。另本案揭露鴻勁現有廠區屬工業區用地且具容積餘裕（獲20%獎勵仍只增一層），代表其大雅本廠基地面積有限，鄰地收購是唯一放大路徑。",
+  "label": "擴張",
+  "entry": "①最高優先：鴻勁大雅本廠「鄰地」——其收購邏輯已被法說會與本案雙重證實為就近擴張，鄰地持有人是本名單上最明確的可成交賣方，應立即從地籍圖反查大雅廠區周邊地主並逐一接觸取得委託 ②大雅／神岡／潭子 3,000坪以上工業地與廠房，需具備可即刻進駐或短期整建條件（對方2027Q1就要投產，等重劃或新建來不及）③外溢層：8.5億增建工程與365個新增員工衍生之營造承攬、設備商、員工宿舍與停車需求",
+  "priority": "A-立即接觸",
+  "related": "臺中市政府經濟發展局（核准機關）；台積電中科1.4奈米新廠（需求源頭）",
+  "sources": "https://www.taichung.gov.tw/8868/8872/9962/3246655 ; https://www.ftnn.com.tw/news/535338 ; https://ec.ltn.com.tw/article/breakingnews/5443054 ; https://ec.ltn.com.tw/article/breakingnews/5392013 ; https://money.udn.com/money/story/5612/9420578 ; https://tw.stock.yahoo.com/news/%E7%A0%B88-5%E5%84%84%E5%BC%B7%E5%8C%96ai%E6%99%B6%E7%89%87%E6%B8%AC%E8%A9%A6%E4%BE%9B%E6%87%89%E9%8F%88-%E5%8D%8A%E5%B0%8E%E9%AB%94%E8%A8%AD%E5%82%99%E5%B7%A8%E9%A0%AD-%E5%8F%B0%E4%B8%AD%E8%93%8B%E6%96%B0%E5%BB%A0-%E5%B8%B6%E5%8B%95%E4%BE%9B%E6%87%89%E9%8F%88%E7%BE%A4%E8%81%9A%E7%99%BC%E9%85%B5-083500990.html ; https://blog.fugle.tw/post/earnings-call-7769-2026-07-30 ; MOPS 7769 115/05/20 原文待回補（openapi.twse.com.tw 與 mopsov.twse.com.tw 本輪遭 egress proxy 403 封鎖）"
  }
 ]

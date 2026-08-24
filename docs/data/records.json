@@ -689,5 +689,19 @@
   "priority": "A-立即接觸",
   "related": "臺中市政府經濟發展局（核准機關）；台積電中科1.4奈米新廠（需求源頭）",
   "sources": "https://www.taichung.gov.tw/8868/8872/9962/3246655 ; https://www.ftnn.com.tw/news/535338 ; https://ec.ltn.com.tw/article/breakingnews/5443054 ; https://ec.ltn.com.tw/article/breakingnews/5392013 ; https://money.udn.com/money/story/5612/9420578 ; https://tw.stock.yahoo.com/news/%E7%A0%B88-5%E5%84%84%E5%BC%B7%E5%8C%96ai%E6%99%B6%E7%89%87%E6%B8%AC%E8%A9%A6%E4%BE%9B%E6%87%89%E9%8F%88-%E5%8D%8A%E5%B0%8E%E9%AB%94%E8%A8%AD%E5%82%99%E5%B7%A8%E9%A0%AD-%E5%8F%B0%E4%B8%AD%E8%93%8B%E6%96%B0%E5%BB%A0-%E5%B8%B6%E5%8B%95%E4%BE%9B%E6%87%89%E9%8F%88%E7%BE%A4%E8%81%9A%E7%99%BC%E9%85%B5-083500990.html ; https://blog.fugle.tw/post/earnings-call-7769-2026-07-30 ; MOPS 7769 115/05/20 原文待回補（openapi.twse.com.tw 與 mopsov.twse.com.tw 本輪遭 egress proxy 403 封鎖）"
+ },
+ {
+  "recordDate": "2026-08-25 03:10",
+  "company": "鴻勁精密",
+  "ticker": "7769",
+  "eventDate": "2026-06-15",
+  "eventType": "擴產設廠",
+  "summary": "【回補・重訊原文】鴻勁(7769)董事會115/06/15決議通過「龍善廠自地委建興建工程」，公告載明「預估興建工程總預算為新台幣14億元」，交易相對人欄位當時為「待確定後另行公告」，取得目的「公司營運所需」，契約種類「自地委建」，非關係人交易、無董事及監察人異議。續於115/07/14由董事長核決補充公告：營造工程承攬金額新台幣780,000,000元（含稅），交易相對人為立穩營造股份有限公司（非關係人），契約效期「自簽訂之日起生效至契約履行完畢之日止」。新聞另載龍善廠預計2028年完工。鴻勁登記地址為台中市大雅區中清路三段758巷11號，龍善廠為其大雅一帶三大建置動作之一。",
+  "reading": "這是鴻勁大雅擴產三部曲裡唯一「自地自建」的一筆，也是三者中金額最大（14億預算／7.8億營造工程）、時程最長（2028完工）的一筆。判讀重點有三：(1)自地委建代表鴻勁手上已有素地，且願意等三年——對照2026Q4新廠投產、2027Q1收購廠投產的時程，龍善廠是第三波、屬中長期產能，短期缺口仍要靠現成廠房補；(2)7/14簽約＝動工在即，依交廠週期，2026Q3-Q4起大雅一帶會出現營造、機電、鋼構、廠務工程協力廠的臨時倉儲與工務所需求，這是仲介最快接得到的一批；(3)最關鍵的反證——鴻勁在115/03/06曾發重訊否認經濟日報報導的水湳中央公園特區單元八鑫新平段15地號（近千坪、每坪145萬）購地案，明言「報導內容屬媒體臆測，本公司並無購入該項資產」。這說明鴻勁的擴產是「緊貼大雅本廠聚落」而非往水湳跑，現傑8/28要做的鄰地地主反查方向正確，且應把範圍收斂在大雅本廠（中清路三段758巷）、上楓段、德勝路、神林路、龍善廠連成的帶狀範圍內。",
+  "label": "擴張",
+  "entry": "①大雅中清路三段758巷／上楓段／德勝路／神林路帶狀範圍內的地主反查與賣方委託爭取（鴻勁三年內連買三處＝已被市場證實的出價方）；②立穩營造進場後的協力廠臨時廠辦、倉儲、工務所需求（2026Q4-2027）；③達佛羅（高鋒子公司）承租母公司大雅科雅路16號1,736坪、租期至2027/12/31到期＝2027年前的落腳決策窗口",
+  "priority": "A-立即接觸",
+  "related": "立穩營造股份有限公司(營造承攬7.8億含稅);達佛羅股份有限公司(上楓段/德勝路賣方,高鋒4510子公司);高鋒工業(4510)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=9&SPOKE_TIME=182457&SPOKE_DATE=20260615&COMPANY_ID=7769 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=190613&SPOKE_DATE=20260714&COMPANY_ID=7769 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=114738&SPOKE_DATE=20260306&COMPANY_ID=7769 ; https://house.ettoday.net/news/3194562 ; https://cmnews.com.tw/article/forumnews-05613a67-6459-11f1-86be-657bf65f9e21"
  }
 ]

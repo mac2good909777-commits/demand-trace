@@ -4,7 +4,7 @@
 import json, sys, urllib.request, urllib.parse, time
 
 URL = "https://mopsov.twse.com.tw/mops/web/ezsearch_query"
-SDATE = "20260822"
+SDATE = "20260824"
 EDATE = "20260824"
 
 KEYWORDS = ["不動產", "土地", "廠房", "建物", "使用權資產", "取得", "處分", "購置", "興建", "廠區", "營建"]
@@ -35,6 +35,6 @@ for k in KEYWORDS:
     out[k] = {"n": len(rows), "truncated": len(rows) >= 1000, "rows": rows}
     print("%s -> %d%s" % (k, len(rows), " [TRUNCATED]" if len(rows) >= 1000 else ""), flush=True)
 
-p = r"C:\Users\dell\AppData\Local\Temp\claude\C--Users-dell-Documents-Claude-DT-projects-00000000-----\7eb4fd5f-a1e3-4ec9-86d0-859b9de1aacc\scratchpad\mops.json"
+p = r"C:\Claude\projects\demand-trace\tools\_mops.json"
 json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False)
 print("saved", p)

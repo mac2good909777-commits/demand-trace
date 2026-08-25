@@ -1,20 +1,28 @@
 # -*- coding: utf-8 -*-
-"""查 MOPS 全文檢索（ezsearch_query），指定日期區間 + 關鍵字窄查。
-輸出 JSON 到 scratchpad。"""
-import json, sys, urllib.request, urllib.parse, time
+"""查 MOPS 全文檢索（ezsearch_query），指定日期 + 關鍵字窄查，去重後輸出。
+
+用法: python tools/mops_daily.py [YYYYMMDD]   （預設昨日需自行指定）
+輸出: tools/_mops_<DATE>.json  （meta / count / rows）
+再用 tools/mops_report.py <DATE> 轉成可讀報表。
+
+註：MOPS 單次查詢硬上限 1000 筆，達到即在 meta 標記 [TRUNCATED]。
+    同一則公告在不同關鍵字（甚至同一關鍵字）下會重複回傳，故以
+    (COMPANY_ID, CTIME, SUBJECT, SEQ) 全欄位去重。
+"""
+import json, io, sys, time
+import urllib.request, urllib.parse
 
 URL = "https://mopsov.twse.com.tw/mops/web/ezsearch_query"
-SDATE = "20260824"
-EDATE = "20260824"
+DATE = sys.argv[1] if len(sys.argv) > 1 else "20260825"
+KEYWORDS = ["不動產", "土地", "廠房", "建物", "使用權資產", "取得", "處分", "購置",
+            "興建", "標得", "收購", "廠區", "營建", "租賃"]
 
-KEYWORDS = ["不動產", "土地", "廠房", "建物", "使用權資產", "取得", "處分", "購置", "興建", "廠區", "營建"]
 
 def q(subject):
-    data = {
+    body = urllib.parse.urlencode({
         "step": "00", "RADIO_CM": "2", "TYPEK": "all", "CO_ID": "",
-        "PRO_ITEM": "", "SUBJECT": subject, "SDATE": SDATE, "EDATE": EDATE,
-    }
-    body = urllib.parse.urlencode(data, encoding="utf-8").encode()
+        "PRO_ITEM": "", "SUBJECT": subject, "SDATE": DATE, "EDATE": DATE,
+    }, encoding="utf-8").encode()
     req = urllib.request.Request(URL, data=body, headers={
         "User-Agent": "Mozilla/5.0", "Content-Type": "application/x-www-form-urlencoded",
         "Referer": "https://mopsov.twse.com.tw/mops/web/ezsearch",
@@ -28,13 +36,23 @@ def q(subject):
                 return {"_error": str(e)}
             time.sleep(3)
 
-out = {}
-for k in KEYWORDS:
-    r = q(k)
-    rows = r.get("data") or []
-    out[k] = {"n": len(rows), "truncated": len(rows) >= 1000, "rows": rows}
-    print("%s -> %d%s" % (k, len(rows), " [TRUNCATED]" if len(rows) >= 1000 else ""), flush=True)
 
-p = r"C:\Claude\projects\demand-trace\tools\_mops.json"
-json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False)
-print("saved", p)
+allrows, meta = {}, []
+for kw in KEYWORDS:
+    r = q(kw)
+    if "_error" in r:
+        meta.append("%s ERROR %s" % (kw, r["_error"]))
+        continue
+    rows = r.get("data") or []
+    meta.append("%s -> %d%s" % (kw, len(rows), " [TRUNCATED]" if len(rows) >= 1000 else ""))
+    print(meta[-1], flush=True)
+    for row in rows:
+        allrows[json.dumps(row, ensure_ascii=False, sort_keys=True)] = row
+    time.sleep(0.4)
+
+out = list(allrows.values())
+p = r"C:\Claude\projects\demand-trace\tools\_mops_%s.json" % DATE
+io.open(p, "w", encoding="utf-8").write(
+    json.dumps({"date": DATE, "meta": meta, "count": len(out), "rows": out},
+               ensure_ascii=False, indent=1))
+print("unique=%d  saved %s" % (len(out), p))

@@ -350,6 +350,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=191432&SPOKE_DATE=20260806&COMPANY_ID=1536"
  },
  {
+  "recordDate": "2026-08-18",
   "company": "矽品精密工業",
   "ticker": "3711(日月光投控子公司)",
   "eventDate": "2026-08-17",
@@ -363,6 +364,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=182518&SPOKE_DATE=20260817&COMPANY_ID=3711;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=3&SPOKE_TIME=182447&SPOKE_DATE=20260817&COMPANY_ID=3711;https://money.udn.com/money/story/5612/9581915;https://estate.ltn.com.tw/article/27488;https://news.cnyes.com/news/id/6579425"
  },
  {
+  "recordDate": "2026-08-18",
   "company": "億光電子",
   "ticker": "2393",
   "eventDate": "2026-08-17",
@@ -376,6 +378,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=170346&SPOKE_DATE=20260817&COMPANY_ID=2393"
  },
  {
+  "recordDate": "2026-08-18",
   "company": "萬潤科技",
   "ticker": "6187",
   "eventDate": "2026-08-10",
@@ -389,6 +392,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=142217&SPOKE_DATE=20260810&COMPANY_ID=6187;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=200603&SPOKE_DATE=20260720&COMPANY_ID=6187"
  },
  {
+  "recordDate": "2026-08-18",
   "company": "萬潤科技",
   "ticker": "6187",
   "eventDate": "2026-06-25",
@@ -584,6 +588,7 @@
   "recordDate": "2026-08-22"
  },
  {
+  "recordDate": "2026-08-23",
   "company": "友達",
   "ticker": "2409",
   "eventDate": "2026-07-28",
@@ -597,6 +602,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=193017&SPOKE_DATE=20260728&COMPANY_ID=2409;https://money.udn.com/money/story/5612/9656856;https://ec.ltn.com.tw/article/breakingnews/5520882;https://www.top1markets.com/tw/news/auo-asset-activation-tsmc-factory-sale-analysis"
  },
  {
+  "recordDate": "2026-08-23",
   "company": "廣達",
   "ticker": "2382",
   "eventDate": "2026-07-28",
@@ -610,6 +616,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=193034&SPOKE_DATE=20260728&COMPANY_ID=2382;https://money.udn.com/money/story/5612/9656856;https://ec.ltn.com.tw/article/breakingnews/5520882"
  },
  {
+  "recordDate": "2026-08-23",
   "company": "光罩",
   "ticker": "2338",
   "eventDate": "2026-06-10",
@@ -623,6 +630,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=172318&SPOKE_DATE=20260610&COMPANY_ID=2338"
  },
  {
+  "recordDate": "2026-08-23",
   "company": "矽品精密工業",
   "ticker": "3711(日月光投控子公司)",
   "eventDate": "2026-06-10",
@@ -636,6 +644,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=184009&SPOKE_DATE=20260610&COMPANY_ID=3711;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=172318&SPOKE_DATE=20260610&COMPANY_ID=2338"
  },
  {
+  "recordDate": "2026-08-23",
   "company": "矽品精密工業",
   "ticker": "3711(日月光投控子公司)",
   "eventDate": "2026-06-25",
@@ -901,6 +910,7 @@
   "sources": "https://money.udn.com/money/story/5612/9718766 ; https://news.ltn.com.tw/news/Changhua/breakingnews/4697512 ; https://www.chinatimes.com/newspapers/20260701000472-260210 ; https://www.chinatimes.com/newspapers/20260727000421-260210 ; https://money.udn.com/money/story/5639/8035310 ; https://a.go8.in/esg/ ; https://www.huilai-enterprise.com/"
  },
  {
+  "recordDate": "2026-08-29",
   "company": "大立光",
   "ticker": "3008",
   "eventDate": "2026/08/28",
@@ -914,6 +924,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=140838&SPOKE_DATE=20260828&COMPANY_ID=3008; https://money.udn.com/money/story/5612/9720607; https://udn.com/news/story/7240/9713850"
  },
  {
+  "recordDate": "2026-08-29",
   "company": "喜特麗國際",
   "ticker": "未上市",
   "eventDate": "2026/08/28",
@@ -927,6 +938,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=140838&SPOKE_DATE=20260828&COMPANY_ID=3008; https://www.twincn.com/item.aspx?no=84551581; https://www.e-jtl.com.tw/exec/contact.php?lg=E; https://www.businesstoday.com.tw/article-content-80393-3736; https://finance.ettoday.net/news/944368"
  },
  {
+  "recordDate": "2026-08-29",
   "company": "鈞興-KY",
   "ticker": "4571",
   "eventDate": "2026/08/28",
@@ -940,6 +952,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=134014&SPOKE_DATE=20260828&COMPANY_ID=4571; https://www.cnyes.com/twstock/4571/company/profile; https://www.ctee.com.tw/news/20230813700368-431202"
  },
  {
+  "recordDate": "2026-08-29",
   "company": "艾姆勒",
   "ticker": "2241",
   "eventDate": "2026/08/29",
@@ -953,6 +966,7 @@
   "sources": "https://statementdog.com/analysis/2241 ; https://tw.stock.yahoo.com/quote/2241/announcement ; https://www.twincn.com/item.aspx?no=89538031 ; https://info.technews.tw/company/89538031-%E5%8F%B0%E7%81%A3%E7%BF%94%E7%99%BB%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8 ; https://ida.gov.tw/ctlr?PRO=filepath.DownloadFile&f=documentAttach&id=18995&t=f"
  },
  {
+  "recordDate": "2026-08-29",
   "company": "科宏工業",
   "ticker": "未上市",
   "eventDate": "2026/08/29",
@@ -1260,6 +1274,7 @@
   "sources": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=1efc8cf3-7bb0-4d39-8a24-862f39c8fa4d ; https://tw.stock.yahoo.com/news/%E5%85%AC%E5%91%8A-%E4%BB%A3%E5%AD%90%E5%85%AC%E5%8F%B8%E6%97%A5%E6%9C%88%E5%85%89%E5%8D%8A%E5%B0%8E%E9%AB%94%E8%A3%BD%E9%80%A0-%E8%82%A1-%E5%85%AC%E5%8F%B8%E5%8F%96%E5%BE%97%E6%BC%A2%E8%8F%AF%E6%B0%B4%E8%99%95%E7%90%86%E5%B7%A5%E7%A8%8B%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E4%BE%9B%E7%87%9F%E6%A5%AD%E7%94%A8%E4%B9%8B%E5%BB%A0%E5%8B%99%E8%A8%AD%E5%82%99%E6%88%96%E5%B7%A5%E7%A8%8B-092517229.html ; https://www.arch-world.com.tw/Company/28710.html ; https://www.twincn.com/item.aspx?no=16463168 ; https://takejob.taichung.gov.tw/job-search/company?id=16463168 ; https://www.104.com.tw/company/7k9qtq8"
  },
  {
+  "recordDate": "2026-09-05",
   "company": "大立光",
   "ticker": "3008",
   "eventDate": "2026/09/04",
@@ -1273,6 +1288,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=145252&SPOKE_DATE=20260904&COMPANY_ID=3008; https://udn.com/news/story/7240/9713850; https://news.cnyes.com/news/id/6587384"
  },
  {
+  "recordDate": "2026-09-05",
   "company": "興光熱處理廠",
   "ticker": "未上市",
   "eventDate": "2026/09/04",
@@ -1286,6 +1302,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=145252&SPOKE_DATE=20260904&COMPANY_ID=3008; https://www.shingkuang.com.tw/index.php; https://www.shingkuang.com.tw/webc/html/about/location.php; https://www.twincn.com/item.aspx?no=51911136; https://thaubing.gcaa.org.tw/corp/51911136"
  },
  {
+  "recordDate": "2026-09-05",
   "company": "和泰服務行銷",
   "ticker": "未上市(和泰車2207子公司)",
   "eventDate": "2026/09/04",
@@ -1299,6 +1316,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=151229&SPOKE_DATE=20260904&COMPANY_ID=2207; https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=2ddec2aa-77e3-49c4-b7b6-66d69204ea5c; https://www.hotaimotor.com.tw/About/Company"
  },
  {
+  "recordDate": "2026-09-05",
   "company": "岱宇國際",
   "ticker": "1598",
   "eventDate": "2026/09/05",
@@ -1368,6 +1386,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=164024&SPOKE_DATE=20260113&COMPANY_ID=3576; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=165256&SPOKE_DATE=20260113&COMPANY_ID=3711; https://finance.biggo.com.tw/news/TW_3576.TW_2026-05-19; https://blog.fugle.tw/post/earnings-call-3576-2026-05-19; https://news.cnyes.com/news/id/6309304"
  },
  {
+  "recordDate": "2026-09-07",
   "company": "台化",
   "ticker": "1326",
   "eventDate": "2026-05-08",
@@ -1381,6 +1400,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=160129&SPOKE_DATE=20260508&COMPANY_ID=1326"
  },
  {
+  "recordDate": "2026-09-07",
   "company": "台化",
   "ticker": "1326",
   "eventDate": "2026-09-07",
@@ -1394,6 +1414,7 @@
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=140009&SPOKE_DATE=20251212&COMPANY_ID=1326; https://www.taisounds.com/news/content/76/230249; https://udn.com/news/story/7325/9200648; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=120047&SPOKE_DATE=20260629&COMPANY_ID=1326"
  },
  {
+  "recordDate": "2026-09-07",
   "company": "矽品精密工業",
   "ticker": "3711(日月光投控子公司)",
   "eventDate": "2026-09-07",
@@ -1407,6 +1428,7 @@
   "sources": "https://tw.stock.yahoo.com/news/%E5%8D%8A%E5%B0%8E%E9%AB%94-%E6%97%A5%E6%9C%88%E5%85%89%E6%97%97%E4%B8%8B%E7%9F%BD%E5%93%81%E6%96%A528%E5%84%84%E9%80%B2%E9%A7%90%E7%AB%B9%E5%8D%97-%E5%8A%9B%E6%88%90-%E5%8D%97%E4%BA%9E%E7%A7%91%E5%90%8C%E6%AD%A5%E5%87%BA%E6%89%8B%E6%93%B4%E7%94%A2-093455575.html; https://money.udn.com/money/story/11162/9263583"
  },
  {
+  "recordDate": "2026-09-07",
   "company": "垚鋐系統科技",
   "ticker": "未上市(上市櫃輔導中)",
   "eventDate": "2026-09-06",
@@ -1602,6 +1624,7 @@
   "sources": "WebSearch摘要 MoneyDJ〈高鋒：子公司達佛羅董事會決議擬處分台中市大雅區民生路三段不動產〉 https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=2012265a-a5ff-458b-bb3c-52024f5ffb85 ; Yahoo股市〈高鋒 代重要子公司達佛羅股份有限公司公告取得使用權資產〉 https://tw.stock.yahoo.com/news/%E9%AB%98%E9%8B%92-%E4%BB%A3%E9%87%8D%E8%A6%81%E5%AD%90%E5%85%AC%E5%8F%B8%E9%81%94%E4%BD%9B%E7%BE%85%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E5%85%AC%E5%91%8A%E5%8F%96%E5%BE%97%E4%BD%BF%E7%94%A8%E6%AC%8A%E8%B3%87%E7%94%A2-075300055.html ; Goodinfo 4510 https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4510"
  },
  {
+  "recordDate": "2026-09-10",
   "company": "富采光電",
   "ticker": "未上市(富采投控3714子公司)",
   "eventDate": "2026/03/06",
@@ -1615,6 +1638,7 @@
   "sources": "https://www.chinatimes.com/realtimenews/20260307002325-260410 ; https://www.ctee.com.tw/news/20260306701818-430502 ; https://money.udn.com/money/story/11162/9364815 ; https://money.udn.com/money/story/5607/9363945 ; https://news.cnyes.com/news/id/6564327 ; https://money.udn.com/money/story/11162/7721784 ; https://udn.com/news/story/7240/7721244 ; https://money.udn.com/money/story/5710/9432243 ; https://www.ctee.com.tw/news/20250826701531-430502"
  },
  {
+  "recordDate": "2026-09-10",
   "company": "台灣杜邦",
   "ticker": "未上市(DuPont 台灣子公司)",
   "eventDate": "2026/03/06",
@@ -2646,5 +2670,33 @@
   "priority": "B-三個月內",
   "related": "環電(股)公司(南崗廠房所有權人・出租方);環旭電子(母公司);大雅電氣工程(廠務承攬3.73億);晨禎營造(草屯辦公大樓原總包・已解約)",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=3&SPOKE_TIME=184029&SPOKE_DATE=20260630&COMPANY_ID=3711 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=142933&SPOKE_DATE=20260618&COMPANY_ID=3711 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=195234&SPOKE_DATE=20251106&COMPANY_ID=3711 ; https://f.twincn.com/item.aspx?no=99652031"
+ },
+ {
+  "recordDate": "2026-09-25",
+  "company": "友達",
+  "ticker": "2409",
+  "eventDate": "2026-09-21",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第1家・md最後更新2026-09-03為全名單最舊】**網路封鎖中，MOPS／TWSE／TPEx 全數不可達，本輪改以 WebSearch 公開報導為唯一來源，重訊原文待管道恢復後補抓。**\n\n**新事實一（本系統首次記錄）：友達高雄廠以 63 億元售予日月光，處分利益 42.8 億元。**加計既有兩筆——桃園龜山華亞 L5D 廠 197 億售廣達（處分利益約 133.9 億）、新加坡 AFPD 廠約 87.53 億售威騰電子——**2026 年迄今已處分三座廠房、合計回收約 347 億元**（工商時報 2026-09-03、2026-09-21；ETtoday 財經雲）。\n\n**新事實二：台積電中科案的時點首次被量化。**經濟日報／聯合新聞網 2026-09-21：台積電已赴中科友達 **L5C（5 代廠）與 L7A（7.5 代廠）**踩點，兩廠與台積電中科廠區比鄰，估交易金額逾 300 億元；因產品需轉移他廠生產並重新認證，**外界推估最快簽約、交割落在 2027 年下半年**。雙方均未證實。\n\n**新事實三**：友達非顯示營收首度突破五成；資金投向 TGV／RDL 試產線與 Micro LED（拚 2028 量產）。",
+  "reading": "**一、時點是本輪最重要的修正，而且方向是壞的。**本檔 2026-08-23 建立台積電中科線時，隱含假設是近期成交。今天報導把簽約交割推到 **2027 下半年**。依本系統時間軸（重訊≈私契簽約→交廠 4 個月～1 年→公契→過戶→再 1-2 月實價揭露，且**交廠前 3-6 月＝處分方安置需求高峰**），若 2027H2 才簽約，友達中科的安置需求高峰要到 **2028 年上半年**——**這條線今年、明年上半年都不會變成案源，不能再當近期指望。**評分時近項因此由 ≤3月(+20) 降為 >6月(+5)。\n\n**二、但『友達是連續處分方』這件事被第三次證實，而且三個買方全在半導體／AI 側。**力成（新竹 L3C 68.98 億）→ 廣達（華亞 197 億）→ **日月光（高雄廠 63 億）**。md 原本的判讀「封測業是友達舊面板廠的天然承接者」再加一個樣本，且**日月光＝矽品母公司，是本名單分數最高（98）的一家**。這不是巧合，是結構：面板舊廠的大跨距、重載、高樓地板與既有無塵室，正好是先進封裝要的。\n\n**三、大宇範式判讀：處分≠經營不善。**347 億全數轉入加值產品與 AI 新技術資本支出，非顯示營收首度過半＝轉型有實績，**是資產活化，不是求現**。對我方的意義：友達不會賤賣，但會持續賣——**真正可作業的不是等中科兩廠，是盯友達下一個處分決議**。",
+  "label": "資產活化",
+  "entry": "【現傑】中科兩廠改列 2027 觀察，本季不投入。可作業的兩條改成：①**日月光／矽品側**——日月光今年已買友達高雄廠 63 億，加上矽品二林 P3/P4 與竹南 28 億光罩廠，是名單內出手最密的集團，其**協力廠與廠務乙方的落腳需求**才是近期案源（聯純科技已驗證）。②**中科周邊賣方委託**——論據升級為『友達今年已賣三座廠、回收 347 億，台積電正在看中科兩廠』，向中科路／東大路二段／西屯工業區 2,000 坪以上整廠持有人爭取委託，時間點正好在他們聽到風聲、但還沒決定賣的時候。\n【助理】友達本體仍不叩門（8/27 已聯繫上、回覆 NO）。本檔本週不排電訪。",
+  "priority": "B-三個月內",
+  "related": "日月光投控(3711)／矽品精密工業、廣達(2382)、力成科技(6239)、威騰電子(Western Digital)、台積電(2330)",
+  "sources": "https://www.ctee.com.tw/news/20260921700067-430502 ; https://www.ctee.com.tw/news/20260921700067-439901 ; https://www.ctee.com.tw/news/20260903700254-439901 ; https://money.udn.com/money/story/5648/9680869 ; https://udn.com/news/story/7240/9680869 ; https://finance.ettoday.net/news/3210401 ; https://uanalyze.com.tw/articles/5850455682 ; https://abmedia.io/tsmc-has-visit-two-auo-plants-in-ctsp"
+ },
+ {
+  "recordDate": "2026-09-25",
+  "company": "南茂科技",
+  "ticker": "8150",
+  "eventDate": "2026-09-12",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第2家・md最後更新2026-09-03並列全名單最舊】**網路封鎖中，MOPS 不可達，本輪以 WebSearch 公開報導為唯一來源。**\n\n**新事實（量化稼動率爬升曲線，本系統首次記錄）**：南茂整體產能稼動率 **2024 年底 59% → 2025Q2 65% → 2026Q2 72%**；記憶體封測稼動率自 **2025Q4 起全面滿載**並延續至今。2026 年 DDR5 測試產能規劃**擴增 10%～20%**（工商時報 2026-09-12、鉅亨網／優分析）。資本支出占營收比重維持 **25% 以上**，2027 年規劃同一水位，投向記憶體封測、高階邏輯測試、先進封裝與設備；跨入智慧型手機 AP／AI ASIC 成品測試與矽光子（SiPh）光學凸塊封裝。\n\n**本輪的關鍵是一個負面結論**：以『南茂＋竹南／苗栗／頭份／湖口＋擴廠／新廠／土地』多組關鍵字搜尋，**查無任何竹南或苗栗廠區的擴建、購地或租廠事證**。迄今所有已揭露的用地動作只有一筆，且在監控區域外——**2026/03 以 8.8 億元購入群創台南南科環東路二段廠房（建物 3.43 萬㎡）**。",
+  "reading": "**一、『查無』這次是有效的負面結論，但只在它自己的範圍內有效。**與 2026-08-29 艾姆勒案釘死的方法論教訓對照：那次錯在查詢區間起點晚於原始決議日。本輪不同——搜尋的是**是否存在任何公開的竹南用地動作**，不是推論某筆既有決議是否成交，**故可據以判定：南茂的擴產至今全部落在台南，竹南／湖口是既有產能滿載、而非新增用地。**（惟公開報導不等於 MOPS 全文，管道恢復後須以 CO_ID=8150 全文檢索複核。）\n\n**二、這正好強化 md 原本的核心判斷，而不是推翻它。**南茂 2026/03 買群創南科現成廠＝**它解決產能的方式是『買現成廠』而非等園區配地**。現在加上稼動率 59→65→72% 連三期爬升、記憶體端已滿載、今年底新一批高階測試機台到位——**機台先到、空間後補的缺口是真的，只是它目前選擇在台南補。**\n\n**三、對我方的實際意義：南茂本體暫時不是買方，但竹南帶的側面需求是真的。**md 已記錄的竹南封測帶四家（矽品 28 億買光罩竹南廠、京元銅鑼四廠、南茂、群聯）同時推進，其**廠務／氣體／配管協力層**（銳澤實業竹南廠在手訂單 30 億創高，已建檔）才是量體 300–2,000 坪、決策快、租買皆可的真實需求。分數維持 70，不因本輪加分（無新不動產事件），亦不減分（擴產動能與區域據點均未變）。",
+  "label": "擴張",
+  "entry": "【現傑】南茂本體維持不叩門。本檔的價值改為『竹南帶熱度的佐證之一』，實際出件對象是廠務／氣體／配管協力層（銳澤、聯純一類），量體 300–2,000 坪、竹南／頭份／湖口、可即刻進駐。\n【助理】8/28 已聯繫上（03-5770055，承辦不在、總機不透露承辦人員、已上官網留言）**至今 28 天無回覆＝官網留言管道判定無效**，不再等待。本檔本週不排電訪，配額讓給逾期案（艾姆勒查證、冠和回訪、台灣固而美補打）。待 MOPS 恢復後補一件事：CO_ID=8150 近一年全文檢索，確認是否有未被媒體報導的竹南用地公告。",
+  "priority": "C-持續觀察",
+  "related": "群創光電(3481)、矽品精密工業(3711)、京元電子(2449)、銳澤實業(7703)、超豐電子(2441)",
+  "sources": "https://www.ctee.com.tw/news/20260912700168-430502 ; https://news.cnyes.com/news/id/6611752 ; https://uanalyze.com.tw/articles/4380155681 ; https://tw.stock.yahoo.com/news/%E5%8D%97%E8%8C%82%E8%B3%87%E6%9C%AC%E6%94%AF%E5%87%BA%E9%80%BE%E7%87%9F%E6%94%B6%E6%AF%94%E9%87%8D25-%E8%B7%A8%E8%B6%B3asic-%E5%85%89%E9%80%9A%E8%A8%8A%E5%B0%81%E6%B8%AC-090510113.html ; https://cmnews.com.tw/article/newsyoudeservetoknow-698e8e26-fb0b-11f0-a4ff-3a9643f0aacd"
  }
 ]

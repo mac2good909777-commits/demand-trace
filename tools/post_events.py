@@ -69,6 +69,12 @@ for e in events:
         except Exception as ex:
             print(f"[POST 重試{attempt+1}] {e['company']}: {ex}")
             time.sleep(4)
+            # 2026-09-25 教訓：回 404 時資料其實已寫入，盲目重送造成矽品重複列。重送前先回讀。
+            chk = sheet_keys()
+            if chk is not None and (e['company'], e['eventType'], str(e.get('summary'))[:40]) in chk:
+                print(f"[回讀確認已寫入，不重送] {e['company']}")
+                ok = True
+                break
     if not ok:
         failed.append(e['company'])
     records.append(e)

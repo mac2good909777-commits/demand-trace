@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
-"""回訪／下一步到期表：依 watchlist.json 的 next 欄位，對照今日。"""
+"""回訪／下一步到期表：依 watchlist.json 的 next 欄位，對照今日。
+
+用法：python tools/due_table.py [YYYY-MM-DD]
+　　　不給參數＝用系統今日；給日期＝以該日為基準（回溯檢查用）。
+
+🔴 2026-09-25 修正：原本寫死 `TODAY = datetime.date(2026, 9, 3)`，
+自 9/4 起每天都把已逾期的項目印成「未到(N天後)」，**連續 22 天輸出方向相反的到期表**。
+到期表是每日總結置頂的「回訪到期表」的資料來源，一旦看成「未到」就不會被點名。
+**基準日一律取系統今日，不要再寫死。**
+"""
 import sys, io, json, datetime
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-TODAY = datetime.date(2026, 9, 3)
+TODAY = (datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1
+         else datetime.date.today())
+print(f"（基準日：{TODAY.isoformat()}）")
 with open(r"C:\Claude\projects\demand-trace\docs\data\watchlist.json", encoding='utf-8') as f:
     wl = json.load(f)
 rows = []

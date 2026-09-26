@@ -2,8 +2,12 @@
 """列出 mops_scan 結果，並標示是否在觀察名單。"""
 import sys, io, os, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 
-REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
+REPO = _R
 path = sys.argv[1]
 with open(path, encoding='utf-8') as f:
     d = json.load(f)

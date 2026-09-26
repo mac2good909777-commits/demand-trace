@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """抓 MOPS 重訊原文並轉純文字。用法: python _fetch_mops.py <SPOKE_DATE> <SPOKE_TIME> <COMPANY_ID> <SEQ_NO> <tag>"""
 import sys, re, io, urllib.request
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 
 d, t, cid, seq, tag = sys.argv[1:6]
 url = ("https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1"
@@ -15,6 +19,6 @@ txt = re.sub(r"<[^>]+>", "", html)
 txt = txt.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
 txt = re.sub(r"[ \t]+", " ", txt)
 txt = "\n".join(l.strip() for l in txt.split("\n") if l.strip())
-p = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_orig_%s.txt" % tag
+p = (_R + "/tools/_orig_%s.txt") % tag
 io.open(p, "w", encoding="utf-8").write(url + "\n\n" + txt)
 print("saved", p, len(txt))

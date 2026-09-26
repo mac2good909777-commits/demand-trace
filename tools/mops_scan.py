@@ -5,9 +5,13 @@
 """
 import sys, io, os, json, time, urllib.request, urllib.parse
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 
 URL = "https://mopsov.twse.com.tw/mops/web/ezsearch_query"
-OUT_DIR = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tmp"
+OUT_DIR = (_R + "/tmp")
 
 KEYWORDS = ["不動產", "土地", "廠房", "建物", "使用權資產", "取得", "處分",
             "購置", "興建", "設備", "工程", "租賃", "廠區", "投資"]

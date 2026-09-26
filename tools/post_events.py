@@ -2,8 +2,12 @@
 """把 tmp/new_events.json 逐筆 POST 到 Apps Script，並 append 到 records.json（含去重）。"""
 import sys, io, os, json, time, urllib.request
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 
-REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
+REPO = _R
 BASE = "https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec"
 TOKEN = "muju-trace-2026"
 

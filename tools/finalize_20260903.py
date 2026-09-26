@@ -2,7 +2,11 @@
 """2026-09-03 收尾：修正環鴻 advice、append 公司 md、更新水位線與待同步。"""
 import sys, io, os, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
+REPO = _R
 CO = os.path.join(REPO, 'docs', 'companies')
 
 

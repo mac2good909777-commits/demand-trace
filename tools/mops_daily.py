@@ -11,6 +11,10 @@
 """
 import json, io, sys, time
 import urllib.request, urllib.parse
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 
 URL = "https://mopsov.twse.com.tw/mops/web/ezsearch_query"
 DATE = sys.argv[1] if len(sys.argv) > 1 else "20260825"
@@ -51,7 +55,7 @@ for kw in KEYWORDS:
     time.sleep(0.4)
 
 out = list(allrows.values())
-p = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_mops_%s.json" % DATE
+p = (_R + "/tools/_mops_%s.json") % DATE
 io.open(p, "w", encoding="utf-8").write(
     json.dumps({"date": DATE, "meta": meta, "count": len(out), "rows": out},
                ensure_ascii=False, indent=1))

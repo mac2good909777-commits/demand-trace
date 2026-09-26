@@ -11,10 +11,14 @@
 """
 import sys, io, json, datetime
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import os as _os
+_R = _os.environ.get('DT_REPO') or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if not _os.path.isdir(_os.path.join(_R, 'docs', 'data')):
+    _R = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"   # 本機（Windows）路徑；容器內以 __file__ 推導為主
 TODAY = (datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1
          else datetime.date.today())
 print(f"（基準日：{TODAY.isoformat()}）")
-with open(r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\docs\data\watchlist.json", encoding='utf-8') as f:
+with open((_R + "/docs/data/watchlist.json"), encoding='utf-8') as f:
     wl = json.load(f)
 rows = []
 for c in wl:

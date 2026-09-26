@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import json, io, sys
 DATE = sys.argv[1] if len(sys.argv) > 1 else "20260825"
-d = json.load(io.open(r"C:\Claude\projects\demand-trace\tools\_mops_%s.json" % DATE, encoding="utf-8"))
-wl = json.load(io.open(r"C:\Claude\projects\demand-trace\docs\data\watchlist.json", encoding="utf-8"))
+d = json.load(io.open(r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_mops_%s.json" % DATE, encoding="utf-8"))
+wl = json.load(io.open(r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\docs\data\watchlist.json", encoding="utf-8"))
 names = set()
 for c in wl:
     names.add(c["company"])
@@ -18,5 +18,5 @@ for r in rows:
         r.get("AN_NAME"), ("  <<<觀察名單 %s" % hit if hit else ""),
         (r.get("SUBJECT") or "").replace("\r\n", " ")))
     lines.append("    " + (r.get("HYPERLINK") or ""))
-io.open(r"C:\Claude\projects\demand-trace\tools\_mops_report.txt", "w", encoding="utf-8").write("\n".join(lines))
+io.open(r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_mops_report.txt", "w", encoding="utf-8").write("\n".join(lines))
 print("ok")

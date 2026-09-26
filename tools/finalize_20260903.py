@@ -2,7 +2,7 @@
 """2026-09-03 收尾：修正環鴻 advice、append 公司 md、更新水位線與待同步。"""
 import sys, io, os, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-REPO = r"C:\Claude\projects\demand-trace"
+REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
 CO = os.path.join(REPO, 'docs', 'companies')
 
 

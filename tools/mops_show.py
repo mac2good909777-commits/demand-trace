@@ -3,7 +3,7 @@
 import sys, io, os, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-REPO = r"C:\Claude\projects\demand-trace"
+REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
 path = sys.argv[1]
 with open(path, encoding='utf-8') as f:
     d = json.load(f)

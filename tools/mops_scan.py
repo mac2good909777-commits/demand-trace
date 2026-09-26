@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """MOPS 全文檢索：依關鍵字掃指定日期區間的重大訊息。
 用法：python tools/mops_scan.py <SDATE> <EDATE>
-輸出：C:\\Claude\\projects\\demand-trace\\tmp\\mops_<SDATE>_<EDATE>.json
+輸出：C:\\Users\\dell\\Documents\\Claude-DT\\projects\\20260808-需求軌跡\\demand-trace\\tmp\\mops_<SDATE>_<EDATE>.json
 """
 import sys, io, os, json, time, urllib.request, urllib.parse
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 URL = "https://mopsov.twse.com.tw/mops/web/ezsearch_query"
-OUT_DIR = r"C:\Claude\projects\demand-trace\tmp"
+OUT_DIR = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tmp"
 
 KEYWORDS = ["不動產", "土地", "廠房", "建物", "使用權資產", "取得", "處分",
             "購置", "興建", "設備", "工程", "租賃", "廠區", "投資"]

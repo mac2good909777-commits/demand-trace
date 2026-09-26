@@ -15,6 +15,6 @@ txt = re.sub(r"<[^>]+>", "", html)
 txt = txt.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
 txt = re.sub(r"[ \t]+", " ", txt)
 txt = "\n".join(l.strip() for l in txt.split("\n") if l.strip())
-p = r"C:\Claude\projects\demand-trace\tools\_orig_%s.txt" % tag
+p = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_orig_%s.txt" % tag
 io.open(p, "w", encoding="utf-8").write(url + "\n\n" + txt)
 print("saved", p, len(txt))

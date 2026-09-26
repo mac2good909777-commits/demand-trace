@@ -14,7 +14,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 TODAY = (datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1
          else datetime.date.today())
 print(f"（基準日：{TODAY.isoformat()}）")
-with open(r"C:\Claude\projects\demand-trace\docs\data\watchlist.json", encoding='utf-8') as f:
+with open(r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\docs\data\watchlist.json", encoding='utf-8') as f:
     wl = json.load(f)
 rows = []
 for c in wl:

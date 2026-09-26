@@ -3,7 +3,7 @@
 import sys, io, os, json, time, urllib.request
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-REPO = r"C:\Claude\projects\demand-trace"
+REPO = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace"
 BASE = "https://script.google.com/macros/s/AKfycbzmlpV1fpt1RWxVwZj8teUHWw4fs4zpix_3JqCVGX4SeMPIp5Di6_6m_YDRZn4fBQ4/exec"
 TOKEN = "muju-trace-2026"
 TODAY = "2026-09-03"

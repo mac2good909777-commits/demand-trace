@@ -51,7 +51,7 @@ for kw in KEYWORDS:
     time.sleep(0.4)
 
 out = list(allrows.values())
-p = r"C:\Claude\projects\demand-trace\tools\_mops_%s.json" % DATE
+p = r"C:\Users\dell\Documents\Claude-DT\projects\20260808-需求軌跡\demand-trace\tools\_mops_%s.json" % DATE
 io.open(p, "w", encoding="utf-8").write(
     json.dumps({"date": DATE, "meta": meta, "count": len(out), "rows": out},
                ensure_ascii=False, indent=1))

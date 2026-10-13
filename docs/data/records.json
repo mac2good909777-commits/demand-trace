@@ -3608,5 +3608,33 @@
   "related": "矽品精密工業；日月光半導體",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SPOKE_DATE=20261012&SEQ_NO=2&SPOKE_TIME=165619&COMPANY_ID=3711",
   "recordDate": "2026-10-13"
+ },
+ {
+  "company": "矽品精密工業",
+  "ticker": "3711(日月光投控子公司)",
+  "eventDate": "2026-10-13",
+  "eventType": "擴產設廠",
+  "summary": "日月光投控115/10/13 14:49 連發兩則第20款（總經理核決），均代子公司矽品精密：①取得營業用機器設備達十億元——6批、每批均價2.077億、總額12.46億（NTD 1,246,138,775），相對人Applied Materials South East Asia，事實發生日115/6/16～10/13；②取得廠務工程——聖暉工程科技（非關係人）總金額17.28億（NTD 1,727,593,000），期間115/10/07～117/06/30，供生產及營運用。兩則合計約29.7億，重訊皆未載廠址。聖暉為矽品本波廠務序列第三紙（9/02 5.42億、9/30 20.37億）。",
+  "reading": "矽品10月已連發設備／廠務多筆（10/01 45.5億、10/12中源11.12億、本日29.7億），資本支出節奏未減；廠務工期至2028年中，與雲林斗六新廠及中科二林園區時程吻合。承攬商（聖暉、中源、九合）中部工務與倉儲安置需求持續累積。",
+  "label": "擴張",
+  "entry": "維持A級；承攬商層續追聖暉工程（已有電訪紀錄9/07）、中源機電（10/16到期電訪）。",
+  "priority": "A-立即接觸",
+  "related": "聖暉工程科技；中源機電顧問；Applied Materials",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SPOKE_DATE=20261013&SEQ_NO=2&SPOKE_TIME=144908&COMPANY_ID=3711；https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SPOKE_DATE=20261013&SEQ_NO=3&SPOKE_TIME=144958&COMPANY_ID=3711",
+  "recordDate": "2026-10-14"
+ },
+ {
+  "company": "矽格聯測／建漢科技",
+  "ticker": "6257(矽格子公司)／3062",
+  "eventDate": "2026-10-13",
+  "eventType": "取得資產",
+  "summary": "115/10/13 建漢(3062)公告出售新竹科學園區創新二路1號廠房及附屬設備（建物14,215.7坪，公開招標），矽格聯測(矽格6257子公司)為買方，總額21.88億含稅（每坪15.39萬），估價20.66億／20.17億，建漢預計處分利益約17.3億，仲介第一太平戴維斯；矽格董事會10/12通過。此為10/12第51款『購置不動產』待確認案的重訊原文，地點確認在新竹，不在監控區域。",
+  "reading": "區域外。價值在話術：封測業買方以『現成廠房＋招標』取得，每坪15.4萬＝新竹科學園區現成廠房行情錨點；與矽品買台灣光罩竹南六廠同型（現成廠房快速投產）。建漢套現後是否另有資產處分待觀察。",
+  "label": "資產活化",
+  "entry": "不新增監控。作為封測業『現成廠房稀缺』話術與新竹行情錨點，供屋主提案引用。",
+  "priority": "C-持續觀察",
+  "related": "矽格；建漢科技；第一太平戴維斯",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SPOKE_DATE=20261013&SEQ_NO=1&SPOKE_TIME=173033&COMPANY_ID=3062；https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SPOKE_DATE=20261013&SEQ_NO=1&SPOKE_TIME=173422&COMPANY_ID=6257",
+  "recordDate": "2026-10-14"
  }
 ]

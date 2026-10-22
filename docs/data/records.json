@@ -4393,5 +4393,19 @@
   "priority": "A-立即接觸",
   "related": "富采光電（供給端）；台灣杜邦（同型買方・N9 成交價錨點）；環鴻科技（次順位買方）；禾榮科(7799)（後龍素地價格錨點）；苗栗縣政府工商發展處",
   "sources": "https://www.moneyweekly.com.tw/_Article?AID=220767 ; https://www.chinatimes.com/realtimenews/20260307002325-260410 ; https://www.cna.com.tw/news/afe/202307250384.aspx ; https://www.businesstoday.com.tw/article/category/183027/post/202307240057/ ; https://www.cna.com.tw/news/afe/202604230191.aspx ; https://docs.google.com/spreadsheets/d/1W_7ab7fG9RuF9TYd-SIt710TxVt34aTAUfzLltmBkmg/edit"
+ },
+ {
+  "recordDate": "2026-10-23 03:00",
+  "company": "漢測",
+  "ticker": "7856",
+  "eventDate": "2026-10-22",
+  "eventType": "擴產設廠",
+  "summary": "115/10/22 董事會一次通過三案：①『中南部建置製造中心』預算授權——廠房 37 億＋設備 12 億，用途為矽光子設備組裝、MEMS 探針卡、回焊設備、薄膜探針卡擴充、雷射清針機產線；②『新竹研發中心建置』15 億；③取得新竹市光復段402-1地號乙工 1,041 坪、6.768 億（約 65 萬/坪，估價 6.84 億，兆豐國際不動產經紀）。『中南部』廠址重訊未載；今年 1~7 月營收 26.68 億已超過 2025 全年，員工 430→570 人，自有資金。",
+  "reading": "北部（新竹）公司首次明確把『製造』放中南部：37 億廠房預算是新竹本部研發中心（15 億）的 2.5 倍，且研發中心已先買地，製造中心地點尚未決定＝現在正是選址窗口。量體以廠房 37 億推估需數千～萬坪級建地／現成廠房。重訊未載縣市，尚未證實在監控區域，故先 B 級觀察。",
+  "label": "擴張",
+  "entry": "①書面查『中南部製造中心』選址（法說會、董事長專訪、工業局／科管局名錄）；②若落台中／彰化／雲林＝直接推現成廠房與工業用地，對照新竹乙工 65 萬/坪作價格錨點；③先用投資人關係窗口，不打董事長。",
+  "priority": "B-三個月內",
+  "related": "兆豐國際不動產（新竹地經紀）；冠宏不動產估價師事務所",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=164336&SPOKE_DATE=20261022&COMPANY_ID=7856 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=164415&SPOKE_DATE=20261022&COMPANY_ID=7856 ; https://finance.technews.tw/2026/08/25/hantests-revenue-in-the-first-seven-months-exceeded-its-total-revenue-for-2025/"
  }
 ]

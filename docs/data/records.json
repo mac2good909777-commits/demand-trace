@@ -4463,5 +4463,61 @@
   "priority": "B-三個月內",
   "related": "聖暉工程;朋億;銳澤實業;漢華水處理;中源機電顧問;柏揚系統科技;富邦綜合證券(承銷)",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=143946&SPOKE_DATE=20261023&COMPANY_ID=6182;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=144009&SPOKE_DATE=20261023&COMPANY_ID=6182;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=143925&SPOKE_DATE=20261023&COMPANY_ID=6182"
+ },
+ {
+  "recordDate": "2026-10-24 03:00",
+  "company": "正達國際光電",
+  "ticker": "3149",
+  "eventDate": "2026-09-07",
+  "eventType": "深度重研",
+  "summary": "【雲端輪深研・78→95・B→A】115 年度現增 60,000,000 股×61 元＝實募 36.6 億（面額口徑 6 億，媒體標題勿引用）；催繳 115/08/05～09/07 15:30 屆滿、新股 115/10/07 上市；用途四項＝營運資金／償還銀行借款／購買機器設備及廠務設施／轉投資子公司。與銅鑼中興路 87 號處分 25.8 億（2026 年底交割）合計半年內現金約 62.4 億，已承諾資本支出僅 HDD 線 10 億 ⇒ 餘裕約 50 億。⚠️ 用途無土地建物字樣，不可說成「增資買地」。",
+  "reading": "現金到位、承諾支出僅 10 億＝銅鑼聚落最有購買力的在地買方；對信邦苗栗需求單構成競食。本機輪 10/25 補核 114/11/22 與 115/03/20 兩則增資重訊原文：用途僅列四項名稱、無金額分配，分配須查公開說明書。",
+  "label": "產能重配置",
+  "entry": "開場三個數字：87 號 25.8 億年底交割（處分利益 7.32 億）＋現增 36.6 億已繳足＋HDD 線 10 億；問『年底交割後中興路 99 號還夠不夠用』。",
+  "priority": "A-立即接觸",
+  "related": "京元電子（87 號買方）；信邦電子（苗栗需求單競食）",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=164847&SPOKE_DATE=20260915&COMPANY_ID=3149 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=154552&SPOKE_DATE=20260320&COMPANY_ID=3149 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=3&SPOKE_TIME=110207&SPOKE_DATE=20251122&COMPANY_ID=3149 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=5&SPOKE_TIME=153011&SPOKE_DATE=20260306&COMPANY_ID=3149"
+ },
+ {
+  "recordDate": "2026-10-24 03:00",
+  "company": "穗曄實業",
+  "ticker": "未上市",
+  "eventDate": "2026-10-24",
+  "eventType": "深度重研",
+  "summary": "【雲端輪深研・78 維持】查得本檔第一個土地地號：彰化縣線西鄉宏濱段 59 地號，其下三筆新建工程列管 N15A6621／N15A6631／N15A6908（皆水污染申報），其中一筆名稱含「倉庫、廠房附屬辦公室、守衛室、單身員工宿舍、台電配電室新建工程」（編號帶 114-0194840）⇒ 加人加電的擴建配置；與同廠區 1,047.62 坪出租科沃斯先進併看＝一邊出租、一邊自建。⚠️ 第三方彙整站、列管日期與狀態未確認。",
+  "reading": "資產活化＋自建擴充並行；賣方線（出租部位）與買方線（新建工程協力需求）同時存在。須謄本與彰化環保局查證三筆工程核發日期。",
+  "label": "資產活化",
+  "entry": "三題順序改寫：①宏濱段 59 新建工程進度 ②出租科沃斯部位到期規劃 ③雲科廠配置。",
+  "priority": "A-立即接觸",
+  "related": "科沃斯先進（承租人）",
+  "sources": "https://prtr.moenv.gov.tw/ ; https://thaubing.gcaa.org.tw/corp/14076058"
+ },
+ {
+  "recordDate": "2026-10-25 02:50",
+  "company": "力成科技",
+  "ticker": "6239",
+  "eventDate": "2026-10-25",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第 1 家・50→55・md 最後更新 10/02】本輪取回四則原文，更正 10/02「力成購置半徑在新竹與海外、不在苗栗」的結論：子公司晶兆成科技（力成綜合持股 79.9%）115/01/13 第 51 款授權原文明載「在桃園、新竹、**苗栗**等地區尋找合適土地/廠房」＝苗栗在它自己寫下的選址半徑內。該輪需求於 115/01/27 以 17.8 億（未稅）購達運精密新竹湖口光復北路 35、35-1 號（土地 2,519.22 坪／建物 6,117.04 坪，約 29.1 萬/建坪；估價 14.6～14.8 億、溢價約 20%；經紀人鼎金不動產）填補；115/05/27 再向母公司力成承租新埔文山路犁頭山段 879 號 2,728 ㎡十年（使用權 1.73 億）；115/08/18 訂購巨漢系統廠務＋無塵室 11.9 億。超豐（2441）近一年 114 則仍零不動產公告。",
+  "reading": "買方線沒有死，只是換了主體：真正在找廠的是晶兆成（CP/FT 測試），不是力成本體或超豐；且它接受苗栗、接受買現成（湖口案為整棟現成廠房）、接受溢價 20%。湖口 6,117 坪已填掉 2026 年這一輪，下一輪觸發看 11.9 億無塵室完工後的產能利用。",
+  "label": "擴張",
+  "entry": "供件對象改為晶兆成（竹南／頭份 5,000 建坪以上現成廠房，價格錨點 29.1 萬/建坪）；每月掃 MOPS 6239 關鍵字「晶兆成」第 51 款／第 20 款；不打力成總機、不打超豐。",
+  "priority": "C-持續觀察",
+  "related": "晶兆成科技（力成 79.9% 子公司，買方主體）；達運精密（6120，湖口賣方）；巨漢系統科技（無塵室乙方）；益昇系統科技（力成廠務乙方 5.34 億）",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=163335&SPOKE_DATE=20260113&COMPANY_ID=6239 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=163319&SPOKE_DATE=20260127&COMPANY_ID=6239 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=10&SPOKE_TIME=181710&SPOKE_DATE=20260527&COMPANY_ID=6239 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=154011&SPOKE_DATE=20260818&COMPANY_ID=6239 ; https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=173318&SPOKE_DATE=20260806&COMPANY_ID=6239 ; https://uanalyze.com.tw/articles/7968546646"
+ },
+ {
+  "recordDate": "2026-10-25 02:50",
+  "company": "環鴻科技",
+  "ticker": "未上市",
+  "eventDate": "2026-10-25",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第 2 家・85 維持・md 最後更新 10/02（A 級 active 中最舊）・誠實結果：查無新事實】MOPS 日月光投控(3711) 115/10/01～10/24 關鍵字「環鴻」僅 10/01 那一則取得長瑜中興段 175 公告，無補充公告＝「尚需政府機關核准」之生效條件尚無後續；WebSearch 近 7 天無環鴻／環旭台灣擴產新聞；草屯廠綠色工廠標章有效期至 2026-08-31（已屆，無實質意涵）。",
+  "reading": "判讀不變：141 號買對門 128 號＝就地擴充型買方，下一標的必在鄰地。本檔 next 2026-10-06 已逾期 19 天，草屯中興段／太平路一段 351 巷全段地籍盤點仍未執行。",
+  "label": "擴張",
+  "entry": "現傑：拉中興段 175、189、194、1130 以外持有人清單；助理：049-2350876 三題（還買不買鄰地／南崗租約是否提前退／銅鑼還評估嗎）。",
+  "priority": "A-立即接觸",
+  "related": "長瑜企業（賣方，A95）；環電（南崗 16,221 坪出租人）",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=174748&SPOKE_DATE=20261001&COMPANY_ID=3711 ; https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=95755ad0-ae2a-45ab-a71a-2793b14e2d82 ; https://sdd.nat.gov.tw/greenfactory/Industry/IndustryView/299?mid=34&page=1"
  }
 ]

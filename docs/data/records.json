@@ -4995,5 +4995,47 @@
   "priority": "B-三個月內",
   "related": "陳姓婦人（賣方，判決匿名）；台灣台中地方法院",
   "sources": "https://udn.com/news/story/7321/9778871 ; https://tw.news.yahoo.com/%E8%B2%B7%E5%8F%B0%E4%B8%AD%E5%9C%9F%E5%9C%B0%E8%93%8B%E5%BB%A0%E6%88%BF-%E6%8E%A2%E5%8B%98%E6%8C%96%E5%87%BA%E5%A4%A7%E7%A7%98%E5%AF%B6-3%E5%B1%A4%E6%A8%93%E6%B7%B1%E9%83%BD%E6%98%AF%E5%9E%83%E5%9C%BE-%E8%B3%A3%E5%AE%B6%E5%88%A4%E8%B3%A03-2%E5%84%84-073404289.html ; https://tw.news.yahoo.com/%E5%8F%B0%E4%B8%AD-%E8%B2%B7%E5%9C%B0%E8%93%8B%E5%BB%A0%E6%88%BF-%E9%91%BD%E6%8E%A2%E5%85%A8%E6%98%AF%E5%BB%A2%E6%A3%84%E7%89%A9-%E8%B3%A3%E5%AE%B6%E6%9C%AA%E5%91%8A%E7%9F%A5-%E5%88%A4%E6%AD%B8%E9%82%84%E5%85%A8%E9%A1%8D3-201000316.html"
+ },
+ {
+  "recordDate": "2026-11-01 02:50",
+  "company": "南茂科技",
+  "ticker": "8150",
+  "eventDate": "2026-10-30",
+  "eventType": "擴產設廠",
+  "summary": "經濟日報 10/31：經濟部投資臺灣事務所 10/30 通過 3 家企業擴大投資台南，南茂科技第三度申請「歡迎台商回台投資行動方案」，整體計畫投資金額約 235 億元（三案合計 242 億；另金葡萄 1.4 億、東野精機 5.6 億設新廠）。新聞先行，待重訊確認（10/31 MOPS CO_ID=8150 查無對應公告）。",
+  "reading": "第三度台商回台、235 億，擴產地點仍是台南——與 10/29 深研『錢落在南科買現成廠擴 DDR5 測試、竹南用地前提連三輪無支持』完全一致，屬第四次佐證。竹南不是買方；反向機會（2027 產能轉移後竹南舊廠釋出）時點未變。",
+  "label": "擴張",
+  "entry": "本體不叩門。竹南協力層（銳澤一類）維持出件對象；2027 起每季追竹南廠稼動，出現處分決議即升 A。",
+  "priority": "C-持續觀察",
+  "related": "經濟部投資臺灣事務所；金葡萄、東野精機（同批核准，台南，區域外）",
+  "sources": "https://money.udn.com/money/story/5612/9848477"
+ },
+ {
+  "recordDate": "2026-11-01 02:50",
+  "company": "聯光通",
+  "ticker": "4903",
+  "eventDate": "2026-11-01",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第1家・md 最後日期 2026-09-15】MOPS CO_ID=4903 自 2025-09-01 至 2026-10-31 全文檢索 163 列，無任何取得土地／廠房／使用權資產公告；最近一則重訊為 115/09/22 除息基準日、最近申報為 10/06 九月營收。WebSearch 亦查無光纖新廠選址報導。",
+  "reading": "9/14 『光纖擴廠已選址、兩座新廠』至今 48 天仍未公告地點。原 70 分含『時近≤7天 +30』已不成立，改計：決議未明 +30、時近≤3月 +20 ＝ 50。自家甲級營造（台鋼工程）吃掉工程端的判讀不變，價值只在土地公告那一刻。",
+  "label": "觀察中",
+  "entry": "照舊只等公告：每週掃 CO_ID=4903；Q3 財報（約 11/10 前）看不動產、廠房及設備或預付設備款是否跳增，作為選址落地的旁證。",
+  "priority": "C-持續觀察",
+  "related": "台鋼工程（100% 子公司）；台鋼集團",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=160355&SPOKE_DATE=20260922&COMPANY_ID=4903;https://www.moneyweekly.com.tw/_Article?AID=215866"
+ },
+ {
+  "recordDate": "2026-11-01 02:50",
+  "company": "台灣大哥大",
+  "ticker": "3045",
+  "eventDate": "2026-11-01",
+  "eventType": "深度重研",
+  "summary": "【深研輪替第2家・md 最後日期 2026-09-11】WebSearch 查無 2026/10 台中 IDC 擴容或新購地消息；同業動態為中華電信預告在台中蓋大型 AI 資料中心（非台灣大）。台灣大 AIDC 仍為桃園龜山 Vantage 園區租用模式。",
+  "reading": "無新事實，40 分維持。值得帶走的是同業線：中華電信台中大型 AIDC 若落地，『機房型買方物件條件表』（以 MW 供電容量為首欄）的需求方多一家。",
+  "label": "觀察中",
+  "entry": "不排電訪；next 維持 2027-01-22 低頻回查。",
+  "priority": "C-持續觀察",
+  "related": "中華電信（同業・台中 AIDC 計畫）；Vantage Data Centers",
+  "sources": "https://www.peoplenews.tw/articles/economic-news/62762;https://technews.tw/2019/06/28/taiwancloud-idc-taichung/"
  }
 ]

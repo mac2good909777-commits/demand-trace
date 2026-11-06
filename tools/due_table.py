@@ -30,7 +30,11 @@ for c in wl:
     except ValueError:
         continue
     delta = (TODAY - d).days
-    rows.append((delta, c.get('score') or 0, c.get('company'), c.get('ticker'),
+    try:
+        _sc = int(float(c.get('score') or 0))
+    except (TypeError, ValueError):
+        _sc = 0
+    rows.append((delta, _sc, c.get('company'), c.get('ticker'),
                  c.get('nextKind'), c.get('active'), n))
 rows.sort(key=lambda r: (-r[0], -r[1]))
 print(f"{'逾期天':>6} {'分':>4} {'公司':<12} {'類型':<6} 排定日")

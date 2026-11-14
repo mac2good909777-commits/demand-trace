@@ -6694,5 +6694,47 @@
   "priority": "B-三個月內",
   "related": "亨福實業（竹南廠房東）；朋億（母公司）；南亞科技（客戶）",
   "sources": "https://uanalyze.com.tw/articles/6668058430;https://uanalyze.com.tw/articles/9479454489"
+ },
+ {
+  "recordDate": "2026-11-15 02:50",
+  "eventDate": "2026-06-15",
+  "company": "柏揚系統科技",
+  "ticker": "未上市(統編28542104)",
+  "eventType": "上下游動態",
+  "summary": "【回補・深研】日月光投控代子公司矽品精密工業 115/06/15 公告取得廠務工程，契約相對人柏揚系統科技，總金額 NTD 505,216,500（5.05 億），契約期間 114/06/19～117/11/01，總經理核決、非關係人。本系統原先只記 115/10/05 那紙（516,038,000 元、115/06/15～117/09/30）；兩紙合計 1,021,254,500 元（10.21 億）。",
+  "reading": "柏揚不是 10 月才進矽品案場，114 年 6 月就已進場、至今 17 個月；在手矽品合約 10.21 億，是公司實收資本額 5,000 萬元的 20 倍。兩紙工期重疊到 117 年。料件與工班空間的壓力來自第二紙疊上去，不是從零開始。另商工登記地為台中市北區臺灣大道二段 360 號 17 樓之 1，負責人莊惇量；官網所載豐原中山路 83 號 10 樓與登記地不同，先前「離潭子 5 公里」的推論須先確認實際辦公處。",
+  "label": "擴張",
+  "entry": "助理撥 04-25325001，可指名莊惇量（負責人）。先問辦公室在豐原還是北區；再問「第二紙疊上去之後，料件與機具放得下嗎，要不要在潭子／豐原再找一處倉」。",
+  "priority": "B-三個月內",
+  "related": "矽品精密工業(3711，發包業主，已在名單)；康呈科技工程(同鏈乙方，已在名單)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=181442&SPOKE_DATE=20260615&COMPANY_ID=3711;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=6&SPOKE_TIME=182323&SPOKE_DATE=20261005&COMPANY_ID=3711;https://data.gcis.nat.gov.tw/od/data/api/5F64D864-61CB-4D0D-8AD9-492047CC1EA6?$format=json&$filter=Business_Accounting_NO%20eq%2028542104"
+ },
+ {
+  "recordDate": "2026-11-15 02:50",
+  "eventDate": "2026-03-02",
+  "company": "康呈科技工程",
+  "ticker": "未上市(統編24239453)",
+  "eventType": "上下游動態",
+  "summary": "【回補・深研】日月光投控代子公司矽品精密工業 115/03/02 公告取得廠務工程，契約相對人康呈科技工程，總金額 NTD 510,890,000（5.11 億），契約期間 114/09/22～116/06/30，非關係人。為康呈自矽品取得之第一紙（本系統原先只記 115/10/05 那紙）。",
+  "reading": "康呈 114 年 9 月即已進矽品案場，至今 14 個月。第一紙 116/06/30 到期，是三紙中最早結束的。",
+  "label": "擴張",
+  "entry": "併入 115/06/29 那一列的電話。",
+  "priority": "B-三個月內",
+  "related": "矽品精密工業(3711，發包業主，已在名單)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=170747&SPOKE_DATE=20260302&COMPANY_ID=3711"
+ },
+ {
+  "recordDate": "2026-11-15 02:50",
+  "eventDate": "2026-06-29",
+  "company": "康呈科技工程",
+  "ticker": "未上市(統編24239453)",
+  "eventType": "上下游動態",
+  "summary": "【回補・深研】日月光投控代子公司矽品精密工業 115/06/29 公告取得廠務工程，契約相對人康呈科技工程，總金額 NTD 522,090,000（5.22 億），契約期間 115/03/02～118/12/31，總經理核決、非關係人。連同 115/03/02（510,890,000 元）與 115/10/05（615,325,000 元）兩紙，康呈自矽品累計三紙 1,648,305,000 元（16.48 億）。",
+  "reading": "三紙合計 16.48 億，是公司實收資本額 1 億元的 16 倍；最長一紙做到 118 年底。三紙工期在 115/06～116/06 完全重疊，這一年是料件與工班量最大的時候。商工登記確認地址為潭子區潭富路二段 163 之 3 號 1 樓、負責人張世勳。",
+  "label": "擴張",
+  "entry": "助理撥 04-2531-1733，可指名張世勳（負責人）。問「三個案子同時在做，潭富路那邊是辦公室還是有場地，料與機具放哪、夠不夠到明年年中」。",
+  "priority": "B-三個月內",
+  "related": "矽品精密工業(3711，發包業主，已在名單)；柏揚系統科技(同鏈乙方，已在名單)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=172612&SPOKE_DATE=20260629&COMPANY_ID=3711;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=5&SPOKE_TIME=182006&SPOKE_DATE=20261005&COMPANY_ID=3711;https://data.gcis.nat.gov.tw/od/data/api/5F64D864-61CB-4D0D-8AD9-492047CC1EA6?$format=json&$filter=Business_Accounting_NO%20eq%2024239453"
  }
 ]

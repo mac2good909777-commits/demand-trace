@@ -6736,5 +6736,47 @@
   "priority": "B-三個月內",
   "related": "矽品精密工業(3711，發包業主，已在名單)；柏揚系統科技(同鏈乙方，已在名單)",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=4&SPOKE_TIME=172612&SPOKE_DATE=20260629&COMPANY_ID=3711;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=5&SPOKE_TIME=182006&SPOKE_DATE=20261005&COMPANY_ID=3711;https://data.gcis.nat.gov.tw/od/data/api/5F64D864-61CB-4D0D-8AD9-492047CC1EA6?$format=json&$filter=Business_Accounting_NO%20eq%2024239453"
+ },
+ {
+  "recordDate": "2026-11-16 02:55",
+  "eventDate": "2026-03-24",
+  "company": "是方電訊",
+  "ticker": "6561",
+  "eventType": "擴產設廠",
+  "summary": "【回補・深研】是方電訊 115/03/24 董事會通過建置新 IDC 機房：擬於台中科學園區「租地興建」新 IDC 大樓，投資金額不高於 32 億元，預計 115 年下半年動工、117 年啟用；同日另公告 115 年度新增資本支出 3 億元。此為中科虎尾 AI 資料中心案之最早法定訊號，比本系統建檔所據之 115/10/20 動土新聞早 210 天。",
+  "reading": "時效起算日由 10/20 改為 03/24。MOPS 近一年 135 則非例行公告中，沒有任何一則工程發包或機電統包公告；媒體載基礎樁工程 7 月底已進場。乙方名單仍只能從新聞或現場取得，MOPS 這條路查不到。本體為園區租地自建，無購地需求，判讀不變。",
+  "label": "擴張",
+  "entry": "不打本體。助理於 12/21 前查中科管理局虎尾園區建照與施工告示牌所載營造、機電承攬商名稱。",
+  "priority": "C-持續觀察",
+  "related": "中華電信(母集團)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=133240&SPOKE_DATE=20260324&COMPANY_ID=6561;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=133256&SPOKE_DATE=20260324&COMPANY_ID=6561;https://money.udn.com/money/amp/story/7307/9826331;https://uanalyze.com.tw/articles/7075857431;https://www.peoplenews.tw/articles/economic-news/62751"
+ },
+ {
+  "recordDate": "2026-11-16 02:55",
+  "eventDate": "2026-05-26",
+  "company": "富采光電",
+  "ticker": "未上市(富采投控3714子公司)",
+  "eventType": "其他",
+  "summary": "【回補・深研】富采控股(3714) 115/05/26 董事會通過公司所在地變更：登記地址由「新竹市東區自由路 67 號 9 樓之 1」遷至「苗栗縣竹南鎮科義街一號 1 樓」，變更基準日 115/05/26。",
+  "reading": "本檔原載竹南據點只有科西一路 12 號（N9，已售台灣杜邦）與科中路 13 號（分層出租）兩處，科義街 1 號是第三處，且控股公司把登記地遷進去＝這一處是留用的。本檔自 10/04 起寫「不打新竹總機」，實際上母公司 5 月底就已不在新竹，窗口應改為竹南科義街 1 號。待售的「另一座竹南廠」因此較可能是科中路 13 號或尚未載入的其他處，科義街 1 號可先排除。",
+  "label": "資產活化",
+  "entry": "助理查商工登記與工廠登記：科義街 1 號登記在哪一家名下、廠房規模。現傑改撥竹南科義街 1 號。",
+  "priority": "A-立即接觸",
+  "related": "台灣杜邦(N9 買方，已在名單)；錼創科技-KY(科中路13號承租戶，已在名單)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=7&SPOKE_TIME=170015&SPOKE_DATE=20260526&COMPANY_ID=3714;https://twincn.com/item.aspx?no=83202930"
+ },
+ {
+  "recordDate": "2026-11-16 02:55",
+  "eventDate": "2026-11-06",
+  "company": "富采光電",
+  "ticker": "未上市(富采投控3714子公司)",
+  "eventType": "財務調度",
+  "summary": "【深研】富采 115/11/06 代子公司富采光電公告再取得友達光電普通股，交易總金額不超過 15 億元（115/03/06 已有一次 15 億額度）。同日法說：第三季稅後純益 12.7 億元、每股 1.99 元，主要來自業外處分收益（媒體口徑）；第二季歸屬母公司淨利 12.5 億元（媒體口徑）。MOPS 115/11/16 往前一年共 156 則非例行公告，廠房處分僅 115/03/06 竹南 N9 一則，沒有第二則。",
+  "reading": "三件事改變本檔判讀：①10/22 所據「另一座竹南廠待價而沽、賣掉可接近損平」是上半年的媒體說法；第二、三季合計已獲利約 25 億元，靠賣廠拚損平的壓力不在了（此句為本系統推論）。②MOPS 八個月沒有第二則處分公告。③N9 公告第 22 項載「經紀人及經紀費用：依經紀合約」＝N9 是透過仲介成交的，第二座若要賣，多半也已有受託方。資金去向是買友達股票（兩次各 15 億額度）與生產設備（新增 12.15 億、追減 9.28 億），不是廠房。處分意圖仍在（N9 公告第 23 項自述「致力於廠區整併、活化資產」），但時效性下修。",
+  "label": "資產活化",
+  "entry": "現傑：先問出 N9 案的受託仲介是哪一家（由台灣杜邦端或同業問），再決定是合作還是直接找富采。",
+  "priority": "A-立即接觸",
+  "related": "友達(2409，關係人，已在名單)；台灣杜邦(已在名單)；晶成半導體(富采光電 100% 子公司，承租富采光電廠房)",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=3&SPOKE_TIME=153402&SPOKE_DATE=20261106&COMPANY_ID=3714;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=2&SPOKE_TIME=135912&SPOKE_DATE=20260306&COMPANY_ID=3714;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=13&SPOKE_TIME=173618&SPOKE_DATE=20260306&COMPANY_ID=3714;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=9&SPOKE_TIME=172735&SPOKE_DATE=20260306&COMPANY_ID=3714;https://uanalyze.com.tw/articles/4866758540;https://finance.technews.tw/2026/08/09/ennostar-q2-financial-statements/"
  }
 ]

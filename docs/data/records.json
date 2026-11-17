@@ -6918,5 +6918,19 @@
   "priority": "B-三個月內",
   "related": "榮全化工機械（五路 5 號賣方，已在名單）",
   "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=181725&SPOKE_DATE=20260304&COMPANY_ID=8033;https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=170252&SPOKE_DATE=20251128&COMPANY_ID=8033;https://cna.com.tw/news/aipl/202608270123.aspx;https://ec.ltn.com.tw/article/breakingnews/5554776;https://udn.com/news/story/6656/9748460;https://money.udn.com/money/story/5612/9503554;https://udn.com/news/story/7252/9613154"
+ },
+ {
+  "recordDate": "2026-11-17 17:12",
+  "eventDate": "115/11/17",
+  "company": "立盈",
+  "ticker": "7820",
+  "eventType": "取得資產",
+  "summary": "立盈(上櫃・綠能環保業)董事會115/11/17決議取得不動產：南投縣南投市大崗段土地(地號0544-0000)4,625㎡(1,399.0625坪)＋南投市工業南五路10號廠房(建號00191-000)1,427.05㎡(431.68坪)，向典盛工業股份有限公司購入，總價3.2億元(估價合計3.102億，雙方議價)，目的載明「因應本公司業務發展及未來營運需求」。",
+  "reading": "盤後快訊掃描全市場命中，立盈與典盛工業均非既有觀察名單對象，首次建檔；案件座落南投市工業南路一帶，屬監控區域內新增取得案例，暫無其他背景資料佐證擴產急迫性或後續動作。",
+  "label": "擴張",
+  "entry": "建立立盈(7820)、典盛工業(賣方)基本檔；後續查核立盈主力業務與南投廠區用途、典盛工業是否可併入潛在賣方名單。",
+  "priority": "C-持續觀察",
+  "related": "典盛工業股份有限公司（賣方）",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=151412&SPOKE_DATE=20261117&COMPANY_ID=7820"
  }
 ]

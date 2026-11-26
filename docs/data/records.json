@@ -7576,5 +7576,33 @@
   "related": "富宸材料(7959)／大宇紡織(1445・我方在手委託・同鎮配對)／光鋐科技(4956)／經濟部產業發展署",
   "sources": "https://www.nstock.tw/news/article_m?id=471884 ; https://news.cnyes.com/news/id/6377808 ; https://tw.stock.yahoo.com/news/%E6%96%B0%E6%87%89%E6%9D%90-5-28%E8%B5%B7%E5%9C%A8%E8%AD%89%E5%88%B8%E5%95%86%E7%87%9F%E6%A5%AD%E8%99%95%E6%89%80%E8%B2%B7%E8%B3%A3-003400696.html ; https://www.ttv.com.tw/finance/view/052026082127ACF547CE690C4DCFA552D6E85667B0D411FB/588",
   "recordDate": "2026-11-26 03:40"
+ },
+ {
+  "recordDate": "2026-11-27 02:30",
+  "company": "京元電子",
+  "ticker": "2449",
+  "eventDate": "2026-11-26",
+  "eventType": "取得資產",
+  "summary": "子公司 KYEC Singapore 向 DBS TRUSTEE（非關係人）承租新加坡 Pioneer Crescent 廠房 185,603.65 sqft（約 17,243 ㎡／約 5,216 坪），使用權資產新幣 4,251.97 萬元；115/12/1～116/5/31 裝修免租，租期 116/6/1～126/5/31，用途擴充產能及辦公。",
+  "reading": "區域外（新加坡）。起租 116/6，趕不上法人口徑的『2027 上半年新產能貢獻營收』⇒ 台灣端（銅鑼／竹南）2027H1 空間題未因本案消失；但部分 2027 下半年以後增量有了海外去處，不可把京元的擴產量全算成中部需求。",
+  "label": "擴張",
+  "entry": "致電時多問一句：新加坡 116/6 起租之前，台灣端的量放哪裡。",
+  "priority": "C-持續觀察",
+  "related": "DBS TRUSTEE LIMITED（出租方・非關係人）／KYEC Singapore",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=152452&SPOKE_DATE=20261126&COMPANY_ID=2449"
+ },
+ {
+  "recordDate": "2026-11-27 02:30",
+  "company": "欣興",
+  "ticker": "3037",
+  "eventDate": "2026-11-26",
+  "eventType": "擴產設廠",
+  "summary": "公告取得廠務工程一批 3.0371 億元（事實發生 115/4/17～115/11/26，董事長核決），相對人駿順科技（非關係人），供生產及營運用；未揭露廠址。",
+  "reading": "廠務工程非不動產交易，地點未揭露，不推定在監控區域。僅作投資節奏紀錄。",
+  "label": "擴張",
+  "entry": "無直接切入點；併入既有 10/27 授權追蹤線。",
+  "priority": "C-持續觀察",
+  "related": "駿順科技（非關係人）",
+  "sources": "https://mopsov.twse.com.tw/mops/web/ajax_t05sr01_1?firstin=true&stp=1&step=1&SEQ_NO=1&SPOKE_TIME=153735&SPOKE_DATE=20261126&COMPANY_ID=3037"
  }
 ]
